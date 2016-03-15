@@ -133,7 +133,7 @@ class Formulario {
         $atributos['matrizItems'] = $camposTipo;
 
         if (isset($_REQUEST [$esteCampo])) {
-            $atributos ['valor'] = $_REQUEST [$esteCampo];
+            $atributos ['seleccion'] = $_REQUEST [$esteCampo];
         } else {
             $atributos ['valor'] = '';
         }
@@ -166,7 +166,7 @@ class Formulario {
         $atributos['matrizItems'] = $matrizItems;
 
         if (isset($_REQUEST [$esteCampo])) {
-            $atributos ['valor'] = $_REQUEST [$esteCampo];
+            $atributos ['seleccion'] = $_REQUEST [$esteCampo];
         } else {
             $atributos ['valor'] = '';
         }
@@ -271,7 +271,7 @@ class Formulario {
         $atributos['columnas'] = 1;
         $atributos ['obligatorio'] = true;
         $atributos ['etiquetaObligatorio'] = true;
-        $atributos ['validar'] = 'required';
+        $atributos ['validar'] = '';
         
         $atributos ['cadena_sql'] = $this->miSql->getCadenaSql("obtenerTiposDocumentos");
         $matrizItems = $primerRecursoDB->ejecutarAcceso($atributos ['cadena_sql'], "busqueda");
@@ -304,7 +304,7 @@ class Formulario {
         $atributos ['anchoEtiqueta'] = 150;
         $atributos ['obligatorio'] = true;
         $atributos ['etiquetaObligatorio'] = true;
-        $atributos ['validar'] = 'required';
+        $atributos ['validar'] = '';
         if (isset($_REQUEST [$esteCampo])) {
             $atributos ['valor'] = $_REQUEST [$esteCampo];
         } else {
@@ -330,20 +330,20 @@ class Formulario {
         unset($atributos);
 
         $esteCampo = "botonAsociaGrupo";
-        $atributos["id"] = $esteCampo;
-        $atributos["tabIndex"] = $tab;
-        $variableRegreso = "pagina=" . $this->miConfigurador->getVariableConfiguracion('pagina'); // pendiente la pagina para modificar parametro
-        $variableRegreso .= "&opcion=asociarPersonas";
-        $variableRegreso .= "&bloque=" . $esteBloque ['nombre'];
-        $variableRegreso .= "&bloqueGrupo=" . $esteBloque ["grupo"];
-        $variableRegreso = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($variableRegreso, $directorio);
-
-        $atributos["enlace"] = $variableRegreso;
-        $atributos["estilo"] = "jqueryui";
-        $atributos["enlaceTexto"] = $this->lenguaje->getCadena($esteCampo);
+        $atributos ["id"] = $esteCampo;
+        $atributos ["tabIndex"] = $tab;
+        $atributos ["tipo"] = 'boton';
+        $atributos ['submit'] = true;
+        $atributos ["estiloMarco"] = '';
+        $atributos ["estiloBoton"] = 'jqueryui';
+        $atributos ["verificar"] = '';
+        $atributos ["tipoSubmit"] = 'jquery'; // Dejar vacio para un submit normal, en este caso se ejecuta la función submit declarada en ready.js
+        $atributos ["valor"] = $this->lenguaje->getCadena($esteCampo);
+        $atributos ['nombreFormulario'] = $esteBloque ['nombre'];
+        $tab ++;
+        // Aplica atributos globales al control
         $atributos = array_merge($atributos, $atributosGlobales);
-
-        echo $this->miFormulario->enlace($atributos);
+        echo $this->miFormulario->campoBoton($atributos);
         unset($atributos);
         // --------------- FIN CONTROL :Documento de Identificacion--------------------------------------------------
         echo $this->miFormulario->division("fin");
@@ -414,7 +414,7 @@ class Formulario {
         $valorCodificado .= "&pagina=" . $this->miConfigurador->getVariableConfiguracion('pagina'); //Frontera mostrar formulario
         $valorCodificado .= "&bloque=" . $esteBloque ['nombre'];
         $valorCodificado .= "&bloqueGrupo=" . $esteBloque ["grupo"];
-        $valorCodificado .= "&opcion=mostrarFormularioPlantilla";
+        $valorCodificado .= "&opcion=determinarTipoCertificado";
         /**
          * SARA permite que los nombres de los campos sean dinámicos.
          * Para ello utiliza la hora en que es creado el formulario para

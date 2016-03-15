@@ -57,8 +57,8 @@ class Funcion {
         } else{
  
             switch ($_REQUEST['opcion']){
-        		case "mostrarFormularioPlantilla":
-                              include_once ($this->ruta."funcion/mostrarFormularioPlantilla.php");
+        		case "determinarTipoCertificado":
+                              include_once ($this->ruta."funcion/determinarTipoCertificado.php");
         		 break;
                          case "registrarPlantilla":
         		      include_once ($this->ruta."funcion/registrar.php");

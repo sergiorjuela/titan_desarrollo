@@ -129,6 +129,9 @@ class Formulario {
         $variableRegreso .= "&opcion=regresarGenerarReportes";
         $variableRegreso .= "&bloque=" . $esteBloque ['nombre'];
         $variableRegreso .= "&bloqueGrupo=" . $esteBloque ["grupo"];
+        $variableRegreso .= "&seltipoPlantilla=" . $_REQUEST["tipoPlantilla"];
+        $variableRegreso .= "&selReporte=" . $_REQUEST["tipoReporte"];
+        $variableRegreso .= "&codigoReporte=" . $_REQUEST["codigoReporte"];
         $variableRegreso = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($variableRegreso, $directorio);
 
         $atributos["enlace"] = $variableRegreso;

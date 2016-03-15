@@ -14,60 +14,14 @@ class Redireccionador {
 		switch ($opcion) {
 			
 			
-			case "registrarInformacionDeCreacionCertificado" :
+			case "vistaSeleccionGrupal" :
 				$variable = 'pagina=' . $miPaginaActual;
-				$variable .= "&opcion=formularioInformacionDeCreacionCertificado";
-				$variable .= "&descripcionPlantilla=" . $valor ['descripcionPlantilla'];
-                                $variable .= "&tipoPlantilla=" . $valor ['tipoPlantilla'];
-				$variable .= "&nombrePlantilla=" . $valor ['nombrePlantilla'];
-				break;
-			case "registrarInformacionDeCreacionReporteGeneral" :
-				$variable = 'pagina=' . $miPaginaActual;
-				$variable .= "&opcion=formularioInformacionDeCreacionReporteGeneral";
-				$variable .= "&descripcionPlantilla=" . $valor ['descripcionPlantilla'];
+				$variable .= "&opcion=asociarPersonas";
 				$variable .= "&tipoPlantilla=" . $valor ['tipoPlantilla'];
-				$variable .= "&nombrePlantilla=" . $valor ['nombrePlantilla'];
+				$variable .= "&tipoReporte=" . $valor ['tipoReporte'];
+				$variable .= "&codigoReporte=" . $valor ['codigoReporte'];
 				break;
-			case "inserto" :
-				$variable = 'pagina=' . $miPaginaActual;
-				$variable .= "&opcion=mensaje";
-				$variable .= "&mensaje=inserto";
-				$variable .= "&nombrePlantilla=" . $valor ['nombrePlantilla'];
-				$variable .= "&tipoPlantilla=" . $valor ['tipoPlantilla'];
-				$variable .= "&idPlantilla=" . $valor ['id'];
-				break;
-			case "noInserto" :
-				$variable = 'pagina=' . $miPaginaActual;
-				$variable .= "&opcion=mensaje";
-				$variable .= "&mensaje=noInserto";
-				$variable .= "&tipoPlantilla=".$valor ['tipoPlantilla'];
-				break;
-			case "modifico" :
-				$variable = 'pagina=' . $miPaginaActual;
-				$variable .= "&opcion=mensaje";
-				$variable .= "&mensaje=modifico";
-				$variable .= "&nombrePlantilla=" . $valor ['nombrePlantilla'];
-				$variable .= "&idPlantilla=" . $valor ['id_plantilla'];
-				break;
-			case "nomodifico" :
-				$variable = 'pagina=' . $miPaginaActual;
-				$variable .= "&opcion=mensaje";
-				$variable .= "&mensaje=nomodifico";
-				$variable .= "&tipoPlantilla=".$valor ['tipoPlantilla'];
-				break;
-			case "inactivo" :
-				$variable = 'pagina=' . $miPaginaActual;
-				$variable .= "&opcion=mensaje";
-				$variable .= "&mensaje=inactivo";
-				$variable .= "&nuevoestado=".$valor ['estado'];
-				$variable .= "&id_plantilla=".$valor ['id_plantilla'];
-				break;
-			case "noinactivo" :
-				$variable = 'pagina=' . $miPaginaActual;
-				$variable .= "&opcion=mensaje";
-				$variable .= "&mensaje=noinactivo";
-				$variable .= "&tipoPlantilla=".$valor ['tipoPlantilla'];
-				break;
+			
 			
 			default :
 				$variable = '';
