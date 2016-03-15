@@ -63,9 +63,11 @@ class FormProcessor {
         );
        
    $atributos ['cadena_sql'] = $this->miSql->getCadenaSql("registrarArl", $datos);
-  
-    $resultado=  $primerRecursoDB->ejecutarAcceso($atributos['cadena_sql'], "acceso");
-        
+    echo $atributos ['cadena_sql'] ;
+   $resultado=  $primerRecursoDB->ejecutarAcceso($atributos['cadena_sql'], "acceso");
+   var_dump($resultado);
+   echo "<br>";
+   exit();
  
    if (!empty($resultado)) {
             Redireccionador::redireccionar('inserto');

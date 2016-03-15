@@ -96,7 +96,7 @@ class Formulario {
 	$atributos ['id'] = $esteCampo;
 	$atributos ["estilo"] = "jqueryui";
 	$atributos ['tipoEtiqueta'] = 'inicio';
-	$atributos ["leyenda"] = "Registro Plantilla";
+	$atributos ["leyenda"] = $this->lenguaje->getCadena ( $esteCampo );
 	echo $this->miFormulario->marcoAgrupacion ( 'inicio', $atributos );
         
         
@@ -133,6 +133,7 @@ class Formulario {
         $atributos = array_merge ( $atributos, $atributosGlobales );
         echo $this->miFormulario->campoCuadroTexto ( $atributos );
         // --------------- FIN CONTROL : Cuadro de Texto --------------------------------------------------
+        // --------------- CONTROL :Select Tipo Plantilla --------------------------------------------------
         $esteCampo = 'tipoPlantilla';
         $atributos ['id'] = $esteCampo;
         $atributos ['nombre'] = $esteCampo;
@@ -164,6 +165,8 @@ class Formulario {
         $atributos = array_merge($atributos, $atributosGlobales);
         echo $this->miFormulario->campoCuadroLista($atributos);
         unset($atributos);
+         // --------------- FIN CONTROL :Select Tipo Plantilla --------------------------------------------------
+        
         // ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
         $esteCampo = 'descripcionPlantilla';
         $atributos ['id'] = $esteCampo;
@@ -262,11 +265,11 @@ class Formulario {
         // En este formulario se utiliza el mecanismo (b) para pasar las siguientes variables:
 
         // Paso 1: crear el listado de variables
-
-        $valorCodificado = "&pagina=" . $this->miConfigurador->getVariableConfiguracion ( 'pagina' );//Frontera mostrar formulario
+        $valorCodificado = "actionBloque=" . $esteBloque ["nombre"]; //Ir pagina Funcionalidad
+        $valorCodificado .= "&pagina=" . $this->miConfigurador->getVariableConfiguracion ( 'pagina' );//Frontera mostrar formulario
         $valorCodificado .= "&bloque=" . $esteBloque ['nombre'];
         $valorCodificado .= "&bloqueGrupo=" . $esteBloque ["grupo"];
-        $valorCodificado .= "&opcion=mostrarCreacionplantilla";
+        $valorCodificado .= "&opcion=mostrarFormularioPlantilla";
         /**
          * SARA permite que los nombres de los campos sean dinámicos.
          * Para ello utiliza la hora en que es creado el formulario para

@@ -99,7 +99,8 @@ class registrarForm {
 					//$cadenaSql = $this->miSql->getCadenaSql ( 'actualizar_entrada', $arreglo );
 					//$inserto = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso" );
 					
-					$mensaje = "Registro de parametro de liquidación Satisfactorio";
+					$mensaje = "Registro de parametro de liquidación Satisfactorio, Nombre: ".$_REQUEST['nombre']."<br>";
+                                        $mensaje .= "Fecha:".date("d-m-y");
 					// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
 					$esteCampo = 'mensajeRegistro';
 					$atributos ['id'] = $esteCampo;
@@ -120,7 +121,7 @@ class registrarForm {
 					//$cadenaSql = $this->miSql->getCadenaSql ( 'actualizar_entrada', $arreglo );
 					//$inserto = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso" );
 					
-					$mensaje = "no se ha registrado el parametro de liquidación <br>";
+					$mensaje = "El registro de parametro de liquidación no se pudo llevar a cabo <br>";
                                         $mensaje .= "revise la informacion suministrada";
 					// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
 					$esteCampo = 'mensajeRegistro';
@@ -140,7 +141,8 @@ class registrarForm {
 					//$cadenaSql = $this->miSql->getCadenaSql ( 'actualizar_entrada', $arreglo );
 					//$inserto = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso" );
 					
-					$mensaje = "Modificación exitosa"; 
+					$mensaje = "Modificación exitosa, se actualizo el parametro: Nombre ".$_REQUEST['nombre']."<br>";
+                                        $mensaje .= "Fecha: ".date("d-m-y");
 					
 					// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
 					$esteCampo = 'mensajeRegistro';
@@ -162,12 +164,56 @@ class registrarForm {
 					//$cadenaSql = $this->miSql->getCadenaSql ( 'actualizar_entrada', $arreglo );
 					//$inserto = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso" );
 					
-					$mensaje = "no se realizó la modificación "; 
+					$mensaje = "No se pudo llevar a cabo la Modificación "; 
+					
+					// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
+					$esteCampo = 'mensajeRegistro';
+					$atributos ['id'] = $esteCampo;
+					$atributos ['tipo'] = 'error';
+					$atributos ['estilo'] = 'textoCentrar';
+					$atributos ['mensaje'] = $mensaje;
+					
+					$tab ++;
+					
+					// Aplica atributos globales al control
+					$atributos = array_merge ( $atributos, $atributosGlobales );
+					echo $this->miFormulario->cuadroMensaje ( $atributos );
+					// --------------- FIN CONTROL : Cuadro de Texto --------------------------------------------------
+				} 
+				if ($_REQUEST ['mensaje'] == 'cambioestado') {
+					
+					//$cadenaSql = $this->miSql->getCadenaSql ( 'actualizar_entrada', $arreglo );
+					//$inserto = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso" );
+					
+					$mensaje = "Cambio de Estado exitoso, Codigo de Parametro: ".$_REQUEST['codigoRegistro']."<br>";
+                                        $mensaje .= "Fecha: ".date("d-m-y");
 					
 					// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
 					$esteCampo = 'mensajeRegistro';
 					$atributos ['id'] = $esteCampo;
 					$atributos ['tipo'] = 'success';
+					$atributos ['estilo'] = 'textoCentrar';
+					$atributos ['mensaje'] = $mensaje;
+					
+					$tab ++;
+					
+					// Aplica atributos globales al control
+					$atributos = array_merge ( $atributos, $atributosGlobales );
+					echo $this->miFormulario->cuadroMensaje ( $atributos );
+					// --------------- FIN CONTROL : Cuadro de Texto --------------------------------------------------
+				} 
+                                
+                                if ($_REQUEST ['mensaje'] == 'noCambioestado') {
+					
+					//$cadenaSql = $this->miSql->getCadenaSql ( 'actualizar_entrada', $arreglo );
+					//$inserto = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso" );
+					
+					$mensaje = "No se pudo llevar a cabo el cambio de estado "; 
+					
+					// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
+					$esteCampo = 'mensajeRegistro';
+					$atributos ['id'] = $esteCampo;
+					$atributos ['tipo'] = 'error';
 					$atributos ['estilo'] = 'textoCentrar';
 					$atributos ['mensaje'] = $mensaje;
 					
@@ -217,6 +263,7 @@ class registrarForm {
 			$atributos ['submit'] = true;
 			$atributos ["estiloMarco"] = '';
 			$atributos ["estiloBoton"] = 'jqueryui';
+                        
 			// verificar: true para verificar el formulario antes de pasarlo al servidor.
 			$atributos ["verificar"] = '';
 			$atributos ["tipoSubmit"] = 'jquery'; // Dejar vacio para un submit normal, en este caso se ejecuta la función submit declarada en ready.js

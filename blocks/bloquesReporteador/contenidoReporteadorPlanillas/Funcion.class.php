@@ -52,28 +52,28 @@ class Funcion {
         
         // Importante: Es adecuado que sea una variable llamada opcion o action la que guie el procesamiento:
         
-        
-        if (isset ( $_REQUEST ['procesarAjax'] )) {
+       if (isset ( $_REQUEST ['procesarAjax'] )) {
             $this->procesarAjax ();
         } else{
-            
-           
-
-            
-           
-        	
-        	switch ($_REQUEST['opcion']){
-        		case "mostrar":
-                            include_once ($this->ruta."funcion/registrar.php");
+ 
+            switch ($_REQUEST['opcion']){
+        		case "mostrarFormularioPlantilla":
+                              include_once ($this->ruta."funcion/mostrarFormularioPlantilla.php");
         		 break;
-                         case "registrar":
+                         case "registrarPlantilla":
         		      include_once ($this->ruta."funcion/registrar.php");
         	         break; 
-                         case "modificarRegistro":
+                         case "modificarPlantilla":
         		      include_once ($this->ruta."funcion/modificar.php");
         	         break; 
                          case "inactivarRegistro":
         		      include_once ($this->ruta."funcion/inactivar.php");
+        	         break; 
+                         case "inactivarRegistro":
+        		      include_once ($this->ruta."funcion/inactivar.php");
+        	         break; 
+                         case "formularioModificar":
+                             include_once ($this->ruta."funcion/formularioModificar.php");
         	         break; 
                      
                      case "opciones" :

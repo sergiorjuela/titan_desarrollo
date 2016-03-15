@@ -1,23 +1,12 @@
 <?php
-
-
+header('Content-Type: text/html; charset=utf-8');
 $conexion = "estructura";
 $esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
-
-
-
-if ($_REQUEST ['funcion'] == 'consultarCiudadAjax') {
-
-
-
-
-	$cadenaSql = $this->sql->getCadenaSql ( 'buscarCiudadAjax', $_REQUEST['valor'] );
+if ($_REQUEST ['funcion'] == 'incluirPP') {
+        $cadenaSql = $this->sql->getCadenaSql ( 'obtenerNombreParametroAjax', $_GET['valor'] );
 	$resultado = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
-
-        
-	$resultado = json_encode ( $resultado);
-
-	echo $resultado;
+        var_dump($resultado);
+        echo "prueba";
 }
 
 

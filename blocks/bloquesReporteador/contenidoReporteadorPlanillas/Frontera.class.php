@@ -49,36 +49,40 @@ class Frontera {
 				case "registrar" :
 					include_once ($this->ruta . "/formulario/registrarInformacionGeneral.php");
 					break;
-				case "siguiente" :
-					include_once ($this->ruta . "/formulario/registrarFormulacion.php");
+				case "formularioInformacionDeCreacionCertificado" :
+					include_once ($this->ruta . "/formulario/registrarInformacionDeCreacionCertificado.php");
 					break;
-				case "siguienteMod" :
-					include_once ($this->ruta . "/formulario/modificarFormulacion.php");
+				case "formularioInformacionDeCreacionReporteGeneral" :
+					include_once ($this->ruta . "/formulario/registrarInformacionDeCreacionReporteGeneral.php");
 					break;
 				case "regresar" :
 					include_once ($this->ruta . "/formulario/form.php");
 					break;
-				case "mostrarCreacionplantilla" :
-					include_once ($this->ruta . "/formulario/registrarInformacionDeCreacion.php");
-					break;
-				case "modificar" :
-					include_once ($this->ruta . "/formulario/modificarInfoBasica.php");
-					break;
-				case "verdetalle" :
-					include_once ($this->ruta . "/formulario/verDetalleConcepto.php");
-					break;
-				case "inactivar" :
-					include_once ($this->ruta . "/formulario/estadoConcepto.php");
-					break;
 				case "mensaje" :
 					include_once ($this->ruta . "/formulario/mensaje.php");
-					break;
-				case "form" :
-					include_once ($this->ruta . "/formulario/form.php");
-					break;
-				case "detalle" :
-					include_once ($this->ruta . "/formulario/detalle.php");
 					break;  
+				case "inactivar" :
+					include_once ($this->ruta . "/formulario/inactivaPlantilla.php");
+					break;  
+				case "modificar" :
+                                
+                                        if ($_REQUEST['tipo'] == 'Certificado') {
+                                            include_once ($this->ruta . "/formulario/modificarcertificado.php");
+                                        }
+                                        else{
+                                          include_once ($this->ruta . "/formulario/modificarreporte.php");
+                                        }
+				break;  
+				case "verdetalle" :
+                                
+                                        if ($_REQUEST['tipo'] == 'Certificado') {
+                                            include_once ($this->ruta . "/formulario/verDetalleCertificado.php");
+                                        }
+                                        else{
+                                            include_once ($this->ruta . "/formulario/verDetalleReporte.php");
+                                        }
+				break;  
+				 
         		}
                        
                        
