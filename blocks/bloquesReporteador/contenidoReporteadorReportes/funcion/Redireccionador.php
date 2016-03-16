@@ -1,6 +1,6 @@
 <?php
 
-namespace bloquesReporteador\contenidoReporteadorPlanillas\funcion;
+namespace bloquesReporteador\contenidoReporteadorReportes\funcion;
 if (! isset ( $GLOBALS ["autorizado"] )) {
 	include ("index.php");
 	exit ();
@@ -20,6 +20,16 @@ class Redireccionador {
 				$variable .= "&tipoPlantilla=" . $valor ['tipoPlantilla'];
 				$variable .= "&tipoReporte=" . $valor ['tipoReporte'];
 				$variable .= "&codigoReporte=" . $valor ['codigoReporte'];
+				break;
+			case "generarPersonal" :
+				$variable = 'pagina=' . $miPaginaActual;
+				$variable .= "&opcion=mensaje";
+				$variable .= "&accion=".$valor['pdf'];
+				$variable .= "&tipoPlantilla=". $valor ['tipoPlantilla'];
+				$variable .= "&tipoReporte=". $valor ['tipoReporte'];
+				$variable .= "&codigoReporte=". $valor ['codigoReporte'];
+				$variable .= "&tipoDocumento=". $valor ['tipoDocumento'];
+				$variable .= "&documento=". $valor ['documento'];
 				break;
 			
 			

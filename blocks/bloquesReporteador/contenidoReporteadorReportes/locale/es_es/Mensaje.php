@@ -13,6 +13,7 @@ $this->idioma["marcoInformacionPesonas"]="Información del Personal";
 $this->idioma["botonAsociaGrupo"]="Seleccionar Personas";
 $this->idioma["marcoFormularioAsociarPersona"]="Asociar Personas";
 $this->idioma["seltipoDocumento"]="Tipo de Documento:";
+$this->idioma["botonRegresarMensaje"]="Regresar:";
 $this->idioma["documentoIdentificacion"]="Documento:";
 $this->idioma["seltipoReporte"]="Tipo de Reporte:";
 $this->idioma["enviarRegistro"]="Continuar";

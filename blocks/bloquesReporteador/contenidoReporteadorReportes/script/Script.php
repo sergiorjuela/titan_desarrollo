@@ -31,6 +31,9 @@ $funcion[$indice++]="npm.js";
 
 $embebido [$indice] = true;
 $funcion [$indice ++] = "scriptLocal/campoFecha.js";
+$funcion [$indice ++] = "jhtmlarea/jquery-1.3.2.min.js";
+$funcion [$indice ++] = "jhtmlarea/jHtmlArea.ColorPickerMenu-0.8.min.js";
+$funcion [$indice ++] = "jhtmlarea/jHtmlArea-0.8.0.min.js";
 
 
 

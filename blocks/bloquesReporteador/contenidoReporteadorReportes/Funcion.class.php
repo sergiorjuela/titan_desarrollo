@@ -60,8 +60,8 @@ class Funcion {
         		case "determinarTipoCertificado":
                               include_once ($this->ruta."funcion/determinarTipoCertificado.php");
         		 break;
-                         case "registrarPlantilla":
-        		      include_once ($this->ruta."funcion/registrar.php");
+                         case "resumenPdfCertificadoPersonal":
+        		      include_once ($this->ruta."funcion/descargarCertificadoPersonal.php");
         	         break; 
                          case "modificarPlantilla":
         		      include_once ($this->ruta."funcion/modificar.php");
