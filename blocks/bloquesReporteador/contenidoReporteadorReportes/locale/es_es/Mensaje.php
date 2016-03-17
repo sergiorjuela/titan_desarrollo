@@ -8,6 +8,7 @@ $this->idioma["codigoReporte"]="Código Reporte:";
 $this->idioma["selReporte"]="Reporte:";
 $this->idioma["seltipoPlantilla"]="Tipo Plantilla:";
 $this->idioma["marcoDatosGenerales"]="Generación del Reporte";
+$this->idioma["selPreliquidacion"]="Preliquidacion";
 $this->idioma["marcoInformacionReportes"]="Información del Reporte";
 $this->idioma["marcoInformacionPesonas"]="Información del Personal";
 $this->idioma["botonAsociaGrupo"]="Seleccionar Personas";

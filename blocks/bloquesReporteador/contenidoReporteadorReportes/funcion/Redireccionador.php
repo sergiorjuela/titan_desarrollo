@@ -24,12 +24,12 @@ class Redireccionador {
 			case "generarPersonal" :
 				$variable = 'pagina=' . $miPaginaActual;
 				$variable .= "&opcion=mensaje";
-				$variable .= "&accion=".$valor['pdf'];
 				$variable .= "&tipoPlantilla=". $valor ['tipoPlantilla'];
 				$variable .= "&tipoReporte=". $valor ['tipoReporte'];
 				$variable .= "&codigoReporte=". $valor ['codigoReporte'];
 				$variable .= "&tipoDocumento=". $valor ['tipoDocumento'];
 				$variable .= "&documento=". $valor ['documento'];
+				$variable .= "&preliquidacion=". $valor ['preliquidacion'];
 				break;
 			
 			

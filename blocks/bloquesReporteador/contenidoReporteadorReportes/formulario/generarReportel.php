@@ -144,6 +144,39 @@ class Formulario {
         echo $this->miFormulario->campoCuadroLista($atributos);
         unset($atributos);
         // --------------- FIN CONTROL :Select Tipo Plantilla --------------------------------------------------
+        // --------------- CONTROL :Select Preliquidacion --------------------------------------------------
+        $esteCampo = 'selPreliquidacion';
+        $atributos ['id'] = $esteCampo;
+        $atributos ['nombre'] = $esteCampo;
+        $atributos ['etiqueta'] = $this->lenguaje->getCadena($esteCampo);
+        $atributos ['tab'] = $tab;
+        $atributos ['seleccion'] = -1;
+        $atributos['evento'] = ' ';
+        $atributos['deshabilitado'] = true;
+        $atributos['limitar'] = 20;
+        $atributos['tamanno'] = 1;
+        $atributos['columnas'] = 1;
+        $atributos ['obligatorio'] = true;
+        $atributos ['etiquetaObligatorio'] = true;
+        $atributos ['validar'] = '';
+        
+        $atributos ['cadena_sql'] = $this->miSql->getCadenaSql("obtenerPreliquidaciones");
+        $matrizItems = $primerRecursoDB->ejecutarAcceso($atributos ['cadena_sql'], "busqueda");
+        $atributos['matrizItems'] = $matrizItems;
+
+        if (isset($_REQUEST [$esteCampo])) {
+            $atributos ['valor'] = $_REQUEST [$esteCampo];
+        } else {
+            $atributos ['valor'] = '';
+        }
+        $tab ++;
+
+        // Aplica atributos globales al control
+        $atributos = array_merge($atributos, $atributosGlobales);
+        echo $this->miFormulario->campoCuadroLista($atributos);
+        unset($atributos);
+        // --------------- FIN CONTROL :Select preliquidacion --------------------------------------------------
+       
         // --------------- CONTROL :Select Reporte --------------------------------------------------
         $esteCampo = 'selReporte';
         $atributos ['id'] = $esteCampo;

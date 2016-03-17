@@ -31,7 +31,7 @@ class FormProcessor {
                 'codigoReporte' => $_REQUEST['codigoReporte'],
                 'tipoDocumento' => $_REQUEST['seltipoDocumento'],
                 'documento' => $_REQUEST['documentoIdentificacion'],
-                'pdf' => 'certificadoPersonal'   
+                'preliquidacion' => $_REQUEST['seltipoPlantilla']   
             );
           Redireccionador::redireccionar('generarPersonal', $datos);
             exit();

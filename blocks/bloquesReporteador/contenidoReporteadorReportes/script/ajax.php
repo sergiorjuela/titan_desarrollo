@@ -29,6 +29,8 @@ $urlFinal17 = $url . $cadena17;
     $("#<?php echo $this->campoSeguro('seltipoDocumento') ?>").select2();
     $('#<?php echo $this->campoSeguro('seltipoReporte') ?>').width(250);
     $("#<?php echo $this->campoSeguro('seltipoReporte') ?>").select2();
+    $('#<?php echo $this->campoSeguro('selPreliquidacion') ?>').width(250);
+    $("#<?php echo $this->campoSeguro('selPreliquidacion') ?>").select2();
 
 
     function consultarReportes(elem, request, response) {
@@ -127,6 +129,22 @@ $urlFinal17 = $url . $cadena17;
                 for(i=0;i<rowCount-1;i++){
                    $('#checkbox'+i).removeAttr('checked');
                 }
+            }
+        });
+
+
+    });
+    
+     $(function () {
+
+        $("#<?php echo $this->campoSeguro('seltipoPlantilla') ?>").change(function () {
+           
+            if ($("#<?php echo $this->campoSeguro('seltipoPlantilla') ?>").val() != 'Certificado') {
+                $("#<?php echo $this->campoSeguro('selPreliquidacion') ?>").removeAttr('disabled');
+                $("#<?php echo $this->campoSeguro('selPreliquidacion') ?>").addClass("validate[required]");
+            }
+            else{
+                $("#<?php echo $this->campoSeguro('selPreliquidacion') ?>").attr('disabled', '');
             }
         });
 

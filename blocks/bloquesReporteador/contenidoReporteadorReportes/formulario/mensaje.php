@@ -1,7 +1,4 @@
 <?php
-
-namespace bloquesReporteador\contenidoReporteadorReportes\formulario;
-
 if (!isset($GLOBALS ["autorizado"])) {
     include ("../index.php");
     exit();
@@ -112,9 +109,11 @@ class registrarForm {
             $variableResumen.= "&bloque=" . $esteBloque["id_bloque"];
             $variableResumen.= "&bloqueGrupo=" . $esteBloque["grupo"];
             $variableResumen.= "&opcion=resumenPdfCertificadoPersonal";
-            $variableResumen.= "&documento=".$_REQUEST ['documento'];
-            $variableResumen.= "&tipoPlantilla=".$_REQUEST ['tipoPlantilla'];
-            $variableResumen.= "&tipoReporte=".$_REQUEST ['tipoReporte'];
+            $variableResumen.= "&tipoPlantilla=".$_REQUEST['tipoPlantilla'];
+            $variableResumen.= "&tipoReporte=".$_REQUEST['tipoReporte'];
+            $variableResumen.= "&codigoReporte=".$_REQUEST['codigoReporte'];
+            $variableResumen.= "&documento=".$_REQUEST['documento'];
+            $variableResumen.= "&preliquidacion=".$_REQUEST['preliquidacion'];
             $variableResumen = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($variableResumen, $directorio);
 
             //------------------Division para los botones-------------------------
