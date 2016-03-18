@@ -31,42 +31,21 @@ class Sql extends \Sql {
             /**
              * Clausulas específicas
              */
-            case 'insertarPlantillaCertificado' :
+            case 'insertarReporte' :
                 $cadenaSql = 'INSERT INTO ';
-                $cadenaSql .= 'reporteador.plantilla_certificado ';
+                $cadenaSql .= 'reporteador.reportes_realizados ';
                 $cadenaSql .= '( ';
-                $cadenaSql .= 'empresa,';
-                $cadenaSql .= 'titulo_encabezado,';
-                $cadenaSql .= 'cuerpo,';
-                $cadenaSql .= 'titulo_pie,';
-                $cadenaSql .= 'email,';
-                $cadenaSql .= 'direccion,';
-                $cadenaSql .= 'otro_pie,';
-                $cadenaSql .= 'telefono,';
-                $cadenaSql .= 'numero_firmas,';
-                $cadenaSql .= 'fecha_creacion,';
-                $cadenaSql .= 'otro_encabezado,';
-                $cadenaSql .= 'imagen_1,';
-                $cadenaSql .= 'imagen_2,';
-                $cadenaSql .= 'id_plantilla_certificado';
+                $cadenaSql .= 'codigo_reporte, ';
+                $cadenaSql .= 'codigo_plantilla, ';
+                $cadenaSql .= 'documento ';
                 $cadenaSql .= ') ';
-                $cadenaSql .= 'VALUES ';
-                $cadenaSql .= '( ';
-                $cadenaSql .= '\'' . $variable ['empresa'] . '\', ';
-                $cadenaSql .= '\'' . $variable ['tituloEncabezado'] . '\', ';
-                $cadenaSql .= '\'' . $variable ['contenidoCertificado'] . '\', ';
-                $cadenaSql .= '\'' . $variable ['tituloPie'] . '\', ';
-                $cadenaSql .= '\'' . $variable ['email'] . '\', ';
-                $cadenaSql .= '\'' . $variable ['direccion'] . '\', ';
-                $cadenaSql .= '\'' . $variable ['otroDatoPie'] . '\', ';
-                $cadenaSql .= $variable ['telefono'] . ",";
-                $cadenaSql .= $variable ['selecNumeroFirmas'] . ', ';
-                $cadenaSql .= '\'' . $variable ['fechaCreacion'] . '\', ';
-                $cadenaSql .= '\'' . $variable ['otroDatoEncabezado'] . '\', ';
-                $cadenaSql .= '\'' . $variable ['imagen1'] . '\', ';
-                $cadenaSql .= '\'' . $variable ['imagen2'] . '\', ';
-                $cadenaSql .= $variable ['id'];
+                $cadenaSql .= 'VALUES';
+                $cadenaSql .= '(';
+                $cadenaSql .= $variable['id'].', ';
+                $cadenaSql .= $variable['codigoReporte'].', ';
+                $cadenaSql .= $variable['documento'].' ';
                 $cadenaSql .= '); ';
+                
                 break;
 
             case 'consultarPlantillasParaReportes' :
