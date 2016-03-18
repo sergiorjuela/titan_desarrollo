@@ -133,7 +133,7 @@ class Formulario {
 
         // ---------------- CONTROL: Tabla Plantillas sin Sara -----------------------------------------------                
 
-        $atributos ['cadena_sql'] = $this->miSql->getCadenaSql("consultarPlantillasParaReportes");
+        $atributos ['cadena_sql'] = $this->miSql->getCadenaSql("consultarReportes");
         $matrizItems = $primerRecursoDB->ejecutarAcceso($atributos['cadena_sql'], "busqueda");
         $longitud = count($matrizItems);
         $i = 0;

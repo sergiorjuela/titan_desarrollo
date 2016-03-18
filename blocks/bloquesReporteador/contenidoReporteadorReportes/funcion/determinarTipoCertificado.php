@@ -1,7 +1,7 @@
 <?php
 
 namespace bloquesReporteador\contenidoReporteadorReportes\funcion;
- 
+
 include_once('Redireccionador.php');
 
 class FormProcessor {
@@ -21,21 +21,32 @@ class FormProcessor {
     }
 
     function procesarFormulario() {
-
+        $conexion = 'estructura';
+        $primerRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
         //Determina que Boton selecciono el usuario si es enviarRegistro genera el certificado Personal
         //De lo contrario direcciona a la vista de selecion grupal
-        if ($_REQUEST['enviarRegistro']=="true") {
-           $datos = array(
+        if ($_REQUEST['enviarRegistro'] == "true") {
+            $datos = array(
                 'tipoPlantilla' => $_REQUEST['seltipoPlantilla'],
                 'tipoReporte' => $_REQUEST['selReporte'],
                 'codigoReporte' => $_REQUEST['codigoReporte'],
                 'tipoDocumento' => $_REQUEST['seltipoDocumento'],
                 'documento' => $_REQUEST['documentoIdentificacion'],
-                'preliquidacion' => $_REQUEST['seltipoPlantilla']   
+                'preliquidacion' => $_REQUEST['seltipoPlantilla'],
+                'id'=> "nextval('reporteador.sec_reporterealizado')"
             );
-          Redireccionador::redireccionar('generarPersonal', $datos);
-            exit();
-        }  else {
+
+            $atributos ['cadena_sql'] = $this->miSql->getCadenaSql("insertarReporte", $datos);
+            $resultado = $primerRecursoDB->ejecutarAcceso($atributos['cadena_sql'], "acceso");
+            if (!empty($resultado)) {
+                Redireccionador::redireccionar('generarPersonal', $datos);
+                exit();
+            }
+            else{
+                Redireccionador::redireccionar('noInserto', $datos);
+                exit();
+            }
+        } else {
             echo "entro";
             $datos = array(
                 'tipoPlantilla' => $_REQUEST['seltipoPlantilla'],

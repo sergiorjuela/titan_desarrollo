@@ -214,6 +214,19 @@ class Sql extends \Sql {
                 $cadenaSql .= 'liquidacion.preliquidacion;  ';
                 
                 break;
+            case 'consultarReportes' :
+                $cadenaSql = 'SELECT ';
+                $cadenaSql .= 'codigo_reporte, ';
+                $cadenaSql .= 'nombre, ';
+                $cadenaSql .= 'tipo ';
+                $cadenaSql .= 'FROM  ';
+                $cadenaSql .= 'reporteador.reportes_realizados r,';
+                $cadenaSql .= 'reporteador.plantilla p ';
+                $cadenaSql .= 'WHERE ';
+                $cadenaSql .= 'r.codigo_plantilla = p.id_plantilla; ';
+                
+                
+                break;
             case 'obtenerInformacionPersonaReporte' :
                 $cadenaSql = 'SELECT ';
                 $cadenaSql .= 'td.nombre||\'(\'||td.abreviatura||\')\' as tipodocumento, ';

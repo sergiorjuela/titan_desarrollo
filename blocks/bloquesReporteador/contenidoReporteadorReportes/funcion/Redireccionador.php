@@ -31,6 +31,11 @@ class Redireccionador {
 				$variable .= "&documento=". $valor ['documento'];
 				$variable .= "&preliquidacion=". $valor ['preliquidacion'];
 				break;
+			case "noInserto" :
+				$variable = 'pagina=' . $miPaginaActual;
+				$variable .= "&opcion=mensaje";
+				$variable .= "&resultado=noInserto";
+				break;
 			
 			
 			default :

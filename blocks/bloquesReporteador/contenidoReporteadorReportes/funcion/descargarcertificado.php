@@ -27,40 +27,8 @@ if ($_REQUEST['tipoPlantilla'] == 'Certificado') {
     $cuerpo = str_replace("[ESTADO_VINCULACION]", " " . $informacionPersona[0]['estado_vinculacion'] . " ", $cuerpo);
     $cuerpo = str_replace("[SEDE]", " " . $informacionPersona[0]['sede'] . " ", $cuerpo);
     $cuerpo = str_replace("[DEPENDENCIA]", " " . $informacionPersona[0]['dependencia'] . " ", $cuerpo);
-} else {
-    $sqlReporte = $this->sql->getCadenaSql('obtenerPlantillaReporteporId', $_REQUEST['tipoReporte']);
-    $cadenaReporte = $primerRecursoDB->ejecutarAcceso($sqlReporte, "busqueda");
-    $cadenaReporte[0]['atributos_persona'] = str_replace("tipo_documento", "tipodocumento", $cadenaReporte[0]['atributos_persona']);
-    $cadenaInformacionPersona = 'SELECT ' . $cadenaReporte[0]['atributos_persona'] . ', ';
-    $cadenaInformacionPersona.= $cadenaReporte[0]['atributos_vinculacion'] . ',nombre FROM informacionPersona ';
-    $cadenaInformacionPersona.= 'WHERE documento=' . $_REQUEST['documento'];
-    $informacionPersona = $primerRecursoDB->ejecutarAcceso($cadenaInformacionPersona, "busqueda");
-    //var_dump($informacionPersona);
-    $cadenaInformacionPreliquidacion = 'SELECT ' . $cadenaReporte[0]['atributos_conceptos'] . ', valor ,naturaleza ';
-    $cadenaInformacionPreliquidacion .= 'FROM informacionPreliquidacion ';
-    $cadenaInformacionPreliquidacion .= 'WHERE persona=' . $_REQUEST['documento'] . ' and ';
-    $conceptosdevenga = $cadenaReporte[0]['conceptos_devenga'];
-    $conceptosdevenga = explode(",", $conceptosdevenga);
-    $condicionesdevenga = "";
-    for ($i = 0; $i < count($conceptosdevenga); $i++) {
-        $condicionesdevenga = $condicionesdevenga . 'codigo =' . $conceptosdevenga[$i] . ' or ';
-    }
-    $condicionesdevenga = substr($condicionesdevenga, 0, -3);
-    $conceptosdeduce = $cadenaReporte[0]['conceptos_deduce'];
-    $conceptosdeduce = explode(",", $conceptosdeduce);
-    $condicionesdeduce = "";
-    for ($i = 0; $i < count($conceptosdeduce); $i++) {
-        $condicionesdeduce = $condicionesdeduce . 'codigo =' . $conceptosdeduce[$i] . ' or ';
-    }
-    $condicionesdeduce = substr($condicionesdeduce, 0, -3);
-    $cadenaInformacionPreliquidacion .= $condicionesdevenga . ' and ';
-    $cadenaInformacionPreliquidacion .= $condicionesdeduce . ' ;';
-    $informacionPreliquidacion = $primerRecursoDB->ejecutarAcceso($cadenaInformacionPreliquidacion, "busqueda");
-    $cuerpo = $cadenaReporte[0]['cuerpo'];
-}
-
-$contenidoPagina = "<page backtop='30mm' backbottom='10mm' backleft='20mm' backright='20mm'>";
-$contenidoPagina .= "<page_header>
+     $contenidoPagina = "<page backtop='30mm' backbottom='10mm' backleft='20mm' backright='20mm'>";
+    $contenidoPagina .= "<page_header>
         <table align='center' style='width: 100%;'>
             <tr>
                 <td align='left' >
@@ -109,123 +77,9 @@ $contenidoPagina .= "<page_header>
 
 $contenidoPagina .= "
 <div>
-<br><br><br><br><br><br><br><br><br>
-<table align='center' class=MsoTableGrid border=1 cellspacing=0 cellpadding=0
- style='width:80%;border-collapse:collapse;border:none;'>   
- <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes'>
-  <td width=123 valign=top style='width:12%;border:solid windowtext 1.0pt; 
-  mso-border-alt:solid windowtext .5pt;background:#BDD6EE;mso-background-themecolor:
-  accent1;mso-background-themetint:102;padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height: 
-  normal'><b style='mso-bidi-font-weight:normal'><span style='font-size:12.0pt;
-  mso-bidi-font-size:11.0pt'>TIPO:".$informacionPersona[0]['tipodocumento']." </span></b></p>
-  </td>
-  <td width=236 valign=top style='width:95%;border:solid windowtext 1.0pt;  
-  border-left:none;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:
-  solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
-  text-align:center;line-height:normal'><span style='font-size:12.0pt;
-  mso-bidi-font-size:11.0pt'>Identificación:".$_REQUEST['documento']."</span></p>
-  </td>
- </tr>
- <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes'>
-  <td width=123 valign=top style='width:12%;border:solid windowtext 1.0pt; 
-  mso-border-alt:solid windowtext .5pt;background:#BDD6EE;mso-background-themecolor:
-  accent1;mso-background-themetint:102;padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height: 
-  normal'><b style='mso-bidi-font-weight:normal'><span style='font-size:12.0pt;
-  mso-bidi-font-size:11.0pt'>Apellidos:".$informacionPersona[0]['primer_apellido']." ".$informacionPersona[0]['segundo_apellido']." </span></b></p>
-  </td>
-  <td width=236 valign=top style='width:95%;border:solid windowtext 1.0pt;  
-  border-left:none;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:
-  solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
-  text-align:center;line-height:normal'><span style='font-size:12.0pt;
-  mso-bidi-font-size:11.0pt'>Nombres:".$informacionPersona[0]['primer_nombre']." ".$informacionPersona[0]['segundo_nombre']."</span></p>
-  </td>
- <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes'>
-  <td width=123 valign=top style='width:12%;border:solid windowtext 1.0pt; 
-  mso-border-alt:solid windowtext .5pt;background:#BDD6EE;mso-background-themecolor:
-  accent1;mso-background-themetint:102;padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height: 
-  normal'><b style='mso-bidi-font-weight:normal'><span style='font-size:12.0pt;
-  mso-bidi-font-size:11.0pt'>Gran Contribuyente:".$informacionPersona[0]['gran_contribuyente']." </span></b></p>
-  </td>
-  <td width=236 valign=top style='width:95%;border:solid windowtext 1.0pt;  
-  border-left:none;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:
-  solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
-  text-align:center;line-height:normal'><span style='font-size:12.0pt;
-  mso-bidi-font-size:11.0pt'>Autorrtenedor:".$informacionPersona[0]['autorretenedor']."</span></p>
-  </td>
-  <td width=236 valign=top style='width:95%;border:solid windowtext 1.0pt;  
-  border-left:none;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:
-  solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
-  text-align:center;line-height:normal'><span style='font-size:12.0pt;
-  mso-bidi-font-size:11.0pt'>Regimen Tributario:".$informacionPersona[0]['regime_tributario']."</span></p>
-  </td>
- </tr>
-  <td width=123 valign=top style='width:12%;border:solid windowtext 1.0pt; 
-  mso-border-alt:solid windowtext .5pt;background:#BDD6EE;mso-background-themecolor:
-  accent1;mso-background-themetint:102;padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height: 
-  normal'><b style='mso-bidi-font-weight:normal'><span style='font-size:12.0pt;
-  mso-bidi-font-size:11.0pt'>Numero Contrato:".$informacionPersona[0]['numero_contrato']." </span></b></p>
-  </td>
-  <td width=236 valign=top style='width:95%;border:solid windowtext 1.0pt;  
-  border-left:none;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:
-  solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
-  text-align:center;line-height:normal'><span style='font-size:12.0pt;
-  mso-bidi-font-size:11.0pt'>Fecha Final:".$informacionPersona[0]['fecha_inicio']."</span></p>
-  </td>
-  <td width=236 valign=top style='width:95%;border:solid windowtext 1.0pt;  
-  border-left:none;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:
-  solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
-  text-align:center;line-height:normal'><span style='font-size:12.0pt;
-  mso-bidi-font-size:11.0pt'>Fecha Fin:".$informacionPersona[0]['fecha_final']."</span></p>
-  </td>
-  <td width=236 valign=top style='width:95%;border:solid windowtext 1.0pt;  
-  border-left:none;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:
-  solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
-  text-align:center;line-height:normal'><span style='font-size:12.0pt;
-  mso-bidi-font-size:11.0pt'>Estado Vinculacion:".$informacionPersona[0]['estado_vinculacion']."</span></p>
-  </td>
- </tr>
- </tr>
-  <td width=123 valign=top style='width:12%;border:solid windowtext 1.0pt; 
-  mso-border-alt:solid windowtext .5pt;background:#BDD6EE;mso-background-themecolor:
-  accent1;mso-background-themetint:102;padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height: 
-  normal'><b style='mso-bidi-font-weight:normal'><span style='font-size:12.0pt;
-  mso-bidi-font-size:11.0pt'>Estado Dependencia:".$informacionPersona[0]['estado_vinculacion_dependencia']." </span></b></p>
-  </td>
-  <td width=236 valign=top style='width:95%;border:solid windowtext 1.0pt;  
-  border-left:none;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:
-  solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
-  text-align:center;line-height:normal'><span style='font-size:12.0pt;
-  mso-bidi-font-size:11.0pt'>Modelo de Liquidacion:".$informacionPersona[0]['modelo_vinculacion']."</span></p>
-  </td>
-  <td width=236 valign=top style='width:95%;border:solid windowtext 1.0pt;  
-  border-left:none;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:
-  solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
-  text-align:center;line-height:normal'><span style='font-size:12.0pt;
-  mso-bidi-font-size:11.0pt'>Valor Contrato:".$informacionPersona[0]['valor_contrato']."</span></p>
-  </td>
-  <td width=236 valign=top style='width:95%;border:solid windowtext 1.0pt;  
-  border-left:none;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:
-  solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt'>
-  <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
-  text-align:center;line-height:normal'><span style='font-size:12.0pt;
-  mso-bidi-font-size:11.0pt'>Actividad:".$informacionPersona[0]['actividad']."</span></p>
-  </td>
- </tr>
- <table>
+<br><br><br><br><br><br><br><br><br><br><br><br>
+$cuerpo
+<br>
 </div>
     ";
 
@@ -233,6 +87,311 @@ $contenidoPagina .= "</page>";
 
 $html2pdf = new HTML2PDF('P', 'LETTER', 'es');
 $res = $html2pdf->WriteHTML($contenidoPagina);
-$html2pdf->Output('resumenUsuario.pdf', 'D');
-//$html2pdf->Output('certificado.pdf');
+$html2pdf->Output('Certificado.pdf', 'D');
+} else {
+    $sqlReporte = $this->sql->getCadenaSql('obtenerPlantillaReporteporId', $_REQUEST['tipoReporte']);
+    $cadenaReporte = $primerRecursoDB->ejecutarAcceso($sqlReporte, "busqueda");
+    $cadenaReporte[0]['atributos_persona'] = str_replace("tipo_documento", "tipodocumento", $cadenaReporte[0]['atributos_persona']);
+    $cadenaInformacionPersona = 'SELECT ' . $cadenaReporte[0]['atributos_persona'] . ', ';
+    $cadenaInformacionPersona.= $cadenaReporte[0]['atributos_vinculacion'] . ',nombre FROM informacionPersona ';
+    $cadenaInformacionPersona.= 'WHERE documento=' . $_REQUEST['documento'];
+    $informacionPersona = $primerRecursoDB->ejecutarAcceso($cadenaInformacionPersona, "busqueda");
+    $cadenaInformacionPreliquidacion = 'SELECT ' . $cadenaReporte[0]['atributos_conceptos'] . ', valor ,naturaleza ';
+    $cadenaInformacionPreliquidacion .= 'FROM informacionPreliquidacion ';
+    $cadenaInformacionPreliquidacion .= 'WHERE persona=' . $_REQUEST['documento'] . ' and ';
+    $conceptosdevenga = $cadenaReporte[0]['conceptos_devenga'];
+    $conceptosdevenga = explode(",", $conceptosdevenga);
+    $condicionesdevenga = "";
+    for ($i = 0; $i < count($conceptosdevenga); $i++) {
+        $condicionesdevenga = $condicionesdevenga . 'codigo =' . $conceptosdevenga[$i] . ' or ';
+    }
+    $condicionesdevenga = substr($condicionesdevenga, 0, -3);
+    $conceptosdeduce = $cadenaReporte[0]['conceptos_deduce'];
+    $conceptosdeduce = explode(",", $conceptosdeduce);
+    $condicionesdeduce = "";
+    for ($i = 0; $i < count($conceptosdeduce); $i++) {
+        $condicionesdeduce = $condicionesdeduce . 'codigo =' . $conceptosdeduce[$i] . ' or ';
+    }
+    $condicionesdeduce = substr($condicionesdeduce, 0, -3);
+    $cadenaInformacionPreliquidacion .= $condicionesdevenga . ' and ';
+    $cadenaInformacionPreliquidacion .= $condicionesdeduce . ' ;';
+    $informacionPreliquidacion = $primerRecursoDB->ejecutarAcceso($cadenaInformacionPreliquidacion, "busqueda");
+    
+    $contenidoReporte = "<table align='left' class=MsoTableGrid border=0 cellspacing=2 cellpadding=0
+                                                style='width:80%;border-collapse:separate;border-spacing:10px 50px;'>";
+    $contenidoReporte .= "<tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes'>";
+    $contenidoReporte .= "<td text-align:left;>
+                            <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+                            text-align:left;line-height:normal'><span style='font-size:10.0pt;
+                            mso-bidi-font-size:11.0pt'><strong>Vinculacion</strong>: " . $informacionPersona[0]['nombre'] . "</span></p>
+                         </td>";
+    if (isset($informacionPersona[0]['estado_vinculacion'])) {
+        $contenidoReporte .= "<td text-align:left;>
+                            <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+                            text-left:left;line-height:normal'><span style='font-size:10.0pt;
+                            mso-bidi-font-size:11.0pt'><strong>Estado:</strong> " . $informacionPersona[0]['estado_vinculacion'] . "</span></p>
+                         </td>";
+    }
+    if (isset($informacionPersona[0]['fecha_inicio'])) {
+        $contenidoReporte .= "<td text-align:left;>
+                            <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+                            text-left:left;line-height:normal'><span style='font-size:10.0pt;
+                            mso-bidi-font-size:11.0pt'><strong>F. Inicio:</strong> " . $informacionPersona[0]['fecha_inicio'] . "</span></p>
+                         </td>";
+    }
+    if (isset($informacionPersona[0]['fecha_final'])) {
+        $contenidoReporte .= "<td text-align:left;>
+                            <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+                            text-left:left;line-height:normal'><span style='font-size:10.0pt;
+                            mso-bidi-font-size:11.0pt'><strong>F. Final:</strong> " . $informacionPersona[0]['fecha_final'] . "</span></p>
+                         </td>";
+    }
+    $contenidoReporte.="</tr>";
+    $contenidoReporte.= "<tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes'>";
+    if (isset($informacionPersona[0]['tipodocumento'])) {
+        $contenidoReporte .= "<td text-align:right;>
+                            <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+                            text-align:left;line-height:normal'><span style='font-size:10.0pt;
+                            mso-bidi-font-size:11.0pt'>" . $informacionPersona[0]['tipodocumento'] . "</span></p>
+                         </td>";
+    }
+    if (isset($informacionPersona[0]['documento'])) {
+        $contenidoReporte .= "<td text-align:right;>
+                            <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+                            text-align:left;line-height:normal'><span style='font-size:10.0pt;
+                            mso-bidi-font-size:11.0pt'><strong>Documento:</strong> " . $informacionPersona[0]['documento'] . "</span></p>
+                         </td>";
+    }
+    $contenidoReporte.="</tr>";
+    $contenidoReporte.= "<tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes'>";
+    $contenidoReporte .= "<td text-align:left;>
+                            <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+                            text-align:left;line-height:normal'><span style='font-size:10.0pt;
+                            mso-bidi-font-size:11.0pt'><strong>Nombres:</strong> </span></p>
+                         </td>";
+    if (isset($informacionPersona[0]['primer_apellido'])) {
+        $contenidoReporte .= "<td text-align:left;>
+                            <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+                            text-align:left;line-height:normal'><span style='font-size:10.0pt;
+                            mso-bidi-font-size:11.0pt'>" . $informacionPersona[0]['primer_apellido'] . "</span></p>
+                         </td>";
+    }
+    if (isset($informacionPersona[0]['segundo_apellido'])) {
+        $contenidoReporte .= "<td text-align:left;>
+                            <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+                            text-align:left;line-height:normal'><span style='font-size:10.0pt;
+                            mso-bidi-font-size:11.0pt'>" . $informacionPersona[0]['segundo_apellido'] . "</span></p>
+                         </td>";
+    }
+    if (isset($informacionPersona[0]['primer_nombre'])) {
+        $contenidoReporte .= "<td text-align:left;>
+                            <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+                            text-align:left;line-height:normal'><span style='font-size:10.0pt;
+                            mso-bidi-font-size:11.0pt'>" . $informacionPersona[0]['primer_nombre'] . "</span></p>
+                         </td>";
+    }
+    if (isset($informacionPersona[0]['segundo_nombre'])) {
+        $contenidoReporte .= "<td text-align:left;>
+                            <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+                            text-align:left;line-height:normal'><span style='font-size:10.0pt;
+                            mso-bidi-font-size:11.0pt'>" . $informacionPersona[0]['segundo_nombre'] . "</span></p>
+                         </td>";
+    }
+    $contenidoReporte.="</tr>";
+    $contenidoReporte.= "<tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes'>";
+
+    if (isset($informacionPersona[0]['estado_vinculacion_dependencia'])) {
+        $contenidoReporte .= "<td text-align:left;>
+                            <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+                            text-align:left;line-height:normal'><span style='font-size:10.0pt;
+                            mso-bidi-font-size:11.0pt'><strong>Est. Dependencia:</strong> " . $informacionPersona[0]['estado_vinculacion_dependencia'] . "</span></p>
+                         </td>";
+    }
+    if (isset($informacionPersona[0]['gran_contribuyente'])) {
+        $contenidoReporte .= "<td text-align:left;>
+                            <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+                            text-align:left;line-height:normal'><span style='font-size:10.0pt;
+                            mso-bidi-font-size:11.0pt'><strong>G.Contribuyente:</strong> " . $informacionPersona[0]['gran_contribuyente'] . "</span></p>
+                         </td>";
+    }
+    if (isset($informacionPersona[0]['autorretenedor'])) {
+        $contenidoReporte .= "<td text-align:left;>
+                            <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+                            text-align:left;line-height:normal'><span style='font-size:10.0pt;
+                            mso-bidi-font-size:11.0pt'><strong>Autorretenedor:</strong> " . $informacionPersona[0]['autorretenedor'] . "</span></p>
+                         </td>";
+    }
+    if (isset($informacionPersona[0]['regimen_tributario'])) {
+        $contenidoReporte .= "<td text-align:left;>
+                            <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+                            text-align:left;line-height:normal'><span style='font-size:10.0pt;
+                            mso-bidi-font-size:11.0pt'><strong>R. Tributario:</strong> " . $informacionPersona[0]['regimen_tributario'] . "</span></p>
+                         </td>";
+    }
+    $contenidoReporte.="</tr>";
+    $contenidoReporte.= "<tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes'>";
+    if (isset($informacionPersona[0]['modelo_vinculacion'])) {
+        $contenidoReporte .= "<td text-align:left;>
+                            <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+                            text-align:left;line-height:normal'><span style='font-size:10.0pt;
+                            mso-bidi-font-size:11.0pt'><strong>M. de Vinculacion:</strong> " . $informacionPersona[0]['modelo_vinculacion'] . "</span></p>
+                         </td>";
+    }
+    if (isset($informacionPersona[0]['numero_contrato'])) {
+        $contenidoReporte .= "<td text-align:left;>
+                            <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+                            text-align:left;line-height:normal'><span style='font-size:10.0pt;
+                            mso-bidi-font-size:11.0pt'><strong>N° Contrato:</strong> " . $informacionPersona[0]['numero_contrato'] . "</span></p>
+                         </td>";
+    }
+    if (isset($informacionPersona[0]['actividad'])) {
+        $contenidoReporte .= "<td text-align:left;>
+                            <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+                            text-align:left;line-height:normal'><span style='font-size:10.0pt;
+                            mso-bidi-font-size:11.0pt'><strong>Actividad:</strong> " . $informacionPersona[0]['actividad'] . "</span></p>
+                         </td>";
+    }
+    if (isset($informacionPersona[0]['valor_contrato'])) {
+        $contenidoReporte .= "<td text-align:left;>
+                            <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+                            text-align:left;line-height:normal'><span style='font-size:10.0pt;
+                            mso-bidi-font-size:11.0pt'><strong>V. Contrato:</strong> " . $informacionPersona[0]['valor_contrato'] . "</span></p>
+                         </td>";
+    }
+    $contenidoReporte.="</tr>";
+    $contenidoReporte .= "</table>";
+    if (isset($informacionPersona[0]['cuerpo'])) {
+        $cuerpo = $informacionPersona[0]['cuerpo'];
+    }
+    else{
+        
+        $cuerpo="";
+    }
+    $contenidoConceptosDevenga = "<table align='left' class=MsoTableGrid border=0 cellspacing=2 cellpadding=0
+                            style='width:80%;border-collapse:separate;border-spacing:10px 50px;'>";
+    $contenidoConceptosDeduce = "<table align='left' class=MsoTableGrid border=0 cellspacing=2 cellpadding=0
+                            style='width:80%;border-collapse:separate;border-spacing:10px 50px;'>";
+    $sumaDevengos=0;
+    $sumaDeducciones=0;
+    for ($j = 0; $j < count($informacionPreliquidacion); $j++) {
+         if ($informacionPreliquidacion[$j]['naturaleza'] == 'Devenga') {
+             $sumaDevengos = $sumaDevengos + $informacionPreliquidacion[$j]['valor'];
+             $contenidoConceptosDevenga .="<tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes'>";
+            for ($k = 0; $k < count($informacionPreliquidacion[$j])/2; $k++) {
+                $contenidoConceptosDevenga .= "<td text-align:left;>
+                            <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+                            text-align:left;line-height:normal'><span style='font-size:10.0pt;
+                            mso-bidi-font-size:11.0pt'>" . $informacionPreliquidacion[$j][$k] . "</span></p>
+                         </td>";
+               
+            }
+            $contenidoConceptosDevenga.="</tr>";
+        } else {
+            $sumaDeducciones = $sumaDeducciones + $informacionPreliquidacion[$j]['valor'];
+            $contenidoConceptosDeduce .="<tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes'>";
+            for ($k = 0; $k < count($informacionPreliquidacion[$j])/2; $k++) {
+                $contenidoConceptosDeduce .= "<td text-align:left;>
+                            <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+                            text-align:left;line-height:normal'><span style='font-size:10.0pt;
+                            mso-bidi-font-size:11.0pt'>" . $informacionPreliquidacion[$j][$k] . "</span></p>
+                         </td>";
+                
+            }
+            $contenidoConceptosDeduce.="</tr>";
+        }
+    }
+    $totalPreliquidar = $sumaDevengos-$sumaDeducciones;
+    $contenidoConceptosDevenga .= "<tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes'>";
+    $contenidoConceptosDevenga .= "<td text-align:left;>
+                            <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+                            text-align:left;line-height:normal'><span style='font-size:10.0pt;
+                            mso-bidi-font-size:11.0pt'><strong>Total Devengando: </strong>" . $sumaDevengos . "</span></p>
+                         </td></tr>";
+    $contenidoConceptosDeduce .= "<tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes'>";
+    $contenidoConceptosDeduce .= "<td text-align:left;>
+                            <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+                            text-align:left;line-height:normal'><span style='font-size:10.0pt;
+                            mso-bidi-font-size:11.0pt'><strong>Total Deducido: </strong>" .$sumaDeducciones . "</span></p>
+                         </td></tr>";
+    $contenidoConceptosDevenga .= "</table>";
+    $contenidoConceptosDeduce .= "</table>";
+    $contenidoPagina = "<page backtop='30mm' backbottom='10mm' backleft='20mm' backright='20mm'>";
+    $contenidoPagina .= "<page_header>
+        <table align='center' style='width: 100%;'>
+            <tr>
+                <td align='left' >
+                <img src='" . $cadenaReporte[0]['icono_izquierdo'] . "' width='80' height='80' /> 
+                </td>
+                <td align='center' >
+                    <br>
+                    <br>
+                    <br>
+                    <font style='font-size:30px;'><b>" . $cadenaReporte[0]['titulo_encabezado'] . "</b></font>
+                    <br>
+                    <font style='font-size:22px;'><b>" . $cadenaReporte[0]['empresa'] . "</b></font>
+                    <br>
+                    <font style='font-size:16px;'><b>" . $cadenaReporte[0]['otro_encabezado'] . "</b></font>
+                    <br>
+                    <font style='font-size:16px;'><b>" . $cadenaReporte[0]['fecha_creacion'] . "</b></font>
+                    <br>
+                </td>
+                <td align='center' >
+                <img src='" . $cadenaReporte[0]['icono_derecho'] . "' width='80' height='80' /> 
+                </td>
+            </tr>
+        </table>
+    </page_header>
+    <page_footer>
+        <table align='center' width = '100%'>
+            <tr>
+                <td align='center'>
+                    
+                </td>
+            </tr>
+            <tr>
+                <td align='center'>
+                    " . $cadenaReporte[0]['titulo_pie'] . "
+                    <br>
+                    " . $cadenaReporte[0]['direccion'] . "
+                    <br>
+                    " . $cadenaReporte[0]['telefono'] . "
+                    <br>
+                    " . $cadenaReporte[0]['email'] . "
+                                                     
+                </td>
+            </tr>
+        </table>
+    </page_footer>";
+
+$contenidoPagina .= "
+<div>
+<br><br><br>
+<h3 align='center'>Informacion de Vinculacion </h3>
+<br><br><br>
+$contenidoReporte
+<br><br>
+$cuerpo
+<br>
+<h3 align='center'>Informacion de Preliquidacion </h3>
+<br><br><br>
+<table border=0.4 px style='width:100%'>
+<tr><td>Devengos</td><td>Deducciones</td></tr>
+<tr><td>
+$contenidoConceptosDevenga
+</td><td>
+$contenidoConceptosDeduce
+</td></tr>
+</table>
+
+<h3 align='center'><strong>Total a Preliquidar:$totalPreliquidar </strong></h3>
+</div>
+    ";
+
+$contenidoPagina .= "</page>";
+
+$html2pdf = new HTML2PDF('P', 'LETTER', 'es');
+$res = $html2pdf->WriteHTML($contenidoPagina);
+$html2pdf->Output('ReporteGeneral.pdf', 'D');
+}
+
 ?>
