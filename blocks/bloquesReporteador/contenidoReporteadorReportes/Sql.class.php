@@ -77,6 +77,30 @@ class Sql extends \Sql {
                 $cadenaSql .= 'AND ';
                 $cadenaSql .= 'estado=\'Activo\'';
                 break;
+            case 'obtenerRepotesAjax' :
+                $cadenaSql = 'SELECT ';
+                $cadenaSql .= 'id_plantilla, ';
+                $cadenaSql .= 'nombre ';
+                $cadenaSql .= 'FROM ';
+                $cadenaSql .= 'reporteador.plantilla ';
+                $cadenaSql .= 'WHERE ';
+                $cadenaSql .= 'tipo=\''.$variable.'\' ';
+                $cadenaSql .= 'AND ';
+                $cadenaSql .= 'estado=\'Activo\'';
+                break;
+            case 'obtenerPersonasAjax' :
+                $cadenaSql = 'SELECT ';
+                $cadenaSql .= 'pn.documento, ';
+                $cadenaSql .= 'pn.primer_apellido||\' \'||pn.segundo_apellido||\' \'||pn.primer_nombre||\' \'||pn.segundo_nombre as nombre, ';
+                $cadenaSql .= 'td.abreviatura ';
+                $cadenaSql .= 'FROM ';
+                $cadenaSql .= 'persona.persona_natural pn, ';
+                $cadenaSql .= 'persona.tipo_documento td ';
+                $cadenaSql .= 'WHERE ';
+                $cadenaSql .= 'pn.tipo_documento = td.tipo_documento ';
+                $cadenaSql .= 'AND ';
+                $cadenaSql .= 'td.tipo_documento=\''.$variable.'\' ';
+                break;
             case 'obtenerReportes' :
                 $cadenaSql = 'SELECT ';
                 $cadenaSql .= 'id_plantilla, ';

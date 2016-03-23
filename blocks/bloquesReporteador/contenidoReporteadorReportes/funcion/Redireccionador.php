@@ -30,6 +30,7 @@ class Redireccionador {
 				$variable .= "&tipoDocumento=". $valor ['tipoDocumento'];
 				$variable .= "&documento=". $valor ['documento'];
 				$variable .= "&preliquidacion=". $valor ['preliquidacion'];
+				$variable .= "&resultado=generarPersonal";
 				break;
 			case "noInserto" :
 				$variable = 'pagina=' . $miPaginaActual;

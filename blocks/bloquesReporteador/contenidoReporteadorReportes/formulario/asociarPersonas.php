@@ -199,7 +199,7 @@ class Formulario {
         $atributos ["valor"] = $valorCodificado;
         echo $this->miFormulario->campoCuadroTexto($atributos);
         unset($atributos);
-
+        
         // ----------------FIN SECCION: Paso de variables -------------------------------------------------
         // ---------------- FIN SECCION: Controles del Formulario -------------------------------------------
         // ----------------FINALIZAR EL FORMULARIO ----------------------------------------------------------

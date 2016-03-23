@@ -83,18 +83,7 @@ class registrarForm {
             $variable = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($variable, $directorio);
 
             // ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
-            $esteCampo = 'botonRegresarMensaje';
-            $atributos ['id'] = $esteCampo;
-            $atributos ['enlace'] = $variable;
-            $atributos ['tabIndex'] = 1;
-            $atributos ['estilo'] = 'textoSubtitulo';
-            $atributos ['enlaceTexto'] = "<h4>" . $this->lenguaje->getCadena($esteCampo) . "</h4>";
-            $atributos ['ancho'] = '10%';
-            $atributos ['alto'] = '10%';
-            $atributos ['redirLugar'] = true;
-            echo $this->miFormulario->enlace($atributos);
-
-            unset($atributos);
+           
 
             $esteCampo = "marcoDatosBasicos";
             $atributos ['id'] = $esteCampo;
@@ -103,7 +92,7 @@ class registrarForm {
 
             echo $this->miFormulario->marcoAgrupacion('inicio', $atributos);
 
-
+            if($_REQUEST['resultado']=='generarPersonal'){
             $variableResumen = "&action=" . $esteBloque["nombre"];
             $variableResumen.= "&pagina=" . $this->miConfigurador->getVariableConfiguracion('pagina'); //Frontera mostrar formulario
             $variableResumen.= "&bloque=" . $esteBloque["id_bloque"];
@@ -122,7 +111,7 @@ class registrarForm {
             echo $this->miFormulario->division("inicio", $atributos);
 
             $enlace = "<a href='" . $variableResumen . "'>";
-            $enlace.="<br>Descargar Resumen ";
+            $enlace.="<br>Descargar Reporte";
             $enlace.="</a><br><br>";
             echo $enlace;
 
@@ -135,7 +124,6 @@ class registrarForm {
                     "<br>Reporte: <h4>" . $_REQUEST ['tipoReporte'] . "</h4>" ;
                   
             $mensaje .= "<br> REPORTE EXITOSO!!";
-            // ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
             $esteCampo = 'mensajeRegistro';
             $atributos ['id'] = $esteCampo;
             $atributos ['tipo'] = 'success';
@@ -147,7 +135,25 @@ class registrarForm {
             // Aplica atributos globales al control
             $atributos = array_merge($atributos, $atributosGlobales);
             echo $this->miFormulario->cuadroMensaje($atributos);
-            // ------------------Division para los botones-------------------------
+            }
+            if($_REQUEST['resultado']=='noInserto'){
+            
+            $mensaje = "El Reporte no pudo ser Generado<br>"
+                    . date("Y-m-d");
+            $esteCampo = 'mensajeRegistro';
+            $atributos ['id'] = $esteCampo;
+            $atributos ['tipo'] = 'alert alert-danger';
+            $atributos ['estilo'] = 'textoCentrar';
+            $atributos ['mensaje'] = $mensaje;
+
+            $tab ++;
+
+            // Aplica atributos globales al control
+            $atributos = array_merge($atributos, $atributosGlobales);
+            echo $this->miFormulario->cuadroMensaje($atributos);
+            }
+            
+           // ------------------Division para los botones-------------------------
             $atributos ["id"] = "botones";
             $atributos ["estilo"] = "marcoBotones";
             echo $this->miFormulario->division("inicio", $atributos);

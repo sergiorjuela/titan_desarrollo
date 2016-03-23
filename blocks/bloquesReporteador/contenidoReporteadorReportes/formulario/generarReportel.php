@@ -327,32 +327,36 @@ class Formulario {
         $esteCampo = 'documentoIdentificacion';
         $atributos ['id'] = $esteCampo;
         $atributos ['nombre'] = $esteCampo;
-        $atributos ['tipo'] = 'text';
-        $atributos ['estilo'] = 'jqueryui';
-        $atributos ['marco'] = true;
-        $atributos ['columnas'] = 1;
-        $atributos ['dobleLinea'] = false;
-        $atributos ['tabIndex'] = $tab;
         $atributos ['etiqueta'] = $this->lenguaje->getCadena($esteCampo);
-        $atributos ['anchoEtiqueta'] = 150;
+        $atributos ['tab'] = $tab;
+        $atributos ['seleccion'] = -1;
+        $atributos['evento'] = ' ';
+        $atributos['deshabilitado'] = true;
+        $atributos['limitar'] = 50;
+        $atributos['tamanno'] = 1;
+        $atributos['columnas'] = 1;
         $atributos ['obligatorio'] = true;
         $atributos ['etiquetaObligatorio'] = true;
         $atributos ['validar'] = '';
+        
+        $atributos ['cadena_sql'] = $this->miSql->getCadenaSql("obtenerTiposDocumentos");
+        $matrizItems = $primerRecursoDB->ejecutarAcceso($atributos ['cadena_sql'], "busqueda");
+
+        $atributos['matrizItems'] = $matrizItems;
+
         if (isset($_REQUEST [$esteCampo])) {
             $atributos ['valor'] = $_REQUEST [$esteCampo];
         } else {
             $atributos ['valor'] = '';
         }
-        $atributos ['deshabilitado'] = false
-                ;
-        $atributos ['tamanno'] = 20;
-        $atributos ['maximoTamanno'] = '';
         $tab ++;
 
         // Aplica atributos globales al control
         $atributos = array_merge($atributos, $atributosGlobales);
-        echo $this->miFormulario->campoCuadroTexto($atributos);
+        echo $this->miFormulario->campoCuadroLista($atributos);
         unset($atributos);
+        // --------------- FIN CONTROL :Select Tipo Documento --------------------------------------------------
+        
         // --------------- FIN CONTROL :Documento de Identificacion--------------------------------------------------
         echo $this->miFormulario->division("fin");
         unset($atributos);
@@ -512,8 +516,6 @@ class Formulario {
 }
 
 $miFormulario = new Formulario($this->lenguaje, $this->miFormulario, $this->sql);
-
-
 $miFormulario->formulario();
 $miFormulario->mensaje();
 ?>

@@ -31,6 +31,8 @@ $urlFinal17 = $url . $cadena17;
     $("#<?php echo $this->campoSeguro('seltipoReporte') ?>").select2();
     $('#<?php echo $this->campoSeguro('selPreliquidacion') ?>').width(250);
     $("#<?php echo $this->campoSeguro('selPreliquidacion') ?>").select2();
+    $('#<?php echo $this->campoSeguro('documentoIdentificacion') ?>').width(350);
+    $("#<?php echo $this->campoSeguro('documentoIdentificacion') ?>").select2();
 
 
     function consultarReportes(elem, request, response) {
@@ -42,7 +44,7 @@ $urlFinal17 = $url . $cadena17;
 
                 if (data[0] != " ") {
                     $("#<?php echo $this->campoSeguro('selReporte') ?>").html('');
-                    $("<option value=''>Seleccione  ....</option>").appendTo("#<?php echo $this->campoSeguro('selReporte') ?>");
+                    $("<option value='-1'>Seleccione  ....</option>").appendTo("#<?php echo $this->campoSeguro('selReporte') ?>");
                     $.each(data, function (indice, valor) {
                         $("<option value='" + data[ indice ].id_plantilla + "'>" + data[ indice ].nombre + "</option>").appendTo("#<?php echo $this->campoSeguro('selReporte') ?>");
 
@@ -75,7 +77,7 @@ $urlFinal17 = $url . $cadena17;
 
 
     });
-    $(function () {
+       $(function () {
 
         $("#<?php echo $this->campoSeguro('selReporte') ?>").change(function () {
             if ($("#<?php echo $this->campoSeguro('selReporte') ?>").val() != '') {
@@ -94,16 +96,16 @@ $urlFinal17 = $url . $cadena17;
 
             if ($("#<?php echo $this->campoSeguro('seltipoReporte') ?>").val() == "1") {
                 $("#<?php echo $this->campoSeguro('seltipoDocumento') ?>").removeAttr('disabled');
-                $("#<?php echo $this->campoSeguro('documentoIdentificacion') ?>").removeAttr('disabled');
+               // $("#<?php echo $this->campoSeguro('documentoIdentificacion') ?>").removeAttr('disabled');
                 $("#<?php echo $this->campoSeguro('documentoIdentificacion') ?>").addClass("validate[required]");
                 $("#<?php echo $this->campoSeguro('seltipoDocumento') ?>").addClass("validate[required]");
 
             } else if ($("#<?php echo $this->campoSeguro('seltipoReporte') ?>").val() == "2") {
                 $("#<?php echo $this->campoSeguro('seltipoDocumento') ?>").attr('disabled', '');
                 $("#<?php echo $this->campoSeguro('documentoIdentificacion') ?>").attr('disabled', '');
-                $("#<?php echo $this->campoSeguro('seltipoDocumento') ?>").val("");
+                $("#<?php echo $this->campoSeguro('seltipoDocumento') ?>").val("-1");
                 $("#<?php echo $this->campoSeguro('seltipoDocumento') ?>").removeClass("validate[required]");
-                $("#<?php echo $this->campoSeguro('documentoIdentificacion') ?>").val("");
+                $("#<?php echo $this->campoSeguro('documentoIdentificacion') ?>").val("-1");
             } else {
                 $("#<?php echo $this->campoSeguro('seltipoDocumento') ?>").attr('disabled', '');
                 $("#<?php echo $this->campoSeguro('documentoIdentificacion') ?>").attr('disabled', '');
@@ -150,6 +152,70 @@ $urlFinal17 = $url . $cadena17;
 
 
     });
+
+
+</script>
+
+<?php
+
+//Variables
+$cadenaACodificar12 = "pagina=" . $this->miConfigurador->getVariableConfiguracion("pagina");
+$cadenaACodificar12 .= "&procesarAjax=true";
+$cadenaACodificar12 .= "&action=index.php";
+$cadenaACodificar12 .= "&bloqueNombre=" . $esteBloque ["nombre"];
+$cadenaACodificar12 .= "&bloqueGrupo=" . $esteBloque ["grupo"];
+$cadenaACodificar12 .= $cadenaACodificar12 . "&funcion=cargarPersonas";
+$cadenaACodificar12 .= "&tiempo=" . $_REQUEST ['tiempo'];
+// Codificar las variables
+$cadena12 = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($cadenaACodificar12, $enlace);
+// URL definitiva
+$urlFinal12 = $url . $cadena12;
+?>
+
+<script>
+
+ function consultarPersonas(elem, request, response) {
+     
+        $.ajax({
+            url: "<?php echo $urlFinal12 ?>",
+            dataType: "json",
+            data: {valor: $("#<?php echo $this->campoSeguro('seltipoDocumento') ?>").val()},
+            success: function (data) {
+
+                if (data[0] != " ") {
+                    $("#<?php echo $this->campoSeguro('documentoIdentificacion') ?>").html('');
+                    $("<option value='-1'>Seleccione  ....</option>").appendTo("#<?php echo $this->campoSeguro('documentoIdentificacion') ?>");
+                    $.each(data, function (indice, valor) {
+                        $("<option value='" + data[ indice ].documento + "'>" + data[ indice ].documento +"("+data[ indice ].nombre+")"+ "</option>").appendTo("#<?php echo $this->campoSeguro('documentoIdentificacion') ?>");
+
+                    });
+
+                    $("#<?php echo $this->campoSeguro('documentoIdentificacion') ?>").removeAttr('disabled');
+                    $("#<?php echo $this->campoSeguro('documentoIdentificacion') ?>").select2();
+                    $("#<?php echo $this->campoSeguro('documentoIdentificacion') ?>").removeClass("validate[required]");
+
+
+                }
+
+            }
+
+        });
+    }
+    ;
+
+    $(function () {
+
+        $("#<?php echo $this->campoSeguro('seltipoDocumento') ?>").change(function () {
+            if ($("#<?php echo $this->campoSeguro('seltipoDocumento') ?>").val() != '') {
+                consultarPersonas();
+            } else {
+                $("#<?php echo $this->campoSeguro('documentoIdentificacion') ?>").attr('disabled', '');
+            }
+        });
+
+
+    });
+
 
 
 </script>

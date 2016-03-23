@@ -8,6 +8,13 @@ if ($_REQUEST ['funcion'] == 'cargarReportes') {
 	echo $resultado;
        
 }
+if ($_REQUEST ['funcion'] == 'cargarPersonas') {
+        $cadenaSql = $this->sql->getCadenaSql ('obtenerPersonasAjax',$_GET['valor']);
+	$resultado = $primerRecursoDB->ejecutarAcceso( $cadenaSql, "busqueda" );
+        $resultado = json_encode ( $resultado);
+	echo $resultado;
+       
+}
 
 
 
