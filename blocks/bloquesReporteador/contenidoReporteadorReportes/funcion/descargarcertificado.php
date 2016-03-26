@@ -27,47 +27,37 @@ if ($_REQUEST['tipoPlantilla'] == 'Certificado') {
     $cuerpo = str_replace("[ESTADO_VINCULACION]", " " . $informacionPersona[0]['estado_vinculacion'] . " ", $cuerpo);
     $cuerpo = str_replace("[SEDE]", " " . $informacionPersona[0]['sede'] . " ", $cuerpo);
     $cuerpo = str_replace("[DEPENDENCIA]", " " . $informacionPersona[0]['dependencia'] . " ", $cuerpo);
-     $contenidoPagina = "<page backtop='30mm' backbottom='10mm' backleft='20mm' backright='20mm'>";
+    $contenidoPagina = "<page backtop='30mm' backbottom='10mm' backleft='20mm' backright='20mm'>";
     $contenidoPagina .= "<page_header>
-        <table align='center' style='width: 100%;'>
+        <table align='center' style='width:100%;' border=0>
             <tr>
-                <td align='left' >
-                <img src='" . $cadenaReporte[0]['icono_izquierdo'] . "' width='80' height='80' /> 
+                <td align='center' style='width:18%;' >
+                <img src='" . $cadenaReporte[0]['icono_izquierdo'] . "' width='70' height='70' align='left' /> 
                 </td>
-                <td align='center' >
+                <td align='center' style='width:64%;' >
+                    <font style='font-size:18px;'><b>" . $cadenaReporte[0]['titulo_encabezado'] . "</b></font>
                     <br>
+                    <font style='font-size:16px;'><b>" . $cadenaReporte[0]['empresa'] . "</b></font>
                     <br>
+                    <font style='font-size:12px;'><b>" . $cadenaReporte[0]['otro_encabezado'] . "</b></font>
                     <br>
-                    <font style='font-size:30px;'><b>" . $cadenaReporte[0]['titulo_encabezado'] . "</b></font>
-                    <br>
-                    <font style='font-size:22px;'><b>" . $cadenaReporte[0]['empresa'] . "</b></font>
-                    <br>
-                    <font style='font-size:16px;'><b>" . $cadenaReporte[0]['otro_encabezado'] . "</b></font>
-                    <br>
-                    <font style='font-size:16px;'><b>" . $cadenaReporte[0]['fecha_creacion'] . "</b></font>
-                    <br>
+                    <font style='font-size:12px;'><b>" . $cadenaReporte[0]['fecha_creacion'] . "</b></font>
                 </td>
-                <td align='center' >
-                <img src='" . $cadenaReporte[0]['icono_derecho'] . "' width='80' height='80' /> 
+                <td align='center' style='width:18%;' >
+                <img src='" . $cadenaReporte[0]['icono_derecho'] . "' width='70' height='70' /> 
                 </td>
             </tr>
         </table>
+        
     </page_header>
     <page_footer>
         <table align='center' width = '100%'>
             <tr>
                 <td align='center'>
-                    
-                </td>
-            </tr>
-            <tr>
-                <td align='center'>
                     " . $cadenaReporte[0]['titulo_pie'] . "
-                    <br>
-                    " . $cadenaReporte[0]['direccion'] . "
-                    <br>
-                    " . $cadenaReporte[0]['telefono'] . "
-                    <br>
+                    <br>    
+                    " . $cadenaReporte[0]['direccion'] . " -
+                    " . $cadenaReporte[0]['telefono'] . " -
                     " . $cadenaReporte[0]['email'] . "
                                                      
                 </td>
@@ -77,7 +67,6 @@ if ($_REQUEST['tipoPlantilla'] == 'Certificado') {
 
 $contenidoPagina .= "
 <div>
-<br><br><br><br><br><br><br><br><br><br><br><br>
 $cuerpo
 <br>
 </div>
@@ -317,45 +306,34 @@ $html2pdf->Output('Certificado.pdf', 'D');
     $contenidoConceptosDeduce .= "</table>";
     $contenidoPagina = "<page backtop='30mm' backbottom='10mm' backleft='20mm' backright='20mm'>";
     $contenidoPagina .= "<page_header>
-        <table align='center' style='width: 100%;'>
+        <table align='center' style='width:100%;' border=0>
             <tr>
-                <td align='left' >
-                <img src='" . $cadenaReporte[0]['icono_izquierdo'] . "' width='80' height='80' /> 
+                <td align='center' style='width:18%;' >
+                <img src='" . $cadenaReporte[0]['icono_izquierdo'] . "' width='70' height='70' align='left' /> 
                 </td>
-                <td align='center' >
+                <td align='center' style='width:64%;' >
+                    <font style='font-size:18px;'><b>" . $cadenaReporte[0]['titulo_encabezado'] . "</b></font>
                     <br>
+                    <font style='font-size:16px;'><b>" . $cadenaReporte[0]['empresa'] . "</b></font>
                     <br>
+                    <font style='font-size:12px;'><b>" . $cadenaReporte[0]['otro_encabezado'] . "</b></font>
                     <br>
-                    <font style='font-size:30px;'><b>" . $cadenaReporte[0]['titulo_encabezado'] . "</b></font>
-                    <br>
-                    <font style='font-size:22px;'><b>" . $cadenaReporte[0]['empresa'] . "</b></font>
-                    <br>
-                    <font style='font-size:16px;'><b>" . $cadenaReporte[0]['otro_encabezado'] . "</b></font>
-                    <br>
-                    <font style='font-size:16px;'><b>" . $cadenaReporte[0]['fecha_creacion'] . "</b></font>
-                    <br>
+                    <font style='font-size:12px;'><b>" . $cadenaReporte[0]['fecha_creacion'] . "</b></font>
                 </td>
-                <td align='center' >
-                <img src='" . $cadenaReporte[0]['icono_derecho'] . "' width='80' height='80' /> 
+                <td align='center' style='width:18%;' >
+                <img src='" . $cadenaReporte[0]['icono_derecho'] . "' width='70' height='70' /> 
                 </td>
             </tr>
         </table>
     </page_header>
     <page_footer>
-        <table align='center' width = '100%'>
-            <tr>
-                <td align='center'>
-                    
-                </td>
-            </tr>
+       <table align='center' width = '100%'>
             <tr>
                 <td align='center'>
                     " . $cadenaReporte[0]['titulo_pie'] . "
-                    <br>
-                    " . $cadenaReporte[0]['direccion'] . "
-                    <br>
-                    " . $cadenaReporte[0]['telefono'] . "
-                    <br>
+                    <br>    
+                    " . $cadenaReporte[0]['direccion'] . " -
+                    " . $cadenaReporte[0]['telefono'] . " -
                     " . $cadenaReporte[0]['email'] . "
                                                      
                 </td>
@@ -365,15 +343,15 @@ $html2pdf->Output('Certificado.pdf', 'D');
 
 $contenidoPagina .= "
 <div>
-<br><br><br>
+<br>
 <h3 align='center'>Informacion de Vinculacion </h3>
-<br><br><br>
+<br>
 $contenidoReporte
-<br><br>
+<br>
 $cuerpo
 <br>
 <h3 align='center'>Informacion de Preliquidacion </h3>
-<br><br><br>
+<br>
 <table border=0.4 px style='width:100%'>
 <tr><td>Devengos</td><td>Deducciones</td></tr>
 <tr><td>
