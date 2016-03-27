@@ -12,6 +12,13 @@ $primerRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB($conex
 if ($_REQUEST['tipoPlantilla'] == 'Certificado') {
     $sqlReporte = $this->sql->getCadenaSql('obtenerPlantillaCertificadoporId', $_REQUEST['tipoReporte']);
     $cadenaReporte = $primerRecursoDB->ejecutarAcceso($sqlReporte, "busqueda");
+    $sqlInformacionLeyes = $this->sql->getCadenaSql('obtenerInformacionLeyesCertificado', $_REQUEST['documento']);
+    $informacionLeyes = $primerRecursoDB->ejecutarAcceso($sqlInformacionLeyes, "busqueda");
+    $reglamentacion="";
+    for ($i = 0; $i < count($informacionLeyes); $i++) {
+        $reglamentacion=$reglamentacion." ".$informacionLeyes[$i]['nombre']." (".$informacionLeyes[$i]['reglamentacion']."),";
+    }
+    $reglamentacion=  substr($reglamentacion,0, -1);
     $sqlInformacionPersona = $this->sql->getCadenaSql('obtenerInformacionPersonaCertificado', $_REQUEST['documento']);
     $informacionPersona = $primerRecursoDB->ejecutarAcceso($sqlInformacionPersona, "busqueda");
     $cuerpo = str_replace("[PRIMER_NOMBRE]", " " . $informacionPersona[0]['primer_nombre'] . " ", $cadenaReporte[0]['cuerpo']);
@@ -27,6 +34,7 @@ if ($_REQUEST['tipoPlantilla'] == 'Certificado') {
     $cuerpo = str_replace("[ESTADO_VINCULACION]", " " . $informacionPersona[0]['estado_vinculacion'] . " ", $cuerpo);
     $cuerpo = str_replace("[SEDE]", " " . $informacionPersona[0]['sede'] . " ", $cuerpo);
     $cuerpo = str_replace("[DEPENDENCIA]", " " . $informacionPersona[0]['dependencia'] . " ", $cuerpo);
+    $cuerpo = str_replace("[REGLAMENTACION]", " " . $reglamentacion . " ", $cuerpo);
     $contenidoPagina = "<page backtop='30mm' backbottom='10mm' backleft='20mm' backright='20mm'>";
     $contenidoPagina .= "<page_header>
         <table align='center' style='width:100%;' border=0>
@@ -87,7 +95,7 @@ $html2pdf->Output('Certificado.pdf', 'D');
     $informacionPersona = $primerRecursoDB->ejecutarAcceso($cadenaInformacionPersona, "busqueda");
     $cadenaInformacionPreliquidacion = 'SELECT ' . $cadenaReporte[0]['atributos_conceptos'] . ', valor ,naturaleza ';
     $cadenaInformacionPreliquidacion .= 'FROM informacionPreliquidacion ';
-    $cadenaInformacionPreliquidacion .= 'WHERE persona=' . $_REQUEST['documento'] . ' and ';
+    $cadenaInformacionPreliquidacion .= 'WHERE id='.$_REQUEST['preliquidacion'] .' and persona=' . $_REQUEST['documento'] . ' and ( ';
     $conceptosdevenga = $cadenaReporte[0]['conceptos_devenga'];
     $conceptosdevenga = explode(",", $conceptosdevenga);
     $condicionesdevenga = "";
@@ -102,8 +110,8 @@ $html2pdf->Output('Certificado.pdf', 'D');
         $condicionesdeduce = $condicionesdeduce . 'codigo =' . $conceptosdeduce[$i] . ' or ';
     }
     $condicionesdeduce = substr($condicionesdeduce, 0, -3);
-    $cadenaInformacionPreliquidacion .= $condicionesdevenga . ' and ';
-    $cadenaInformacionPreliquidacion .= $condicionesdeduce . ' ;';
+    $cadenaInformacionPreliquidacion .= $condicionesdevenga . ' or ';
+    $cadenaInformacionPreliquidacion .= $condicionesdeduce . ' );';
     $informacionPreliquidacion = $primerRecursoDB->ejecutarAcceso($cadenaInformacionPreliquidacion, "busqueda");
     
     $contenidoReporte = "<table align='left' class=MsoTableGrid border=0 cellspacing=2 cellpadding=0

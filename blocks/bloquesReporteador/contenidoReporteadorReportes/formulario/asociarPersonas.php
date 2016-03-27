@@ -94,10 +94,14 @@ class Formulario {
         $atributos ['id'] = $esteCampo;
         $atributos ["estilo"] = "jqueryui";
         $atributos ['tipoEtiqueta'] = 'inicio';
-        $atributos ["leyenda"] = $this->lenguaje->getCadena($esteCampo);
+        if ($_REQUEST["tipoPlantilla"] != "Certificado") {
+            $atributos ["leyenda"] = $this->lenguaje->getCadena($esteCampo) . " / Tipo: " . $_REQUEST["tipoPlantilla"] . "-Codigo: " . $_REQUEST["codigoReporte"] . "-Preliquidacion: " . $_REQUEST["preliquidacion"];
+        } else {
+            $atributos ["leyenda"] = $this->lenguaje->getCadena($esteCampo) . " / Tipo: " . $_REQUEST["tipoPlantilla"] . "-Codigo: " . $_REQUEST["codigoReporte"];
+        }
         echo $this->miFormulario->marcoAgrupacion('inicio', $atributos);
         // --------------------------------------------------------------------------------------------------
-         // ------------------Division para los botones-------------------------
+        // ------------------Division para los botones-------------------------
         $atributos ["id"] = "botones";
         $atributos ["estilo"] = "marcoBotones";
         echo $this->miFormulario->division("inicio", $atributos);
@@ -121,7 +125,7 @@ class Formulario {
         // Aplica atributos globales al control
         $atributos = array_merge($atributos, $atributosGlobales);
         echo $this->miFormulario->campoBoton($atributos);
-         // Este boton regresa a la pagina principal de plantillas
+        // Este boton regresa a la pagina principal de plantillas
         $esteCampo = "botonRegreso";
         $atributos["id"] = $esteCampo;
         $atributos["tabIndex"] = $tab;
@@ -141,13 +145,11 @@ class Formulario {
 
         echo $this->miFormulario->enlace($atributos);
         // -------------------------Fin Control Boton------------------------------------------------------
-      
-
         // -----------------FIN CONTROL: Botón -----------------------------------------------------------
         // ------------------Fin Division para los botones-------------------------
 
 
-        echo $this->miFormulario->division("fin");  
+        echo $this->miFormulario->division("fin");
         // ---------------- CONTROL: Tabla Plantillas sin Sara -----------------------------------------------                
 
         $atributos ['cadena_sql'] = $this->miSql->getCadenaSql("consultarPersonasParaReportes");
@@ -157,30 +159,55 @@ class Formulario {
         echo '<table id="tablaReporte" class="display" cellspacing="0" width="100%"> '
         . '<thead style="display: table-row-group"><tr><th>' . "SELECCIONAR TODOS <input type=\"checkbox\" id=\"checkboxPadre\" name=\"checkboxPadre\" value=\"Elegir\"> " . '</th><th>' . "CEDULA" . '</th> <th>' . "NOMBRE" . '</th><th>' . "TIPO DE VINCULACIÓN" . '</th><th>' . "DEPENDENCIA" . '</th></tr></thead>
         .  <tbody>';
-              
+
         if (!empty($matrizItems)) {
             while ($i < $longitud) {
-                echo "<tr><td><center><input type=\"checkbox\" id=\"checkbox$i\" name=\"checkbox$i\" value=\"Elegir\"></center></td>";
+                $documento =  $matrizItems[$i][0];
+                echo "<tr><td><center><input type=\"checkbox\" id=\"checkbox$i\" name=\"checkbox$i\" value=\"$documento\"></center></td>";
                 echo "<td>" . $matrizItems[$i][0] . "</td>";
                 echo "<td>" . $matrizItems[$i][3] . "</td>";
                 echo "<td>" . $matrizItems[$i][1] . "</td>";
                 echo "<td>" . $matrizItems[$i][2] . "</td>";
-              
-               
+
+
                 $i+=1;
             }
         }
         echo '</tbody></table>';
-        
-        
-        
 
-      //$valorCodificado = "actionBloque=" . $esteBloque ["nombre"]; //Ir pagina Funcionalidad
-        $valorCodificado = "&pagina=" . $this->miConfigurador->getVariableConfiguracion('pagina'); //Frontera mostrar formulario
+        // // ---------------- CONTROL: hidden Tamaño tabla--------------------------------------------------------
+        $esteCampo = 'tamanoTabla';
+        $atributos ['id'] = $esteCampo;
+        $atributos ['nombre'] = $esteCampo;
+        $atributos ['tipo'] = 'hidden';
+        $atributos ['estilo'] = 'jqueryui';
+        $atributos ['marco'] = true;
+        $atributos ['columnas'] = 1;
+        $atributos ['dobleLinea'] = false;
+        $atributos ['tabIndex'] = $tab;
+
+        $atributos ['valor'] = $longitud;
+        //var_dump( $resultado[0]['atributos_conceptos']);
+        $atributos ['deshabilitado'] = false;
+        $atributos ['tamanno'] = 30;
+        $atributos ['maximoTamanno'] = '';
+        $tab ++;
+
+        // Aplica atributos globales al control
+        $atributos = array_merge($atributos, $atributosGlobales);
+        echo $this->miFormulario->campoCuadroTexto($atributos);
+        unset($atributos);
+
+
+        $valorCodificado = "actionBloque=" . $esteBloque ["nombre"]; //Ir pagina Funcionalidad
+        $valorCodificado .= "&pagina=" . $this->miConfigurador->getVariableConfiguracion('pagina'); //Frontera mostrar formulario
         $valorCodificado .= "&bloque=" . $esteBloque ['nombre'];
         $valorCodificado .= "&tamaño=" . $longitud;
         $valorCodificado .= "&bloqueGrupo=" . $esteBloque ["grupo"];
-        $valorCodificado .= "&opcion=registrar";
+        $valorCodificado .= "&seltipoPlantilla=" . $_REQUEST["tipoPlantilla"];
+        $valorCodificado .= "&codigoReporte=" . $_REQUEST["codigoReporte"];
+        $valorCodificado .= "&preliquidacion=" . $_REQUEST["preliquidacion"];
+        $valorCodificado .= "&opcion=generarMultipleReporte";
         /**
          * SARA permite que los nombres de los campos sean dinámicos.
          * Para ello utiliza la hora en que es creado el formulario para
@@ -199,7 +226,7 @@ class Formulario {
         $atributos ["valor"] = $valorCodificado;
         echo $this->miFormulario->campoCuadroTexto($atributos);
         unset($atributos);
-        
+
         // ----------------FIN SECCION: Paso de variables -------------------------------------------------
         // ---------------- FIN SECCION: Controles del Formulario -------------------------------------------
         // ----------------FINALIZAR EL FORMULARIO ----------------------------------------------------------

@@ -63,11 +63,11 @@ class Funcion {
                          case "resumenPdfCertificadoPersonal":
         		      include_once ($this->ruta."funcion/descargarcertificado.php");
         	         break; 
-                         case "modificarPlantilla":
-        		      include_once ($this->ruta."funcion/modificar.php");
+                         case "generarMultipleReporte":
+                              include_once ($this->ruta."funcion/generarMultipleReporte.php");
         	         break; 
-                         case "inactivarRegistro":
-        		      include_once ($this->ruta."funcion/inactivar.php");
+                         case "resumenPdfCertificadoGrupal":
+        		      include_once ($this->ruta."funcion/descargarcertificadoGrupal.php");
         	         break; 
                          case "inactivarRegistro":
         		      include_once ($this->ruta."funcion/inactivar.php");

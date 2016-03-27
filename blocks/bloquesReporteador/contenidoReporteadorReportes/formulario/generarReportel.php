@@ -337,7 +337,7 @@ class Formulario {
         $atributos['columnas'] = 1;
         $atributos ['obligatorio'] = true;
         $atributos ['etiquetaObligatorio'] = true;
-        $atributos ['validar'] = '';
+        $atributos ['validar'] = 'required';
         
         $atributos ['cadena_sql'] = $this->miSql->getCadenaSql("obtenerTiposDocumentos");
         $matrizItems = $primerRecursoDB->ejecutarAcceso($atributos ['cadena_sql'], "busqueda");

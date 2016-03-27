@@ -20,6 +20,7 @@ class Redireccionador {
 				$variable .= "&tipoPlantilla=" . $valor ['tipoPlantilla'];
 				$variable .= "&tipoReporte=" . $valor ['tipoReporte'];
 				$variable .= "&codigoReporte=" . $valor ['codigoReporte'];
+				$variable .= "&preliquidacion=" . $valor ['preliquidacion'];
 				break;
 			case "generarPersonal" :
 				$variable = 'pagina=' . $miPaginaActual;
@@ -31,6 +32,15 @@ class Redireccionador {
 				$variable .= "&documento=". $valor ['documento'];
 				$variable .= "&preliquidacion=". $valor ['preliquidacion'];
 				$variable .= "&resultado=generarPersonal";
+				break;
+			case "generalGrupal" :
+                                $variable = 'pagina=' . $miPaginaActual;
+				$variable .= "&opcion=mensaje";
+				$variable .= "&tipoPlantilla=". $valor ['tipoPlantilla'];
+				$variable .= "&codigoReporte=". $valor ['codigoReporte'];
+				$variable .= "&personas=". serialize($valor ['personas']);
+				$variable .= "&preliquidacion=". $valor ['preliquidacion'];
+				$variable .= "&resultado=generalGrupal";
 				break;
 			case "noInserto" :
 				$variable = 'pagina=' . $miPaginaActual;

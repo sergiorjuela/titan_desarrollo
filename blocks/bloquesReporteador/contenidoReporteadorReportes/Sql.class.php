@@ -37,14 +37,40 @@ class Sql extends \Sql {
                 $cadenaSql .= '( ';
                 $cadenaSql .= 'codigo_reporte, ';
                 $cadenaSql .= 'codigo_plantilla, ';
+                $cadenaSql .= 'preliquidacion, ';
+                $cadenaSql .= 'fecha, ';
                 $cadenaSql .= 'documento ';
                 $cadenaSql .= ') ';
                 $cadenaSql .= 'VALUES';
                 $cadenaSql .= '(';
                 $cadenaSql .= $variable['id'].', ';
                 $cadenaSql .= $variable['codigoReporte'].', ';
+                $cadenaSql .= $variable['preliquidacion'].', ';
+                $cadenaSql .= '\''.$variable['fecha'].'\', ';
                 $cadenaSql .= $variable['documento'].' ';
                 $cadenaSql .= '); ';
+                
+                break;
+            case 'obtenerHistoricoReporteId' :
+                $cadenaSql = 'SELECT ';
+                $cadenaSql .= 'r.codigo_reporte, ';
+                $cadenaSql .= 'r.fecha, ';
+                $cadenaSql .= 'p.tipo, ';
+                $cadenaSql .= 'p.nombre as nombrePlantilla, ';
+                $cadenaSql .= 'pn.documento, ';
+                $cadenaSql .= 'pn.primer_apellido||\' \'||pn.segundo_apellido||\' \'||pn.primer_nombre||\' \'||pn.segundo_nombre as nombreEmpleado, ';
+                $cadenaSql .= 'pl.nombre AS nombrePreliquidacion ';
+                $cadenaSql .= 'FROM ';
+                $cadenaSql .= 'reporteador.reportes_realizados r, ';
+                $cadenaSql .= 'persona.persona_natural pn, ';
+                $cadenaSql .= 'reporteador.plantilla p, ';
+                $cadenaSql .= 'liquidacion.preliquidacion pl ';
+                $cadenaSql .= 'WHERE ';
+                $cadenaSql .= 'r.documento = pn.documento and ';
+                $cadenaSql .= 'p.id_plantilla=r.codigo_plantilla and ';
+                $cadenaSql .= 'pl.id = r.preliquidacion and ';
+                $cadenaSql .= 'r.codigo_reporte='.$variable;
+            
                 
                 break;
 
@@ -218,16 +244,20 @@ class Sql extends \Sql {
                 break;
             case 'obtenerInformacionLeyesCertificado' :
                 $cadenaSql = 'SELECT ';
-                $cadenaSql .= 'ldn.nombre ||\', Entidad Reguladura: \'|| ldn.entidad as reglamentacion ';
+                $cadenaSql .= 'ldn.nombre,\'Entidad Reguladora: \'||ldn.entidad as reglamentacion ';
                 $cadenaSql .= 'FROM  ';
                 $cadenaSql .= 'parametro.tipo_vinculacion ptv, ';
                 $cadenaSql .= 'persona.persona_natural pn, ';
                 $cadenaSql .= 'persona.vinculacion_persona_natural vpn, ';
-                $cadenaSql .= 'persona.tipo_documento td ';
+                $cadenaSql .= 'persona.tipo_documento td, ';
+                $cadenaSql .= 'parametro.ldnxtipo_vinculacion ldntv, ';
+                $cadenaSql .= 'parametro.ley_decreto_norma ldn ';
                 $cadenaSql .= 'WHERE ';
                 $cadenaSql .= 'pn.documento = vpn.documento and ';
                 $cadenaSql .= 'vpn.id_tipo_vinculacion = ptv.id and ';
                 $cadenaSql .= 'pn.tipo_documento = td.tipo_documento and ';
+                $cadenaSql .= 'ldntv.id_tipo_vinculacion=ptv.id and ';
+                $cadenaSql .= 'ldn.id_ldn=ldntv.id_ley and ';
                 $cadenaSql .= 'pn.documento='.$variable.';'; 
                 break;
             case 'obtenerPreliquidaciones' :

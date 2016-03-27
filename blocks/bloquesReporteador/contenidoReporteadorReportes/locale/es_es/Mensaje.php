@@ -32,4 +32,13 @@ $this->idioma["botonRegresarConsulta"]="Regresar";
 $this->idioma["estadoRegistro"]="Estado:";
 
 
+
+$this->idioma["identificadorHistorio"]="Identificador del Reporte: ";
+$this->idioma["plantilla"]="Tipo y Nombre de Plantilla: ";
+$this->idioma["empleado"]="Nombre y Documento del Empleado: ";
+$this->idioma["fecha"]="Fecha de Generación: ";
+$this->idioma["preliquidacion"]="Preliquidacion: ";
+$this->idioma["marcoVerDetalleReporte"]="Vet Detalle Reporte ";
+
+
 ?>

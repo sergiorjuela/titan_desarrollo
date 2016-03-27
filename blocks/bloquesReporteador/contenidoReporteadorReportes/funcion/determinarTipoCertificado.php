@@ -25,6 +25,11 @@ class FormProcessor {
         $primerRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
         //Determina que Boton selecciono el usuario si es enviarRegistro genera el certificado Personal
         //De lo contrario direcciona a la vista de selecion grupal
+        if (isset($_REQUEST['selPreliquidacion'])) {
+            $preliquidacion = $_REQUEST['selPreliquidacion'];
+        } else {
+            $preliquidacion = "0";
+        }
         if ($_REQUEST['enviarRegistro'] == "true") {
             $datos = array(
                 'tipoPlantilla' => $_REQUEST['seltipoPlantilla'],
@@ -32,10 +37,10 @@ class FormProcessor {
                 'codigoReporte' => $_REQUEST['codigoReporte'],
                 'tipoDocumento' => $_REQUEST['seltipoDocumento'],
                 'documento' => $_REQUEST['documentoIdentificacion'],
-                'preliquidacion' => $_REQUEST['seltipoPlantilla'],
+                'preliquidacion' => $preliquidacion,
+                'fecha' => date("Y-m-d"),
                 'id'=> "nextval('reporteador.sec_reporterealizado')"
             );
-
             $atributos ['cadena_sql'] = $this->miSql->getCadenaSql("insertarReporte", $datos);
             $resultado = $primerRecursoDB->ejecutarAcceso($atributos['cadena_sql'], "acceso");
             if (!empty($resultado)) {
@@ -47,11 +52,11 @@ class FormProcessor {
                 exit();
             }
         } else {
-            echo "entro";
             $datos = array(
                 'tipoPlantilla' => $_REQUEST['seltipoPlantilla'],
                 'tipoReporte' => $_REQUEST['selReporte'],
-                'codigoReporte' => $_REQUEST['codigoReporte'],
+                'preliquidacion' => $_REQUEST['selPreliquidacion'],
+                'codigoReporte' => $_REQUEST['codigoReporte']
             );
 
             Redireccionador::redireccionar('vistaSeleccionGrupal', $datos);

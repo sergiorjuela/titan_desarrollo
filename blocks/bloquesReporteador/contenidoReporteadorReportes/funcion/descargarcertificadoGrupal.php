@@ -110,7 +110,7 @@ if ($_REQUEST['tipoPlantilla'] == 'Certificado') {
         $informacionPersona = $primerRecursoDB->ejecutarAcceso($cadenaInformacionPersona, "busqueda");
         $cadenaInformacionPreliquidacion = 'SELECT ' . $cadenaReporte[0]['atributos_conceptos'] . ', valor ,naturaleza ';
         $cadenaInformacionPreliquidacion .= 'FROM informacionPreliquidacion ';
-        $cadenaInformacionPreliquidacion .= 'WHERE persona=' . $personas[$n] . ' and ';
+        $cadenaInformacionPreliquidacion .= 'WHERE id='.$_REQUEST['preliquidacion'] .' and persona=' . $personas[$n] . ' and ( ';
         $conceptosdevenga = $cadenaReporte[0]['conceptos_devenga'];
         $conceptosdevenga = explode(",", $conceptosdevenga);
         $condicionesdevenga = "";
@@ -125,8 +125,8 @@ if ($_REQUEST['tipoPlantilla'] == 'Certificado') {
             $condicionesdeduce = $condicionesdeduce . 'codigo =' . $conceptosdeduce[$i] . ' or ';
         }
         $condicionesdeduce = substr($condicionesdeduce, 0, -3);
-        $cadenaInformacionPreliquidacion .= $condicionesdevenga . ' and ';
-        $cadenaInformacionPreliquidacion .= $condicionesdeduce . ' ;';
+        $cadenaInformacionPreliquidacion .= $condicionesdevenga . ' or ';
+        $cadenaInformacionPreliquidacion .= $condicionesdeduce . ') ;';
         $informacionPreliquidacion = $primerRecursoDB->ejecutarAcceso($cadenaInformacionPreliquidacion, "busqueda");
 
         $contenidoReporte = "<table align='left' class=MsoTableGrid border=0 cellspacing=2 cellpadding=0
@@ -325,7 +325,7 @@ if ($_REQUEST['tipoPlantilla'] == 'Certificado') {
         $contenidoConceptosDevenga .= "</table>";
         $contenidoConceptosDeduce .= "</table>";
 
-       $contenidoCuerpoMultiple[$n]= "<br>
+        $contenidoCuerpoMultiple[$n] = "<br>
 <h3 align='center'>Informacion de Vinculacion </h3><br>
 $contenidoReporte
 <br>
@@ -343,7 +343,6 @@ $contenidoConceptosDeduce
 </table>
 <h3 align='center'><strong>Total a Preliquidar:$totalPreliquidar </strong></h3>";
     }
-
     $contenidoPagina = "<page backtop='30mm' backbottom='10mm' backleft='20mm' backright='20mm'>";
     $contenidoPagina .= "<page_header>
         <table align='center' style='width:100%;' border=0>
@@ -380,8 +379,7 @@ $contenidoConceptosDeduce
             </tr>
         </table>
     </page_footer>";
-
-   for ($m = 0; $m < count($contenidoCuerpoMultiple) - 1; $m++) {
+    for ($m = 0; $m < count($contenidoCuerpoMultiple) - 1; $m++) {
         $contenidoPagina .= "
         <div style='page-break-after:always; clear:both'>
         $contenidoCuerpoMultiple[$m]
@@ -393,9 +391,8 @@ $contenidoConceptosDeduce
             $contenidoCuerpoMultiple[count($contenidoCuerpoMultiple) - 1]
             . " </div>
     ";
-
+   
     $contenidoPagina .= "</page>";
-    
     $html2pdf = new HTML2PDF('P', 'LETTER', 'es');
     $res = $html2pdf->WriteHTML($contenidoPagina);
     $html2pdf->Output('ReporteGeneral.pdf', 'D');

@@ -1,4 +1,5 @@
 <?php
+
 if (!isset($GLOBALS ["autorizado"])) {
     include ("../index.php");
     exit();
@@ -67,8 +68,7 @@ class registrarForm {
         //exit;
         // ----------------INICIAR EL FORMULARIO ------------------------------------------------------------
         $atributos ['tipoEtiqueta'] = 'inicio';
-        echo $this->miFormulario->formulario($atributos);
-        {
+        echo $this->miFormulario->formulario($atributos); {
             // ---------------- SECCION: Controles del Formulario -----------------------------------------------
 
 
@@ -83,7 +83,7 @@ class registrarForm {
             $variable = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($variable, $directorio);
 
             // ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
-           
+
 
             $esteCampo = "marcoDatosBasicos";
             $atributos ['id'] = $esteCampo;
@@ -92,68 +92,105 @@ class registrarForm {
 
             echo $this->miFormulario->marcoAgrupacion('inicio', $atributos);
 
-            if($_REQUEST['resultado']=='generarPersonal'){
-            $variableResumen = "&action=" . $esteBloque["nombre"];
-            $variableResumen.= "&pagina=" . $this->miConfigurador->getVariableConfiguracion('pagina'); //Frontera mostrar formulario
-            $variableResumen.= "&bloque=" . $esteBloque["id_bloque"];
-            $variableResumen.= "&bloqueGrupo=" . $esteBloque["grupo"];
-            $variableResumen.= "&opcion=resumenPdfCertificadoPersonal";
-            $variableResumen.= "&tipoPlantilla=".$_REQUEST['tipoPlantilla'];
-            $variableResumen.= "&tipoReporte=".$_REQUEST['tipoReporte'];
-            $variableResumen.= "&codigoReporte=".$_REQUEST['codigoReporte'];
-            $variableResumen.= "&documento=".$_REQUEST['documento'];
-            $variableResumen.= "&preliquidacion=".$_REQUEST['preliquidacion'];
-            $variableResumen = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($variableResumen, $directorio);
+            if ($_REQUEST['resultado'] == 'generarPersonal') {
+                $variableResumen = "&action=" . $esteBloque["nombre"];
+                $variableResumen.= "&pagina=" . $this->miConfigurador->getVariableConfiguracion('pagina'); //Frontera mostrar formulario
+                $variableResumen.= "&bloque=" . $esteBloque["id_bloque"];
+                $variableResumen.= "&bloqueGrupo=" . $esteBloque["grupo"];
+                $variableResumen.= "&opcion=resumenPdfCertificadoPersonal";
+                $variableResumen.= "&tipoPlantilla=" . $_REQUEST['tipoPlantilla'];
+                $variableResumen.= "&tipoReporte=" . $_REQUEST['tipoReporte'];
+                $variableResumen.= "&codigoReporte=" . $_REQUEST['codigoReporte'];
+                $variableResumen.= "&documento=" . $_REQUEST['documento'];
+                $variableResumen.= "&preliquidacion=" . $_REQUEST['preliquidacion'];
+                $variableResumen = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($variableResumen, $directorio);
 
-            //------------------Division para los botones-------------------------
-            $atributos["id"] = "botones";
-            $atributos["estilo"] = "marcoBotones";
-            echo $this->miFormulario->division("inicio", $atributos);
+                //------------------Division para los botones-------------------------
+                $atributos["id"] = "botones";
+                $atributos["estilo"] = "marcoBotones";
+                echo $this->miFormulario->division("inicio", $atributos);
 
-            $enlace = "<a href='" . $variableResumen . "'>";
-            $enlace.="<br>Descargar Reporte";
-            $enlace.="</a><br><br>";
-            echo $enlace;
+                $enlace = "<a href='" . $variableResumen . "'>";
+                $enlace.="<br>Descargar Reporte";
+                $enlace.="</a><br><br>";
+                echo $enlace;
+                $mensaje = "Certificado Generado Con Exito<br> ID: <h4>" . $_REQUEST ['codigoReporte'] . "</h4>" .
+                        "<br>Documento: <h4>" . $_REQUEST ['documento'] . "</h4>" .
+                        "<br>Fecha de Generación: " . date('Y-m-d') .
+                        "<br>Tipo de Certificado: <h4>" . $_REQUEST ['tipoPlantilla'] . "</h4>" .
+                        "<br>Reporte: <h4>" . $_REQUEST ['tipoReporte'] . "</h4>";
 
+                $mensaje .= "<br> REPORTE EXITOSO!!";
+                $esteCampo = 'mensajeRegistro';
+                $atributos ['id'] = $esteCampo;
+                $atributos ['tipo'] = 'success';
+                $atributos ['estilo'] = 'textoCentrar';
+                $atributos ['mensaje'] = $mensaje;
 
+                $tab ++;
 
-            $mensaje = "Certificado Generado Con Exito<br> ID: <h4>" . $_REQUEST ['codigoReporte'] . "</h4>" .
-                    "<br>Documento: <h4>" . $_REQUEST ['documento'] . "</h4>" .
-                    "<br>Fecha de Generación: " . date('Y-m-d').
-                    "<br>Tipo de Certificado: <h4>" . $_REQUEST ['tipoPlantilla'] . "</h4>" .
-                    "<br>Reporte: <h4>" . $_REQUEST ['tipoReporte'] . "</h4>" ;
-                  
-            $mensaje .= "<br> REPORTE EXITOSO!!";
-            $esteCampo = 'mensajeRegistro';
-            $atributos ['id'] = $esteCampo;
-            $atributos ['tipo'] = 'success';
-            $atributos ['estilo'] = 'textoCentrar';
-            $atributos ['mensaje'] = $mensaje;
-
-            $tab ++;
-
-            // Aplica atributos globales al control
-            $atributos = array_merge($atributos, $atributosGlobales);
-            echo $this->miFormulario->cuadroMensaje($atributos);
+                // Aplica atributos globales al control
+                $atributos = array_merge($atributos, $atributosGlobales);
+                echo $this->miFormulario->cuadroMensaje($atributos);
             }
-            if($_REQUEST['resultado']=='noInserto'){
-            
-            $mensaje = "El Reporte no pudo ser Generado<br>"
-                    . date("Y-m-d");
-            $esteCampo = 'mensajeRegistro';
-            $atributos ['id'] = $esteCampo;
-            $atributos ['tipo'] = 'alert alert-danger';
-            $atributos ['estilo'] = 'textoCentrar';
-            $atributos ['mensaje'] = $mensaje;
+            if($_REQUEST['resultado'] == 'generalGrupal'){
+                
+                $personas = unserialize($_REQUEST['personas']);
+                $variableResumen = "&action=" . $esteBloque["nombre"];
+                $variableResumen.= "&pagina=" . $this->miConfigurador->getVariableConfiguracion('pagina'); //Frontera mostrar formulario
+                $variableResumen.= "&bloque=" . $esteBloque["id_bloque"];
+                $variableResumen.= "&bloqueGrupo=" . $esteBloque["grupo"];
+                $variableResumen.= "&opcion=resumenPdfCertificadoGrupal";
+                $variableResumen.= "&tipoPlantilla=" . $_REQUEST['tipoPlantilla'];
+                $variableResumen.= "&codigoReporte=" . $_REQUEST['codigoReporte'];
+                $variableResumen.= "&personas=" . serialize($personas);
+                $variableResumen.= "&preliquidacion=" . $_REQUEST['preliquidacion'];
+                $variableResumen = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($variableResumen, $directorio);
 
-            $tab ++;
+                //------------------Division para los botones-------------------------
+                $atributos["id"] = "botones";
+                $atributos["estilo"] = "marcoBotones";
+                echo $this->miFormulario->division("inicio", $atributos);
 
-            // Aplica atributos globales al control
-            $atributos = array_merge($atributos, $atributosGlobales);
-            echo $this->miFormulario->cuadroMensaje($atributos);
+                $enlace = "<a href='" . $variableResumen . "'>";
+                $enlace.="<br>Descargar Reporte";
+                $enlace.="</a><br><br>";
+                echo $enlace;
+                $mensaje = "Certificado Multiple Generado Con Exito<br> ID: <h4>" . $_REQUEST ['codigoReporte'] . "</h4>" .
+                           "<br>Fecha de Generación: " . date('Y-m-d') .
+                           "<br>Tipo de Certificado: <h4>" . $_REQUEST ['tipoPlantilla'] . "</h4>";
+                        
+               
+                $mensaje .= "<br> REPORTE EXITOSO!!";
+                $esteCampo = 'mensajeRegistro';
+                $atributos ['id'] = $esteCampo;
+                $atributos ['tipo'] = 'success';
+                $atributos ['estilo'] = 'textoCentrar';
+                $atributos ['mensaje'] = $mensaje;
+                $tab ++;
+
+                // Aplica atributos globales al control
+                $atributos = array_merge($atributos, $atributosGlobales);
+                echo $this->miFormulario->cuadroMensaje($atributos);
             }
-            
-           // ------------------Division para los botones-------------------------
+            if ($_REQUEST['resultado'] == 'noInserto') {
+
+                $mensaje = "El Reporte no pudo ser Generado<br>"
+                        . date("Y-m-d");
+                $esteCampo = 'mensajeRegistro';
+                $atributos ['id'] = $esteCampo;
+                $atributos ['tipo'] = 'alert alert-danger';
+                $atributos ['estilo'] = 'textoCentrar';
+                $atributos ['mensaje'] = $mensaje;
+
+                $tab ++;
+
+                // Aplica atributos globales al control
+                $atributos = array_merge($atributos, $atributosGlobales);
+                echo $this->miFormulario->cuadroMensaje($atributos);
+            }
+
+            // ------------------Division para los botones-------------------------
             $atributos ["id"] = "botones";
             $atributos ["estilo"] = "marcoBotones";
             echo $this->miFormulario->division("inicio", $atributos);
