@@ -55,10 +55,14 @@ class Formulario {
          */
         $atributosGlobales ['campoSeguro'] = 'true';
         $_REQUEST['tiempo'] = time();
-
         $conexion = 'estructura';
         $primerRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
+        if($_REQUEST['tipo']=='Certificado'){
+        $atributos ['cadena_sql'] = $this->miSql->getCadenaSql("obtenerHistoricoCertificadoId", $_REQUEST['variable']);
+        }
+        else{
         $atributos ['cadena_sql'] = $this->miSql->getCadenaSql("obtenerHistoricoReporteId", $_REQUEST['variable']);
+        }
         $resultado = $primerRecursoDB->ejecutarAcceso($atributos['cadena_sql'], "busqueda");
         // -------------------------------------------------------------------------------------------------
         // ---------------- SECCION: Parámetros Generales del Formulario ----------------------------------

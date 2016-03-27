@@ -70,7 +70,9 @@ class registrarForm {
         $atributos ['tipoEtiqueta'] = 'inicio';
         echo $this->miFormulario->formulario($atributos); {
             // ---------------- SECCION: Controles del Formulario -----------------------------------------------
-
+             $rutaBloque = $this->miConfigurador->getVariableConfiguracion("host");
+             $rutaBloque.=$this->miConfigurador->getVariableConfiguracion("site") . "/blocks/";
+             $rutaBloque.= $esteBloque['grupo'] . "/" . $esteBloque['nombre'];
 
             $miPaginaActual = $this->miConfigurador->getVariableConfiguracion('pagina');
 
@@ -111,7 +113,7 @@ class registrarForm {
                 echo $this->miFormulario->division("inicio", $atributos);
 
                 $enlace = "<a href='" . $variableResumen . "'>";
-                $enlace.="<br>Descargar Reporte";
+                $enlace.= "<img src='" . $rutaBloque . "/css/images/pdfImage.png' width='25px'><br>Descargar Reporte";
                 $enlace.="</a><br><br>";
                 echo $enlace;
                 $mensaje = "Certificado Generado Con Exito<br> ID: <h4>" . $_REQUEST ['codigoReporte'] . "</h4>" .
@@ -153,7 +155,7 @@ class registrarForm {
                 echo $this->miFormulario->division("inicio", $atributos);
 
                 $enlace = "<a href='" . $variableResumen . "'>";
-                $enlace.="<br>Descargar Reporte";
+                $enlace.= "<img src='" . $rutaBloque . "/css/images/pdfImage.png' width='25px'><br>Descargar Reporte";
                 $enlace.="</a><br><br>";
                 echo $enlace;
                 $mensaje = "Certificado Multiple Generado Con Exito<br> ID: <h4>" . $_REQUEST ['codigoReporte'] . "</h4>" .

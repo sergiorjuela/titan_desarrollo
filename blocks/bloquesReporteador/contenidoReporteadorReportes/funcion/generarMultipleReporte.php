@@ -25,7 +25,6 @@ class FormProcessor {
         $primerRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
         //Determina que Boton selecciono el usuario si es enviarRegistro genera el certificado Personal
         //De lo contrario direcciona a la vista de selecion grupal
-
         $personas = array();
         $cont = 0;
         for ($i = 0; $i < $_REQUEST['tamanoTabla']; $i++) {
@@ -39,7 +38,7 @@ class FormProcessor {
         if (isset($_REQUEST['preliquidacion'])) {
             $preliquidacion = $_REQUEST['preliquidacion'];
         } else {
-            $preliquidacion = "0";
+            $preliquidacion = 0;
         }
         for ($j = 0; $j < count($personas); $j++) {
             $datos = array(
@@ -50,8 +49,11 @@ class FormProcessor {
                 'fecha' => date("Y-m-d"),
                 'id' => "nextval('reporteador.sec_reporterealizado')"
             );
+
             $atributos ['cadena_sql'] = $this->miSql->getCadenaSql("insertarReporte", $datos);
+           
             $resultado = $primerRecursoDB->ejecutarAcceso($atributos['cadena_sql'], "acceso");
+            
             if ($resultado != true) {
                 Redireccionador::redireccionar('noInserto', $datos);
                 exit();

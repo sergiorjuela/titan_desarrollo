@@ -153,8 +153,9 @@ class Formulario {
                 ; // pendiente la pagina para modificar parametro
                 $variableVD .= "&opcion=verdetalle";
                 $variableVD .= "&bloque=" . $esteBloque ['nombre'];
-                $variableVD .="&tamaño=" . $longitud;
+                $variableVD .= "&tamaño=" . $longitud;
                 $variableVD .= "&variable=" . $matrizItems[$i][0];
+                $variableVD .= "&tipo=" . $matrizItems[$i][2];
                 $variableVD .= "&bloqueGrupo=" . $esteBloque ["grupo"];
                 $variableVD = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($variableVD, $directorio);
                 echo "<td><center><a href='" . $variableVD . "'>

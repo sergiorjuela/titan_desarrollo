@@ -73,6 +73,25 @@ class Sql extends \Sql {
             
                 
                 break;
+            case 'obtenerHistoricoCertificadoId' :
+                $cadenaSql = 'SELECT ';
+                $cadenaSql .= 'r.codigo_reporte, ';
+                $cadenaSql .= 'r.fecha, ';
+                $cadenaSql .= 'p.tipo, ';
+                $cadenaSql .= 'p.nombre as nombrePlantilla, ';
+                $cadenaSql .= 'pn.documento, ';
+                $cadenaSql .= 'pn.primer_apellido||\' \'||pn.segundo_apellido||\' \'||pn.primer_nombre||\' \'||pn.segundo_nombre as nombreEmpleado ';
+                $cadenaSql .= 'FROM ';
+                $cadenaSql .= 'reporteador.reportes_realizados r, ';
+                $cadenaSql .= 'persona.persona_natural pn, ';
+                $cadenaSql .= 'reporteador.plantilla p ';
+                $cadenaSql .= 'WHERE ';
+                $cadenaSql .= 'r.documento = pn.documento and ';
+                $cadenaSql .= 'p.id_plantilla=r.codigo_plantilla and ';
+                $cadenaSql .= 'r.codigo_reporte='.$variable;
+            
+                
+                break;
 
             case 'consultarPlantillasParaReportes' :
                 $cadenaSql = 'SELECT ';

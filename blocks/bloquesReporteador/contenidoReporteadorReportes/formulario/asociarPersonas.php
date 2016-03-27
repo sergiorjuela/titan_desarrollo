@@ -121,7 +121,7 @@ class Formulario {
         $atributos ["valor"] = $this->lenguaje->getCadena($esteCampo);
         $atributos ['nombreFormulario'] = $esteBloque ['nombre'];
         $tab ++;
-
+        
         // Aplica atributos globales al control
         $atributos = array_merge($atributos, $atributosGlobales);
         echo $this->miFormulario->campoBoton($atributos);
@@ -136,6 +136,7 @@ class Formulario {
         $variableRegreso .= "&seltipoPlantilla=" . $_REQUEST["tipoPlantilla"];
         $variableRegreso .= "&selReporte=" . $_REQUEST["tipoReporte"];
         $variableRegreso .= "&codigoReporte=" . $_REQUEST["codigoReporte"];
+        $variableRegreso .= "&preliquidacion=" . $_REQUEST["preliquidacion"];
         $variableRegreso = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($variableRegreso, $directorio);
 
         $atributos["enlace"] = $variableRegreso;

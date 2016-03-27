@@ -55,7 +55,7 @@ class FormProcessor {
             $datos = array(
                 'tipoPlantilla' => $_REQUEST['seltipoPlantilla'],
                 'tipoReporte' => $_REQUEST['selReporte'],
-                'preliquidacion' => $_REQUEST['selPreliquidacion'],
+                'preliquidacion' => $preliquidacion,
                 'codigoReporte' => $_REQUEST['codigoReporte']
             );
 

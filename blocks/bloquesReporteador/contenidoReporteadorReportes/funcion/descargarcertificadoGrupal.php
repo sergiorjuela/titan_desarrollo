@@ -6,7 +6,7 @@ if (!isset($GLOBALS["autorizado"])) {
 }
 ob_end_clean();
 $ruta = $this->miConfigurador->getVariableConfiguracion('raizDocumento');
-include($ruta . '/plugin/html2pdf/html2pdf.class.php');
+include($ruta . '/blocks/bloquesReporteador/contenidoReporteadorReportes/html2pdf/html2pdf.class.php');
 $conexion = 'estructura';
 $primerRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
 if ($_REQUEST['tipoPlantilla'] == 'Certificado') {
@@ -23,9 +23,11 @@ if ($_REQUEST['tipoPlantilla'] == 'Certificado') {
             $reglamentacion = $reglamentacion . " " . $informacionLeyes[$i]['nombre'] . " (" . $informacionLeyes[$i]['reglamentacion'] . "),";
         }
         $reglamentacion = substr($reglamentacion, 0, -1);
+        
         $sqlInformacionPersona = $this->sql->getCadenaSql('obtenerInformacionPersonaCertificado', $personas[$l]);
         $informacionPersona = $primerRecursoDB->ejecutarAcceso($sqlInformacionPersona, "busqueda");
-        $cuerpo = str_replace("[PRIMER_NOMBRE]", " " . $informacionPersona[0]['primer_nombre'] . " ", $cadenaReporte[0]['cuerpo']);
+        $cuerpo = str_replace("\\", "", $cadenaReporte[0]['cuerpo']);
+        $cuerpo = str_replace("[PRIMER_NOMBRE]", " " . $informacionPersona[0]['primer_nombre'] . " ", $cuerpo);
         $cuerpo = str_replace("[SEGUNDO_NOMBRE]", " " . $informacionPersona[0]['segundo_nombre'] . " ", $cuerpo);
         $cuerpo = str_replace("[PRIMER_APELLIDO]", " " . $informacionPersona[0]['primer_apellido'] . " ", $cuerpo);
         $cuerpo = str_replace("[SEGUNDO_APELLIDO]", " " . $informacionPersona[0]['segundo_apellido'] . " ", $cuerpo);
@@ -93,9 +95,10 @@ if ($_REQUEST['tipoPlantilla'] == 'Certificado') {
     ";
     $contenidoPagina .= "</page>";
 
+    $nombre = $_REQUEST['codigoReporte'] . $_REQUEST['tipoPlantilla'];
     $html2pdf = new HTML2PDF('P', 'LETTER', 'es');
     $res = $html2pdf->WriteHTML($contenidoPagina);
-    $html2pdf->Output('Certificado.pdf', 'D');
+    $html2pdf->Output($nombre . ".pdf", 'D');
 } else {
 
     $personas = unserialize($_REQUEST['personas']);
@@ -110,7 +113,7 @@ if ($_REQUEST['tipoPlantilla'] == 'Certificado') {
         $informacionPersona = $primerRecursoDB->ejecutarAcceso($cadenaInformacionPersona, "busqueda");
         $cadenaInformacionPreliquidacion = 'SELECT ' . $cadenaReporte[0]['atributos_conceptos'] . ', valor ,naturaleza ';
         $cadenaInformacionPreliquidacion .= 'FROM informacionPreliquidacion ';
-        $cadenaInformacionPreliquidacion .= 'WHERE id='.$_REQUEST['preliquidacion'] .' and persona=' . $personas[$n] . ' and ( ';
+        $cadenaInformacionPreliquidacion .= 'WHERE id=' . $_REQUEST['preliquidacion'] . ' and persona=' . $personas[$n] . ' and ( ';
         $conceptosdevenga = $cadenaReporte[0]['conceptos_devenga'];
         $conceptosdevenga = explode(",", $conceptosdevenga);
         $condicionesdevenga = "";
@@ -391,10 +394,11 @@ $contenidoConceptosDeduce
             $contenidoCuerpoMultiple[count($contenidoCuerpoMultiple) - 1]
             . " </div>
     ";
-   
+
     $contenidoPagina .= "</page>";
+    $nombre = $_REQUEST['codigoReporte'] . $_REQUEST['tipoPlantilla'];
     $html2pdf = new HTML2PDF('P', 'LETTER', 'es');
     $res = $html2pdf->WriteHTML($contenidoPagina);
-    $html2pdf->Output('ReporteGeneral.pdf', 'D');
+    $html2pdf->Output($nombre . ".pdf", 'D');
 }
 ?>
