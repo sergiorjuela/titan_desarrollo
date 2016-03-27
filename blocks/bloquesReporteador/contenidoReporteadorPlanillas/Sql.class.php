@@ -415,7 +415,8 @@ class Sql extends \Sql {
                 $cadenaSql .= 'WHERE ';
                 $cadenaSql .= 'table_name = \'concepto\'  ';
                 $cadenaSql .= 'and column_name <> \'id\' ';
-                $cadenaSql .= 'and column_name <> \'con_codigo\'; ';
+                $cadenaSql .= 'and column_name <> \'con_codigo\' ';
+                $cadenaSql .= 'and column_name <> \'naturaleza\'; ';
                 break;
             case 'obtenerDevengaConcepto' :
                 $cadenaSql = 'Select ';
