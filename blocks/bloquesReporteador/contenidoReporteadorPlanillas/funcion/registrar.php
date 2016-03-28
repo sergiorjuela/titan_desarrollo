@@ -35,30 +35,18 @@ class FormProcessor {
             $otro_Pie = $_REQUEST ['otroDatoPie'];
         }
         if ($_REQUEST ['tipoPlantilla'] == "1") {
+            
+            $cadenaObtenerConsecutivo= $this->miSql->getCadenaSql("ObtenerConsecutivo");
+            $consecutivo = $primerRecursoDB->ejecutarAcceso($cadenaObtenerConsecutivo, "busqueda");
+            $consecutivoArchivo = $consecutivo[0]['consecutivo']+1;
             $tipoPlantilla = "Certificado";
             $estado = "Activo";
             $fecha = date("Y-m-d");
             $nombreRuta = $_REQUEST ['nombrePlantilla'];
-            $dir_subida = "blocks/bloquesReporteador/Iconos/$tipoPlantilla/$nombreRuta/$fecha";
-            $carpetas = explode("/", $dir_subida);
-            $ruta_destino = "";
-            foreach ($carpetas as $c) {
-                if (strlen($ruta_destino) > 0) {
-                    $ruta_destino .="/" . $c;
-                } else {
-                    $ruta_destino = $c;
-                }
-                if (!is_dir($ruta_destino)) {
-                    mkdir($ruta_destino, 0777);
-                    chmod($ruta_destino, 7777);
-                }
-                else{
-                    chmod($ruta_destino, 0777);
-                }
-            }
-            $ruta_destino.="/";
-            $almacenar1 = move_uploaded_file($_FILES['iconoIzquierdo']['tmp_name'], utf8_decode($ruta_destino.$_FILES['iconoIzquierdo']['name']));
-            $almacenar2 = move_uploaded_file($_FILES['iconoDerecho']['tmp_name'], utf8_decode($ruta_destino.$_FILES['iconoDerecho']['name']));
+            $dir_subidaIzquierdo = "blocks/bloquesReporteador/Iconos/Certificado/IconoIzquierdo-$consecutivoArchivo-";
+            $dir_subidaDerecho = "blocks/bloquesReporteador/Iconos/Certificado/IconoDerecho-$consecutivoArchivo-";
+            $almacenar1 = move_uploaded_file($_FILES['iconoIzquierdo']['tmp_name'], utf8_decode($dir_subidaIzquierdo.$_FILES['iconoIzquierdo']['name']));
+            $almacenar2 = move_uploaded_file($_FILES['iconoDerecho']['tmp_name'], utf8_decode($dir_subidaDerecho.$_FILES['iconoDerecho']['name']));
             
             $datosPlantilla = array(
                 'nombrePlantilla' => $_REQUEST ['nombrePlantilla'],
@@ -79,8 +67,8 @@ class FormProcessor {
                 'telefono' => $_REQUEST ['telefono'],
                 'email' => $_REQUEST ['email'],
                 'otroDatoPie' => $otro_Pie,
-                'iconoizquierdo' => $ruta_destino.$_FILES['iconoIzquierdo']['name'],
-                'iconoderecho' => $ruta_destino.$_FILES['iconoDerecho']['name'],
+                'iconoizquierdo' => $dir_subidaIzquierdo.$_FILES['iconoIzquierdo']['name'],
+                'iconoderecho' => $dir_subidaDerecho.$_FILES['iconoDerecho']['name'],
                 'selecNumeroFirmas' => $_REQUEST ['selecNumeroFirmas'],
                 'id' => "currval('reporteador.sec_plantilla')"
             );
@@ -109,7 +97,10 @@ class FormProcessor {
            
             $tipoPlantilla = "Reporte General";
             $estado = "Activo";
-
+            $cadenaObtenerConsecutivo= $this->miSql->getCadenaSql("ObtenerConsecutivo");
+            $consecutivo = $primerRecursoDB->ejecutarAcceso($cadenaObtenerConsecutivo, "busqueda");
+            $consecutivoArchivo = $consecutivo[0]['consecutivo']+1;
+           
             $datosPlantilla = array(
                 'nombrePlantilla' => $_REQUEST ['nombrePlantilla'],
                 'tipoPlantilla' => $tipoPlantilla,
@@ -119,26 +110,10 @@ class FormProcessor {
             );
             $fecha = date("Y-m-d");
             $nombreRuta = $_REQUEST ['nombrePlantilla'];
-            $dir_subida = "blocks/bloquesReporteador/Iconos/$tipoPlantilla/$nombreRuta/$fecha";
-            $carpetas = explode("/", $dir_subida);
-            $ruta_destino = "";
-            foreach ($carpetas as $c) {
-                if (strlen($ruta_destino) > 0) {
-                    $ruta_destino .="/" . $c;
-                } else {
-                    $ruta_destino = $c;
-                }
-                if (!is_dir($ruta_destino)) {
-                    mkdir($ruta_destino, 0777);
-                    chmod($ruta_destino, 7777);
-                }
-                else{
-                    chmod($ruta_destino, 0777);
-                }
-            }
-            $ruta_destino.="/";
-            $almacenar1 = move_uploaded_file($_FILES['iconoIzquierdo']['tmp_name'], utf8_decode($ruta_destino.$_FILES['iconoIzquierdo']['name']));
-            $almacenar2 = move_uploaded_file($_FILES['iconoDerecho']['tmp_name'], utf8_decode($ruta_destino.$_FILES['iconoDerecho']['name']));
+            $dir_subidaIzquierdo = "blocks/bloquesReporteador/Iconos/Reporte General/IconoIzquierdo-$consecutivoArchivo-";
+            $dir_subidaDerecho = "blocks/bloquesReporteador/Iconos/Reporte General/IconoDerecho-$consecutivoArchivo-";
+            $almacenar1 = move_uploaded_file($_FILES['iconoIzquierdo']['tmp_name'], utf8_decode($dir_subidaIzquierdo.$_FILES['iconoIzquierdo']['name']));
+            $almacenar2 = move_uploaded_file($_FILES['iconoDerecho']['tmp_name'], utf8_decode($dir_subidaDerecho.$_FILES['iconoDerecho']['name']));
            
 
             $datosReporte = array(
@@ -161,8 +136,8 @@ class FormProcessor {
                 'atributosConceptodHidden' => $_REQUEST ['atributosConceptodHidden'],
                 'novedadesdHidden' => $_REQUEST ['novedadesdHidden'],
                 'selecNumeroFirmas' => $_REQUEST ['selecNumeroFirmas'],
-                'iconoizquierdo' => $ruta_destino.$_FILES['iconoIzquierdo']['name'],
-                'iconoderecho' => $ruta_destino.$_FILES['iconoDerecho']['name'],
+                'iconoizquierdo' => $dir_subidaIzquierdo.$_FILES['iconoIzquierdo']['name'],
+                'iconoderecho' => $dir_subidaDerecho.$_FILES['iconoDerecho']['name'],
                 'selectNomina' => $_REQUEST ['selectNomina'],
                 'id' => "currval('reporteador.sec_plantilla')"
             );

@@ -458,6 +458,13 @@ class Sql extends \Sql {
                 $cadenaSql .= 'id_plantilla_reporte ='.$variable.';';
 
                 break;
+            case 'ObtenerConsecutivo' :
+                $cadenaSql = 'Select ';
+                $cadenaSql .= 'MAX(id_plantilla) AS consecutivo ';
+                $cadenaSql .= 'FROM ';
+                $cadenaSql .= 'reporteador.plantilla; ';
+
+                break;
         }
 
 

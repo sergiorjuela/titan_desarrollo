@@ -40,39 +40,23 @@ class FormProcessor {
             
             $obtenerRutasdeArchivos = $this->miSql->getCadenaSql("obtenerRutasArchivoCertificado", $_REQUEST ['id']);
             $rutas = $primerRecursoDB->ejecutarAcceso($obtenerRutasdeArchivos, "busqueda");
-            
-            
+            $id=$_REQUEST ['id'];
             $nombreRuta = $_REQUEST ['nombrePlantilla'];
             $tipoPlantilla =$_REQUEST ['tipo'];
             $fecha = date("Y-m-d");
-            $dir_subida = "blocks/bloquesReporteador/Iconos/$tipoPlantilla/$nombreRuta/$fecha";
-            $carpetas = explode("/", $dir_subida);
-            $ruta_destino = "";
-            foreach ($carpetas as $c) {
-                if (strlen($ruta_destino) > 0) {
-                    $ruta_destino .="/" . $c;
-                } else {
-                    $ruta_destino = $c;
-                }
-                if (!is_dir($ruta_destino)) {
-                    mkdir($ruta_destino, 0777);
-                    chmod($ruta_destino, 7777);
-                } else {
-                    chmod($ruta_destino, 0777);
-                }
-            }
-            $ruta_destino.="/";
+            $dir_subidaIzquierdo = "blocks/bloquesReporteador/Iconos/Certificado/IconoIzquierdo-$id-";
+            $dir_subidaDerecho = "blocks/bloquesReporteador/Iconos/Certificado/IconoDerecho-$id-";
             if ($_FILES["iconoIzquierdo"]["tmp_name"]) {
                  unlink($rutas[0]['icono_izquierdo']);
-                $almacenar1 = move_uploaded_file($_FILES['iconoIzquierdo']['tmp_name'], utf8_decode($ruta_destino . $_FILES['iconoIzquierdo']['name']));
-                $iconoIzquiedo = $ruta_destino . $_FILES['iconoIzquierdo']['name'];
+                $almacenar1 = move_uploaded_file($_FILES['iconoIzquierdo']['tmp_name'], utf8_decode($dir_subidaIzquierdo . $_FILES['iconoIzquierdo']['name']));
+                $iconoIzquiedo = $dir_subidaIzquierdo . $_FILES['iconoIzquierdo']['name'];
             } else {
                 $iconoIzquiedo = $rutas[0]['icono_izquierdo'];
             }
             if ($_FILES["iconoDerecho"]["tmp_name"]) {
                 unlink($rutas[0]['icono_derecho']);
-                $almacenar1 = move_uploaded_file($_FILES['iconoDerecho']['tmp_name'], utf8_decode($ruta_destino . $_FILES['iconoDerecho']['name']));
-                $iconoDerecho = $ruta_destino . $_FILES['iconoDerecho']['name'];
+                $almacenar1 = move_uploaded_file($_FILES['iconoDerecho']['tmp_name'], utf8_decode($dir_subidaDerecho . $_FILES['iconoDerecho']['name']));
+                $iconoDerecho = $dir_subidaDerecho . $_FILES['iconoDerecho']['name'];
             } else {
                 $iconoDerecho = $rutas[0]['icono_derecho'];
             }
@@ -87,7 +71,7 @@ class FormProcessor {
                 'tituloEncabezado' => $_REQUEST ['tituloEncabezado'],
                 'otroDatoEncabezado' => $otro_Encabezado,
                 'fechaCreacion' => $_REQUEST ['fechaCreacion'],
-                'contenidoCertificado' => $_REQUEST ['contenidoCertificado'],
+                'contenidoCertificado' => str_replace("\\", "", $_REQUEST ['contenidoCertificado']),
                 'tituloPie' => $_REQUEST ['tituloPie'],
                 'direccion' => $_REQUEST ['direccion'],
                 'telefono' => $_REQUEST ['telefono'],
@@ -128,35 +112,22 @@ class FormProcessor {
             $nombreRuta = $_REQUEST ['nombrePlantilla'];
             $tipoPlantilla =$_REQUEST ['tipo'];
             $fecha = date("Y-m-d");
-            $dir_subida = "blocks/bloquesReporteador/Iconos/$tipoPlantilla/$nombreRuta/$fecha";
-            $carpetas = explode("/", $dir_subida);
-            $ruta_destino = "";
-            foreach ($carpetas as $c) {
-                if (strlen($ruta_destino) > 0) {
-                    $ruta_destino .="/" . $c;
-                } else {
-                    $ruta_destino = $c;
-                }
-                if (!is_dir($ruta_destino)) {
-                    mkdir($ruta_destino, 0777);
-                    chmod($ruta_destino, 7777);
-                } else {
-                    chmod($ruta_destino, 0777);
-                }
-            }
-            $ruta_destino.="/";
+            $id=$_REQUEST ['id'];
+            $dir_subidaIzquierdo = "blocks/bloquesReporteador/Iconos/Reporte General/IconoIzquierdo-$id-";
+            $dir_subidaDerecho = "blocks/bloquesReporteador/Iconos/Reporte General/IconoDerecho-$id-";
+            
             if ($_FILES["iconoIzquierdo"]["tmp_name"]) {
                 unlink($rutas[0]['icono_izquierdo']);
-                $almacenar1 = move_uploaded_file($_FILES['iconoIzquierdo']['tmp_name'], utf8_decode($ruta_destino . $_FILES['iconoIzquierdo']['name']));
-                $iconoIzquiedo = $ruta_destino . $_FILES['iconoIzquierdo']['name'];
+                $almacenar1 = move_uploaded_file($_FILES['iconoIzquierdo']['tmp_name'], utf8_decode($dir_subidaIzquierdo . $_FILES['iconoIzquierdo']['name']));
+                $iconoIzquiedo = $dir_subidaIzquierdo . $_FILES['iconoIzquierdo']['name'];
                 
             } else {
                 $iconoIzquiedo = $rutas[0]['icono_izquierdo'];
             }
             if ($_FILES["iconoDerecho"]["tmp_name"]) {
                 unlink($rutas[0]['icono_derecho']);
-                $almacenar1 = move_uploaded_file($_FILES['iconoDerecho']['tmp_name'], utf8_decode($ruta_destino . $_FILES['iconoDerecho']['name']));
-                $iconoDerecho = $ruta_destino . $_FILES['iconoDerecho']['name'];
+                $almacenar1 = move_uploaded_file($_FILES['iconoDerecho']['tmp_name'], utf8_decode($dir_subidaDerecho . $_FILES['iconoDerecho']['name']));
+                $iconoDerecho = $dir_subidaDerecho . $_FILES['iconoDerecho']['name'];
             } else {
                 $iconoDerecho = $rutas[0]['icono_derecho'];
                 
