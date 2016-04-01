@@ -151,7 +151,7 @@ class Formulario {
         
         $atributos ['obligatorio'] = true;
         $atributos ['etiquetaObligatorio'] = true;
-        $atributos ['validar'] = 'required,minSize[1],maxSize[5]';
+        $atributos ['validar'] = 'required,minSize[5],maxSize[5], custom[onlyLetterBack]';
         
         $atributos ['valor'] = $matrizDatosConcepto[0]['simbolo'];
         //$atributos ['titulo'] = $this->lenguaje->getCadena ( $esteCampo . 'Titulo' );

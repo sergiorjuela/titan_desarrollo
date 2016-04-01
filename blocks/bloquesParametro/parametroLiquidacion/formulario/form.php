@@ -127,43 +127,49 @@ class Formulario {
         // ---------------- CONTROL: Tabla Cargos sin Sara -----------------------------------------------                
 
         $atributos ['cadena_sql'] = $this->miSql->getCadenaSql("buscarParametroLiquidacion");
+
+
         $matrizItems = $primerRecursoDB->ejecutarAcceso($atributos['cadena_sql'], "busqueda");
+
         $longitud = count($matrizItems);
         $i = 0;
+        $cadenaSqlDetalle = $this->miSql->getCadenaSql("consultarLeyesParametro", $matrizItems[$i][6]);
+
+        $matrizDatosLeyes = $primerRecursoDB->ejecutarAcceso($cadenaSqlDetalle, "busqueda", $matrizItems[$i][6], "consultarLeyesDeConceptos");
+
+
+        $j = 0;
+        $cadenaSelectMultiple = '';
+
+        while ($j < count($matrizDatosLeyes)) {
+
+            $cadenaSqlDetalleNombre = $this->miSql->getCadenaSql("buscarLeyXParametro", $matrizDatosLeyes[$j]['id']);
+            $matrizDatosNombreLeyes = $primerRecursoDB->ejecutarAcceso($cadenaSqlDetalleNombre, "busqueda", $matrizDatosLeyes[$j]['id'], "buscarLeyXParametro");
+
+            $cadenaSelectMultiple = $cadenaSelectMultiple . $matrizDatosNombreLeyes[0]['nombre'] . '<br>';
+            $j++;
+        }
         echo '<table id="tablaReporte" class="display" cellspacing="0" width="100%"> '
-        . '<thead style="display: table-row-group"><tr><th>' . "NOMBRE" . '</th> <th>' . "SIMBOLO" . '</th> <th>' . "DESCRIPCION" . '</th> <th>' . "LEY" . '</th><th>' . "VALOR" . '</th><th>' . "ESTADO" . '</th><th>' . "VER DETALLE" . '</th><th>' . "MODIFICAR" . '</th><th>' . "CAMBIAR ESTADO" . '</th></tr></thead>
+        . '<thead style="display: table-row-group"><tr><th>' . "NOMBRE" . '</th> <th>' . "SIMBOLO" . '</th><th>' . "REGLAMENTACION" . '</th> <th>' . "DESCRIPCION" . '</th> <th>' . "VALOR" . '</th><th>' . "ESTADO" . '</th><th>' . "VER DETALLE" . '</th><th>' . "MODIFICAR" . '</th><th>' . "CAMBIAR ESTADO" . '</th></tr></thead>
                        
                     <tbody>';
 
         while ($i < $longitud) {
 
-
-            $obtenerLeyes = $this->miSql->getCadenaSql("obtenerNombresLeyesParametroPorId", $matrizItems[$i][5]);
-            $leyes = $primerRecursoDB->ejecutarAcceso($obtenerLeyes, "busqueda");
-            $labels_leyes="";
-            for ($j = 0; $j < count($leyes); $j++) {
-                
-                if ($leyes[$j]['fecha_ven'] < date("Y-m-d")) {
-                    $labels_leyes = $labels_leyes . " <p class='text-danger'>" . $leyes[$j]['nombre'] . "!</p>";
-                } else {
-                    $labels_leyes = $labels_leyes . " <p class='text-primary'>" . $leyes[$j]['nombre'] . "</p>";
-                }
-            }
-
             echo "<tr><td>" . $matrizItems[$i][0] . "</td>";
             echo "<td>" . $matrizItems[$i][1] . "</td>";
+            echo "<td>" . $cadenaSelectMultiple . "</td>";
             echo "<td>" . $matrizItems[$i][2] . "</td>";
-            echo "<td>" . $labels_leyes . "</p></td>";
-            echo "<td>" . $matrizItems[$i][3] . "</td>";
             echo "<td>" . $matrizItems[$i][4] . "</td>";
-           
+            echo "<td>" . $matrizItems[$i][5] . "</td>";
+
 
             $variableVD = "pagina=" . $this->miConfigurador->getVariableConfiguracion('pagina');
             ; // pendiente la pagina para modificar parametro
             $variableVD .= "&opcion=verdetalle";
             $variableVD .= "&bloque=" . $esteBloque ['nombre'];
             $variableVD .="&tamaño=" . $longitud;
-            $variableVD .= "&variable=" . $matrizItems[$i][5];
+            $variableVD .= "&variable=" . $i;
             $variableVD .= "&bloqueGrupo=" . $esteBloque ["grupo"];
             $variableVD = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($variableVD, $directorio);
             echo "<td><center><a href='" . $variableVD . "'>
@@ -175,7 +181,7 @@ class Formulario {
             $variableMOD .= "&opcion=modificar";
             $variableMOD .= "&bloque=" . $esteBloque ['nombre'];
             $variableMOD .="&tamaño=" . $longitud;
-            $variableMOD .= "&variable=" . $matrizItems[$i][5];
+            $variableMOD .= "&variable=" . $i;
             $variableMOD .= "&bloqueGrupo=" . $esteBloque ["grupo"];
             $variableMOD = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($variableMOD, $directorio);
             echo "<td><center><a href='" . $variableMOD . "'>
@@ -187,11 +193,11 @@ class Formulario {
             $variableACT .= "&opcion=inactivar";
             $variableACT .= "&bloque=" . $esteBloque ['nombre'];
             $variableACT .="&tamaño=" . $longitud;
-            $variableACT .= "&variable=" . $matrizItems[$i][5];
+            $variableACT .= "&variable=" . $i;
             $variableACT .= "&bloqueGrupo=" . $esteBloque ["grupo"];
             $variableACT = $this->miConfigurador->fabricaConexiones->crypto->codificar_url($variableACT, $directorio);
             echo "<td><center><a href='" . $variableACT . "'>";
-            if ($matrizItems[$i][4] == 'Activo') {
+            if ($matrizItems[$i][5] == 'Activo') {
                 echo "<img src='" . $rutaBloque . "/css/images/desactivacion.png' width='25px'>";
             } else {
                 echo "<img src='" . $rutaBloque . "/css/images/activacion.png' width='25px'>";

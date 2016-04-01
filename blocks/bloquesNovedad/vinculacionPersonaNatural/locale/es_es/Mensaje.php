@@ -8,17 +8,52 @@ $this->idioma["botonModificar"]="Modificar";
 $this->idioma["Modificar"]="Modificar";
 $this->idioma["botonInactivar"]="Inactivar";
 $this->idioma["botonActivar"]="Activar";
+$this->idioma["botonAceptar"]="Aceptar";
 $this->idioma["botonVincular"]="Vincular";
 $this->idioma["botonVerDetalle"]="Ver detalle";
 $this->idioma["enviarInactivar"]="Aceptar";
 $this->idioma["cancelarInactivar"]="cancelar";
 $this->idioma["regresar"]="Regresar ";
+$this->idioma["siguiente"]="Siguiente ";
+$this->idioma["opciones"]="Opciones ";
 
 
 //REGISTRO
 $this->idioma["fechaInicio"]="Fecha de inicio: " ;
 $this->idioma["fechaInicioTitulo"]="" ;
+$this->idioma["registroVinculacion"]="Registro de vinculación: " ;
+$this->idioma["registroVinculacionTitulo"]="" ;
+
 $this->idioma["estado"]="Estado: " ;
+
+$this->idioma["infoSoporte"]="Documento Soporte de Vinculación: " ;
+$this->idioma["soporteVinculacion"]="Soporte vinculación: " ;
+
+$this->idioma["tipoContrato"]="Tipo contrato: " ;
+$this->idioma["mesada"]="Valor mesada: " ;
+$this->idioma["couta"]="Porcentaje de cuota: " ;
+$this->idioma["cargo"]="Cargo: " ;
+$this->idioma["actividad"]="Actividad que desempeña: " ;
+$this->idioma["numeroRegistro"]="Número de Registro: " ;
+$this->idioma["numeroContrato"]="Número de Contrato: " ;
+$this->idioma["tipoVincu"]="Tipo vinculación especial: " ;
+$this->idioma["vigencia"]="Vigencia: " ;
+$this->idioma["numeroDisponibilidad"]="Número de Disponibilidad: " ;
+$this->idioma["unidadEjecutora"]="Unidad Ejecutora: " ;
+$this->idioma["rubro"]="Rubro: " ;
+$this->idioma["fecha"]="Fecha Disponibilidad: " ;
+$this->idioma["valorContrato"]="Valor del contrato: " ;
+$this->idioma["duracionContrato"]="Duración del Contrato (meses): " ;
+$this->idioma["valorMensual"]="Valor Mensual: " ;
+$this->idioma["valorCancelado"]="Valor Cancelado: " ;
+$this->idioma["saldo"]="Saldo: " ;
+$this->idioma["dedicacion"]="Dedicación: " ;
+$this->idioma["semanas"]="Numero Semanas: " ;
+$this->idioma["dedicacionn"]="Dedicación: " ;
+$this->idioma["semanass"]="Numero Semanas: " ;
+$this->idioma["horas"]="Horas: " ;
+$this->idioma["tipoVinculacionEspecial"]="Tipo Vinculación Especial: " ;
+
 $this->idioma["estadoTitulo"]="" ;
 $this->idioma["fechaFin"]="Fecha de fin: " ;
 $this->idioma["fechaInicioTitulo"]="" ;

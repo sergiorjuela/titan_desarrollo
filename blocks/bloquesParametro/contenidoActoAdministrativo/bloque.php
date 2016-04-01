@@ -1,6 +1,6 @@
 <?php
 
-namespace bloquesModelo\bloqueContenido;
+namespace bloquesParametro\contenidoActoAdministrativo;
 
 // Evitar un acceso directo a este archivo
 if (! isset ( $GLOBALS ["autorizado"] )) {

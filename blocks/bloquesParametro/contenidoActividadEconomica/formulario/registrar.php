@@ -89,7 +89,31 @@ class Formulario {
         // ---------------- SECCION: Controles del Formulario -----------------------------------------------
         
         
-       
+             // -----------------FIN CONTROL: Botón -----------------------------------------------------------
+        // -----------------CONTROL: Botón ----------------------------------------------------------------
+       $miPaginaActual = $this->miConfigurador->getVariableConfiguracion ( 'pagina' );
+				
+			$directorio = $this->miConfigurador->getVariableConfiguracion ( "host" );
+			$directorio .= $this->miConfigurador->getVariableConfiguracion ( "site" ) . "/index.php?";
+			$directorio .= $this->miConfigurador->getVariableConfiguracion ( "enlace" );
+				
+			$variable = "pagina=" . $miPaginaActual;
+			//$variable .= "&usuario=" . $_REQUEST['usuario'];
+			$variable = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $variable, $directorio );
+				
+			// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
+			$esteCampo = 'botonRegresarConsulta';
+			$atributos ['id'] = $esteCampo;
+			$atributos ['enlace'] = $variable;
+			$atributos ['tabIndex'] = 1;
+			$atributos ['estilo'] = 'textoSubtitulo';
+			$atributos ['enlaceTexto'] = "<h4>".$this->lenguaje->getCadena ( $esteCampo )."</h4>";
+			$atributos ['ancho'] = '10%';
+			$atributos ['alto'] = '10%';
+			$atributos ['redirLugar'] = true;
+			echo $this->miFormulario->enlace ( $atributos );
+				
+			unset ( $atributos );
         
         // --------------------------------------------------------------------------------------------------
         
@@ -149,7 +173,7 @@ class Formulario {
         
         $atributos ['obligatorio'] = true;
         $atributos ['etiquetaObligatorio'] = true;
-        $atributos ['validar'] = 'required, minSize[4], maxSize[150]';
+        $atributos ['validar'] = 'required, minSize[4], maxSize[150],custom[onlyLetterSp]';
         
         if (isset ( $_REQUEST [$esteCampo] )) {
         	$atributos ['valor'] = $_REQUEST [$esteCampo];
@@ -168,44 +192,7 @@ class Formulario {
         // --------------- FIN CONTROL : Cuadro de Texto --------------------------------------------------
         
        
-        
-        // ---------------- CONTROL: Select --------------------------------------------------------
-        $esteCampo = 'estadoRegistro';
-        $atributos['nombre'] = $esteCampo;
-        $atributos['id'] = $esteCampo;
-        $atributos['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
-        $atributos['tab'] = $tab;
-        $atributos['seleccion'] = -1;
-        $atributos['evento'] = ' ';
-        $atributos['deshabilitado'] = false;
-        $atributos['limitar']= 50;
-        $atributos['tamanno']= 1;
-        $atributos['columnas']= 1;
-        
-        $atributos ['ajax_function'] = "";
-        $atributos ['ajax_control'] = $esteCampo;
-        
-        $atributos ['obligatorio'] = true;
-        $atributos ['etiquetaObligatorio'] = true;
-        $atributos ['validar'] = 'required';
-        
-                 $matrizItems=array(
-                 		array(1,'Activo'),
-                 		array(2,'Inactivo')
-                 );
-        $atributos['matrizItems'] = $matrizItems;
-        
-        if (isset ( $_REQUEST [$esteCampo] )) {
-        	$atributos ['valor'] = $_REQUEST [$esteCampo];
-        } else {
-        	$atributos ['valor'] = '';
-        }
-        $tab ++;
-        
-        // Aplica atributos globales al control
-        $atributos = array_merge ( $atributos, $atributosGlobales );
-        echo $this->miFormulario->campoCuadroLista ( $atributos );
-        // --------------- FIN CONTROL : Select --------------------------------------------------
+
         
         // ------------------Division para los botones-------------------------
         $atributos ["id"] = "botones";
@@ -232,6 +219,10 @@ class Formulario {
         // Aplica atributos globales al control
         $atributos = array_merge ( $atributos, $atributosGlobales );
         echo $this->miFormulario->campoBoton ( $atributos );
+        
+      
+        
+  
         
       
         

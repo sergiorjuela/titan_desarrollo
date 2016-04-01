@@ -121,6 +121,37 @@ class FormProcessor {
         $atributos ['cadena_sql'] = $this->miSql->getCadenaSql("modificarRegistroxnomina",$datos);
         
         $resultado=$primerRecursoDB->ejecutarAcceso($atributos['cadena_sql'], "acceso");
+        
+        
+        if (!empty($resultado)) {
+         
+           
+            $atributos['cadena_sql'] = $this->miSql->getCadenaSql("buscarNominaAlterno",$datos);
+            $nomina=$primerRecursoDB->ejecutarAcceso($atributos['cadena_sql'], "busqueda");
+           
+            
+                     $arrayLeyes = explode(",", $_REQUEST['leyRegistros']);
+                     $count = 0;
+       
+//        
+        while($count < count($arrayLeyes)){
+        	
+        	$datosLeyesConcepto = array(
+        			'fk_id_ley' => $arrayLeyes[$count],
+        			'fk_nomina' => $nomina[0][0]
+        	);
+        if($count==0){
+            	 $cadenaSql = $this->miSql->getCadenaSql("eliminarLeyesModificar",$datosLeyesConcepto);
+        $primerRecursoDB->ejecutarAcceso($cadenaSql, "acceso");
+        }
+        	
+        $cadenaSql = $this->miSql->getCadenaSql("insertarLeyesNomina",$datosLeyesConcepto);
+        	$primerRecursoDB->ejecutarAcceso($cadenaSql, "acceso");
+        	
+        	$count++;
+        
+        }
+        } 
         //Al final se ejecuta la redirección la cual pasará el control a otra página
         if (!empty($resultado)) {
               Redireccionador::redireccionar('modifico',$datos);

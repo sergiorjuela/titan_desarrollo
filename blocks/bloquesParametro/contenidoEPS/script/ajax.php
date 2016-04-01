@@ -64,7 +64,15 @@ $("#<?php echo $this->campoSeguro('fdpCiudad')?>").select2();
 	    			}
 	    	      });
 	        
-		
-                
+		 $("#<?php echo $this->campoSeguro('faxRegistro')?>").change(function(){
+                 if($("#<?php echo $this->campoSeguro('faxRegistro')?>").val()!=''){
+                        
+	            	$("#<?php echo $this->campoSeguro('extFaxRegistro')?>").removeAttr('readonly');
+	    		}
+                        else{
+                             $("#<?php echo $this->campoSeguro('extFaxRegistro')?>").val('');
+                            $("#<?php echo $this->campoSeguro('extFaxRegistro')?>").attr('readonly','');
+                        }
+                 });
 	    });
 </script>

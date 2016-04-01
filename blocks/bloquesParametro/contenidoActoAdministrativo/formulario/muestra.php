@@ -1,5 +1,5 @@
 <?php
-namespace bloquesModelo\bloqueContenido\formulario;
+namespace bloquesParametro\contenidoActoAdministrativo\formulario;
 
 if(!isset($GLOBALS["autorizado"])) {
 	include("../index.php");

@@ -1,5 +1,5 @@
 <?php 
-namespace bloquesParametro\contenidoCargo\formulario;
+namespace bloquesLiquidacion\tipoNomina\formulario;
 
 
 
@@ -87,8 +87,12 @@ class Formulario {
 
         // ---------------- SECCION: Controles del Formulario -----------------------------------------------
         
+        $atributos ['cadena_sql'] = $this->miSql->getCadenaSql("buscarNominaxregistroMod",$_REQUEST['vinculacion']);
+        $matrizItems=$primerRecursoDB->ejecutarAcceso($atributos['cadena_sql'], "busqueda");
+       $_identificadorConcepto =  $matrizItems[$_REQUEST['variablei']][0];//Codigo Unico que identifica el Concepto
         
        
+      
         
         // --------------------------------------------------------------------------------------------------
         
@@ -103,8 +107,7 @@ class Formulario {
         
         
         
-        $atributos ['cadena_sql'] = $this->miSql->getCadenaSql("buscarNominaxregistro",$_REQUEST['vinculacion']);
-        $matrizItems=$primerRecursoDB->ejecutarAcceso($atributos['cadena_sql'], "busqueda");
+        
         
         
         // ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
@@ -188,6 +191,7 @@ class Formulario {
                  );
         $atributos['matrizItems'] = $matrizTipo;
         
+        $tipo=0;
         if($matrizItems[$_REQUEST['variablei']][2] == 'Periodica'){$tipo=1;}
         if($matrizItems[$_REQUEST['variablei']][2] == 'Esporadica'){$tipo=2;}
         if($matrizItems[$_REQUEST['variablei']][2] == 'Mixta'){$tipo=3;} 
@@ -234,7 +238,7 @@ class Formulario {
         
                  );
         $atributos['matrizItems'] = $matrizMes;
-        
+        $tipo=0;
         if($matrizItems[$_REQUEST['variablei']][3] == 'Enero'){$tipo=1;}
         if($matrizItems[$_REQUEST['variablei']][3] == 'Febrero'){$tipo=2;}
         if($matrizItems[$_REQUEST['variablei']][3] == 'Marzo'){$tipo=3;}
@@ -329,6 +333,17 @@ class Formulario {
         // Aplica atributos globales al control
         $atributos = array_merge ( $atributos, $atributosGlobales );
         echo $this->miFormulario->campoCuadroLista ( $atributos );
+        
+         $cadenaSqlDetalle = $this->miSql->getCadenaSql("consultarLeyesDeNomina",$_identificadorConcepto);
+        $matrizDatosLeyes = $primerRecursoDB->ejecutarAcceso($cadenaSqlDetalle, "busqueda", $_identificadorConcepto, "consultarLeyesDeConceptos");
+        $i = 0; $cadenaSelectMultiple = '';
+        
+        while($i < count($matrizDatosLeyes)){
+        	$cadenaSelectMultiple = $cadenaSelectMultiple . $matrizDatosLeyes[$i]['id'] . ',';
+        	$i++;
+        }
+        $cadenaSelectMultiple = substr($cadenaSelectMultiple, 0, -1);
+        
         // --------------- FIN CONTROL : Select --------------------------------------------------
        $esteCampo = 'leyes';
         $atributos['nombre'] = $esteCampo;
@@ -349,7 +364,7 @@ class Formulario {
         $atributos ['etiquetaObligatorio'] = true;
         $atributos ['validar'] = 'required';
         
-             $atributos ['cadena_sql'] = $this->miSql->getCadenaSql("buscarRegistroxLEY");
+             $atributos ['cadena_sql'] = $this->miSql->getCadenaSql("buscarLey");
         
         $matrizLeyes=$primerRecursoDB->ejecutarAcceso($atributos['cadena_sql'], "busqueda");
         $atributos['matrizItems'] = $matrizLeyes;
@@ -397,6 +412,101 @@ class Formulario {
         echo $this->miFormulario->campoTextArea( $atributos );
         // --------------- FIN CONTROL : Cuadro de Texto --------------------------------------------------
         // 
+          unset($atributos);
+        unset($atributos);
+        // ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
+        $esteCampo = 'leyRegistros';
+        $atributos ['id'] = $esteCampo;
+        $atributos ['nombre'] = $esteCampo;
+        $atributos ['tipo'] = 'hidden';
+        $atributos ['estilo'] = 'jqueryui';
+        $atributos ['marco'] = true;
+        $atributos ['columnas'] = 1;
+        $atributos ['dobleLinea'] = false;
+        $atributos ['tabIndex'] = $tab;
+        	
+        $atributos ['valor'] = $cadenaSelectMultiple;
+        $atributos ['deshabilitado'] = false;
+        $atributos ['tamanno'] = 30;
+        $atributos ['maximoTamanno'] = '';
+        $tab ++;
+        	
+        // Aplica atributos globales al control
+        $atributos = array_merge ( $atributos, $atributosGlobales );
+        echo $this->miFormulario->campoCuadroTexto ( $atributos );
+        // --------------- FIN CONTROL : Cuadro de Texto --------------------------------------------------
+        
+        unset($atributos);
+        // ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
+        $esteCampo = 'estadoPagina';
+        $atributos ['id'] = $esteCampo;
+        $atributos ['nombre'] = $esteCampo;
+        $atributos ['tipo'] = 'hidden';
+        $atributos ['estilo'] = 'jqueryui';
+        $atributos ['marco'] = true;
+        $atributos ['columnas'] = 1;
+        $atributos ['dobleLinea'] = false;
+        $atributos ['tabIndex'] = $tab;
+         
+        $atributos ['valor'] = 'modificar';
+        $atributos ['deshabilitado'] = false;
+        $atributos ['maximoTamanno'] = '';
+        $tab ++;
+         
+        // Aplica atributos globales al control
+        $atributos = array_merge ( $atributos, $atributosGlobales );
+        echo $this->miFormulario->campoCuadroTexto ( $atributos );
+        // --------------- FIN CONTROL : Cuadro de Texto --------------------------------------------------
+        
+        unset($atributos);
+        // ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
+        $esteCampo = 'cargaSelectMultiple';
+        $atributos ['id'] = $esteCampo;
+        $atributos ['nombre'] = $esteCampo;
+        $atributos ['tipo'] = 'hidden';
+        $atributos ['estilo'] = 'jqueryui';
+        $atributos ['marco'] = true;
+        $atributos ['columnas'] = 1;
+        $atributos ['dobleLinea'] = false;
+        $atributos ['tabIndex'] = $tab;
+         
+        $atributos ['valor'] = $cadenaSelectMultiple;
+        $atributos ['deshabilitado'] = false;
+        $atributos ['maximoTamanno'] = '';
+        $tab ++;
+         
+        // Aplica atributos globales al control
+        $atributos = array_merge ( $atributos, $atributosGlobales );
+        echo $this->miFormulario->campoCuadroTexto ( $atributos );
+        // --------------- FIN CONTROL : Cuadro de Texto --------------------------------------------------
+         
+        unset($atributos);
+        // ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
+        $esteCampo = 'variable';
+        $atributos ['id'] = $esteCampo;
+        $atributos ['nombre'] = $esteCampo;
+        $atributos ['tipo'] = 'hidden';
+        $atributos ['estilo'] = 'jqueryui';
+        $atributos ['marco'] = true;
+        $atributos ['columnas'] = 1;
+        $atributos ['dobleLinea'] = false;
+        $atributos ['tabIndex'] = $tab;
+         
+    	if (isset ( $_REQUEST [$esteCampo] )) {
+	        $atributos ['valor'] = $_REQUEST [$esteCampo];
+	    } else {
+	        $atributos ['valor'] = '';
+	    }
+        $atributos ['deshabilitado'] = false;
+        $atributos ['maximoTamanno'] = '';
+        $tab ++;
+         
+        // Aplica atributos globales al control
+        $atributos = array_merge ( $atributos, $atributosGlobales );
+        echo $this->miFormulario->campoCuadroTexto ( $atributos );
+        // --------------- FIN CONTROL : Cuadro de Texto --------------------------------------------------
+        
+        
          // ------------------Division para los botones-------------------------
         $atributos ["id"] = "botones";
         $atributos ["estilo"] = "marcoBotones";

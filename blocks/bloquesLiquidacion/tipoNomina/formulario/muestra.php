@@ -1,5 +1,5 @@
 <?php
-namespace bloquesModelo\bloqueContenido\formulario;
+namespace bloquesLiquidacion\tipoNomina\formulario;
 
 if(!isset($GLOBALS["autorizado"])) {
 	include("../index.php");

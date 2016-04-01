@@ -35,13 +35,13 @@ class FormProcessor {
                    
                 }
                
-                if($_REQUEST['botonVerDetalle'.$i] == 'true'){
+                if(isset($_REQUEST['botonVerDetalle'.$i])&&$_REQUEST['botonVerDetalle'.$i] == 'true'){
                  Redireccionador::redireccionar('verdetalle',$i); 
                 // var_dump($_REQUEST['botonModificar'.$i]);
                   break; 
                    
                 }
-                  if($_REQUEST['botonModificar'.$i] == 'true'){
+                  if(isset($_REQUEST['botonModificar'.$i])&&$_REQUEST['botonModificar'.$i] == 'true'){
                  Redireccionador::redireccionar('modificar',$i); 
                 // var_dump($_REQUEST['botonModificar'.$i]);
                   break; 

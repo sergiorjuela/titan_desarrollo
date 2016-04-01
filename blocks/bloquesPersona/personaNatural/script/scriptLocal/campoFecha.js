@@ -21,6 +21,9 @@ $( document ).ready(function() {
 	campoFecha[IFechaA++] = "#<?php echo $this->campoSeguro('fechaEconomicoFin')?>";
 	campoFechaInput[IFechaB++] = "input#<?php echo $this->campoSeguro('fechaEconomicoFin')?>";
 	
+	campoFecha[IFechaA++] = "#<?php echo $this->campoSeguro('fechaEconomicoCreacion')?>";
+	campoFechaInput[IFechaB++] = "input#<?php echo $this->campoSeguro('fechaEconomicoCreacion')?>";
+	
 	$(campoFecha).each(function(){
 		$(this.valueOf()).datepicker({
 			dateFormat: 'yy-mm-dd',

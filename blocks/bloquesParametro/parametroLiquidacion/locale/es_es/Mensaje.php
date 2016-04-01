@@ -2,8 +2,8 @@
 $this->idioma["bloqueContenido"]="Cargo";
 $this->idioma["noDefinido"]="No definido";
 
+$this->idioma["botonRegresar"]="Regresar ";
 $this->idioma["botonRegistrar"]="Registrar ";
-$this->idioma["botonRegreso"]="Regresar ";
 $this->idioma["botonGuardar"]="Aceptar";
 $this->idioma["botonModificar"]="Modificar";
 $this->idioma["botonInactivar"]="Inactivar";
@@ -20,6 +20,8 @@ $this->idioma["modificar"]="Modificar ";
 $this->idioma["simbolo"]="Simbolo: " ;
 $this->idioma["id"]="Id: " ;
 $this->idioma["simboloTitulo"]="" ;
+$this->idioma["categoria"]="Categoria: " ;
+$this->idioma["categoriaTitulo"]="" ;
 $this->idioma["descripcion"]="Descripción: " ;
 $this->idioma["descripcionTitulo"]="" ;
 $this->idioma["valor"]="Valor: " ;
@@ -29,7 +31,6 @@ $this->idioma["leyTitulo"]="" ;
 $this->idioma["ley1"]="Ley: " ;
 $this->idioma["ley1Titulo"]="" ;
 $this->idioma["nombre"]="Nombre: ";
-$this->idioma["categoriaParametro"]="Categoria del Parametro: ";
 
 $this->idioma["nombreTitulo"]="";
 $this->idioma["direccion"]="Dirección: ";

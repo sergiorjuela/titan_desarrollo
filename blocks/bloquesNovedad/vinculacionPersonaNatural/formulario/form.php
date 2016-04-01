@@ -137,24 +137,26 @@ class Formulario {
                         echo $this->miFormulario->division("fin"); 
         // ---------------- CONTROL: Tabla Cargos sin Sara -----------------------------------------------                
                         
-        $atributos ['cadena_sql'] = $this->miSql->getCadenaSql("buscarPersonaVinculada");
+        $atributos ['cadena_sql'] = $this->miSql->getCadenaSql("buscarPersonaVinculadaDetalle");
     
      
         $matrizItems=$primerRecursoDB->ejecutarAcceso($atributos['cadena_sql'], "busqueda");
-     
+      
        $longitud = count($matrizItems);
         $i=0;
         
         echo '<table id="tablaReporte" class="display" cellspacing="0" width="100%"> '
-                 . '<thead style="display: table-row-group"><tr><th>'."DOCUMENTO".'</th><th>'."ID VINCULACION".'</th> <th>'."ESTADO".'</th><th>'."  VER DETALLE".'</th><th>'."MODIFICAR".'</th><th>'."MODIFICAR ESTADO. ".'</th></tr></thead>
+                 . '<thead style="display: table-row-group"><tr><th>'."DOCUMENTO".'</th><th>'."NOMBRES".'</th><th>'."APELLIDOS".'</th><th>'."TIPO VINCULACION".'</th> <th>'."ESTADO".'</th><th>'."  VER DETALLE".'</th><th>'."MODIFICAR".'</th><th>'."MODIFICAR ESTADO. ".'</th></tr></thead>
                        
                     <tbody>'; 
         
         while($i<$longitud){
             
-                    echo "<tr><td>".$matrizItems[$i][0]."</td>";
+                    echo "<tr><td>".$matrizItems[$i][8]."</td>";
+                    echo "<td>".$matrizItems[$i][0]."</td>";
                     echo "<td>".$matrizItems[$i][1]."</td>";
                     echo "<td>".$matrizItems[$i][2]."</td>";
+                    echo "<td>".$matrizItems[$i][7]."</td>";
                  
                     $variableVD = "pagina=" . $this->miConfigurador->getVariableConfiguracion ( 'pagina' );; // pendiente la pagina para modificar parametro
                           $variableVD .= "&opcion=verdetalle";
@@ -186,7 +188,7 @@ class Formulario {
                           $variableACT .= "&bloqueGrupo=" . $esteBloque ["grupo"];
                           $variableACT = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $variableACT, $directorio );
                          echo "<td><center><a href='" . $variableACT . "'>";
-                         if($matrizItems[$i][2]=='Activo'){
+                         if($matrizItems[$i][7]=='Activo'){
                             echo "<img src='" . $rutaBloque . "/css/images/desactivacion.png' width='25px'>";
                          }
                          else{

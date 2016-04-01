@@ -8,6 +8,7 @@ $this->idioma["botonModificar"]="Modificar";
 $this->idioma["botonInactivar"]="Inactivar";
 $this->idioma["botonActivar"]="Activar";
 $this->idioma["botonVerDetalle"]="Ver detalle";
+$this->idioma["botonRegresar"]="Regresar";
 $this->idioma["enviarInactivar"]="Aceptar";
 $this->idioma["regresar"]="Regresar";
 $this->idioma["modificar"]="Modificar ";

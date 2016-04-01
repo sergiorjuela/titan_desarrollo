@@ -169,7 +169,24 @@ class registrarForm {
 					echo $this->miFormulario->cuadroMensaje ( $atributos );
 					// --------------- FIN CONTROL : Cuadro de Texto --------------------------------------------------
 				}
-				
+				if ($_REQUEST ['mensaje'] == 'nitRep') {
+					
+					$mensaje = "No Se Pudo Hacer Registro de EPS, Por favor revisar que el nit no se encuentre registrado anteriormente <br> Nit: <h4>" . $_REQUEST ['nitRegistro'] . "</h4>". "<br>Fecha Registro:" . date ( 'Y-m-d' );
+					
+					// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
+					$esteCampo = 'mensajeRegistro';
+					$atributos ['id'] = $esteCampo;
+					$atributos ['tipo'] = 'error';
+					$atributos ['estilo'] = 'textoCentrar';
+					$atributos ['mensaje'] = $mensaje;
+					
+					$tab ++;
+					
+					// Aplica atributos globales al control
+					$atributos = array_merge ( $atributos, $atributosGlobales );
+					echo $this->miFormulario->cuadroMensaje ( $atributos );
+					// --------------- FIN CONTROL : Cuadro de Texto --------------------------------------------------
+				}
 				
 			}
 	

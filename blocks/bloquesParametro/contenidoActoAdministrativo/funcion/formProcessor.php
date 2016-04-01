@@ -1,6 +1,6 @@
 <?php
 
-namespace bloquesModelo\bloqueContenido\funcion;
+namespace bloquesParametro\contenidoActoAdministrativo\funcion;
 
 
 include_once('Redireccionador.php');

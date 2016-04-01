@@ -1,34 +1,20 @@
 <?php
 namespace bloquesConcepto\contenidoConcepto\formulario;
-
-
-
 if(!isset($GLOBALS["autorizado"])) {
 	include("../index.php");
 	exit;
 }
-
-
 class Formulario {
-
 	var $miConfigurador;
 	var $lenguaje;
 	var $miFormulario;
-
 	function __construct($lenguaje, $formulario, $sql) {
-
 		$this->miConfigurador = \Configurador::singleton ();
-
 		$this->miConfigurador->fabricaConexiones->setRecursoDB ( 'principal' );
-
 		$this->lenguaje = $lenguaje;
-
 		$this->miFormulario = $formulario;
-
 		$this->miSql = $sql;
-
 	}
-
 	function formulario() {
 	
 		/**
@@ -36,10 +22,8 @@ class Formulario {
 		 * Por tanto en el archivo ready.php se delaran algunas funciones js
 		 * que lo complementan.
 		 */
-
 		// Rescatar los datos de este bloque
 		$esteBloque = $this->miConfigurador->getVariableConfiguracion ( "esteBloque" );
-
 		// ---------------- SECCION: Parámetros Globales del Formulario ----------------------------------
 		/**
 		* Atributos que deben ser aplicados a todos los controles de este formulario.
@@ -52,42 +36,32 @@ class Formulario {
  		$atributosGlobales ['campoSeguro'] = 'true';
  		$_REQUEST['tiempo']=time();
  		$tiempo=$_REQUEST['tiempo'];
-
 		$conexion = 'estructura';
 		$primerRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
 		
 		//var_dump($primerRecursoDB);
 		//exit;
-
 		// -------------------------------------------------------------------------------------------------
-
 		// ---------------- SECCION: Parámetros Generales del Formulario ----------------------------------
 		$esteCampo = $esteBloque ['nombre'];
 		$atributos ['id'] = $esteCampo;
 		$atributos ['nombre'] = $esteCampo;
-
 		// Si no se coloca, entonces toma el valor predeterminado 'application/x-www-form-urlencoded'
 		$atributos ['tipoFormulario'] = '';
-
 		// Si no se coloca, entonces toma el valor predeterminado 'POST'
 		$atributos ['metodo'] = 'POST';
-
 		// Si no se coloca, entonces toma el valor predeterminado 'index.php' (Recomendado)
 		$atributos ['action'] = 'index.php';
 		$atributos ['titulo'] = false;//$this->lenguaje->getCadena ( $esteCampo );
-
 		// Si no se coloca, entonces toma el valor predeterminado.
 		$atributos ['estilo'] = '';
 		$atributos ['marco'] = true;
 		$tab = 1;
 		// ---------------- FIN SECCION: de Parámetros Generales del Formulario ----------------------------
-
 		// ----------------INICIAR EL FORMULARIO ------------------------------------------------------------
 		$atributos ['tipoEtiqueta'] = 'inicio';
 		echo $this->miFormulario->formulario ( $atributos );
-
 		// ---------------- SECCION: Controles del Formulario -----------------------------------------------
-
 		// --------------------------------------------------------------------------------------------------
         
         $esteCampo = "marcoDatosBasicos";
@@ -152,7 +126,7 @@ class Formulario {
 					echo $this->miFormulario->division ( "fin" );
 					
 					$atributos ["id"] = "botonesPanel2";
-					$atributos ["estilo"] = "col-md-8 btn-group btn-group-lg";
+					$atributos ["estilo"] = "col-md-10 btn-group btn-group-lg";
 					echo $this->miFormulario->division ( "inicio", $atributos );
 					{
 						echo "<input type=\"button\" id=\"btOper1\" value=\"(\" class=\"btn btn-primary\"/>";
@@ -213,7 +187,7 @@ class Formulario {
 					$atributos ['etiquetaObligatorio'] = false;
 					$atributos ['validar'] = '';
 					
-					$atributos ['cadena_sql'] = $this->miSql->getCadenaSql("buscarRegistroxParametro");
+					$atributos ['cadena_sql'] = $this->miSql->getCadenaSql("buscarCategoriaParametro");
 					$matrizParametros=$primerRecursoDB->ejecutarAcceso($atributos['cadena_sql'], "busqueda");
 					
 					$atributos['matrizItems'] = $matrizParametros;
@@ -253,7 +227,7 @@ class Formulario {
 					$esteCampo = 'seccionParametros';
 					$atributos['nombre'] = $esteCampo;
 					$atributos['id'] = $esteCampo;
-					$atributos['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
+					$atributos['etiqueta'] = '';
 					$atributos ['anchoEtiqueta'] = 180;
 					$atributos['tab'] = $tab;
 					$atributos['seleccion'] = -1;
@@ -267,7 +241,7 @@ class Formulario {
 					$atributos ['etiquetaObligatorio'] = false;
 					$atributos ['validar'] = '';
 					
-					$atributos ['cadena_sql'] = $this->miSql->getCadenaSql("buscarRegistroxParametro");
+					$atributos ['cadena_sql'] = $this->miSql->getCadenaSql("buscarCategoriaParametro");
 					$matrizParametros=$primerRecursoDB->ejecutarAcceso($atributos['cadena_sql'], "busqueda");
 					
 					$atributos['matrizItems'] = $matrizParametros;
@@ -363,6 +337,12 @@ class Formulario {
 						$atributos ['etiquetaObligatorio'] = false;
 						$atributos ['validar'] = '';
 							
+						$atributos ['cadena_sql'] = $this->miSql->getCadenaSql("buscarCategoriaConcepto");
+						$matrizParametros=$primerRecursoDB->ejecutarAcceso($atributos['cadena_sql'], "busqueda");
+							
+						$atributos['matrizItems'] = $matrizParametros;
+						
+						/*
 						$matrizItems=array(
 								array(1,'CP0001'),
 								array(2,'CP0002'),
@@ -371,7 +351,7 @@ class Formulario {
 								array(5,'CP0005')
 									
 						);
-						$atributos['matrizItems'] = $matrizItems;
+						$atributos['matrizItems'] = $matrizItems;*/
 							
 						if (isset ( $_REQUEST [$esteCampo] )) {
 							$atributos ['valor'] = $_REQUEST [$esteCampo];
@@ -399,7 +379,7 @@ class Formulario {
 						$esteCampo = 'seccionConceptos';
 						$atributos['nombre'] = $esteCampo;
 						$atributos['id'] = $esteCampo;
-						$atributos['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
+						$atributos['etiqueta'] = '';
 						$atributos ['anchoEtiqueta'] = 180;
 						$atributos['tab'] = $tab;
 						$atributos['seleccion'] = -1;
@@ -496,7 +476,7 @@ class Formulario {
 					echo $this->miFormulario->division ( "inicio", $atributos );
 					{
 						$atributos ["id"] = "botonesPanel1B";
-						$atributos ["estilo"] = "col-md-2";
+						$atributos ["estilo"] = "col-md-12";
 						echo $this->miFormulario->division ( "inicio", $atributos );
 						{
 							echo("Operadores:");
@@ -505,9 +485,10 @@ class Formulario {
 						echo $this->miFormulario->division ( "fin" );
 							
 						$atributos ["id"] = "botonesPanel2B";
-						$atributos ["estilo"] = "col-md-10 btn-group btn-group-lg";
+						$atributos ["estilo"] = "col-md-12 btn-group";
 						echo $this->miFormulario->division ( "inicio", $atributos );
 						{
+							echo "<center>";
 							echo "<input type=\"button\" id=\"btOper1B\" value=\"(\" class=\"btn btn-warning\"/>";
 							echo "<input type=\"button\" id=\"btOper2B\" value=\")\" class=\"btn btn-warning\" />";
 							echo "<input type=\"button\" id=\"btOper3B\" value=\"+\" class=\"btn btn-warning\"/>";
@@ -518,12 +499,82 @@ class Formulario {
 							echo "<input type=\"button\" id=\"btOper8B\" value=\"^\" class=\"btn btn-warning\" />";
 							echo "<input type=\"button\" id=\"btOper9B\" value=\"Borrar\" class=\"btn btn-danger\" />";
 							echo "<input type=\"button\" id=\"btOper10B\" value=\"Insertar\" class=\"btn btn-success\" />";
+							echo "</center>";
 						}
 						echo $this->miFormulario->division ( "fin" );
 					
 					}
 					echo $this->miFormulario->division ( "fin" );
 					
+				}
+				echo $this->miFormulario->marcoAgrupacion ( "fin" );
+				
+                                
+                                unset($atributos);
+                                
+                                $esteCampo = "marcoDatosVariables";
+				$atributos ['id'] = $esteCampo;
+				$atributos ["estilo"] = "jqueryui";
+				$atributos ['tipoEtiqueta'] = 'inicio';
+				$atributos ["leyenda"] = "Panel Variables";
+				echo $this->miFormulario->marcoAgrupacion ( 'inicio', $atributos );
+				{
+				
+				$atributos ["id"] = "variables_lista";
+				$atributos ["estilo"] = "col-md-12";
+				echo $this->miFormulario->division ( "inicio", $atributos );
+				{
+					// ---------------- CONTROL: Select --------------------------------------------------------
+					$esteCampo = 'VariablesList';
+					$atributos['nombre'] = $esteCampo;
+					$atributos['id'] = $esteCampo;
+					$atributos['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
+					$atributos ['anchoEtiqueta'] = 230;
+					$atributos['tab'] = $tab;
+					$atributos['seleccion'] = -1;
+					$atributos['evento'] = ' ';
+					$atributos['deshabilitado'] = false;
+					$atributos['limitar']= 50;
+					$atributos['tamanno']= 1;
+					$atributos['columnas']= 1;
+				
+					$atributos ['obligatorio'] = false;
+					$atributos ['etiquetaObligatorio'] = false;
+					$atributos ['validar'] = '';
+					
+					$atributos ['cadena_sql'] = $this->miSql->getCadenaSql("buscarVariables");
+					$matrizParametros=$primerRecursoDB->ejecutarAcceso($atributos['cadena_sql'], "busqueda");
+					
+					$atributos['matrizItems'] = $matrizParametros;
+				
+// 					$matrizItems=array(
+// 							array(1,'SMLV'),
+// 							array(2,'IVA'),
+// 							array(3,'RTF'),
+// 							array(4,'HED'),
+// 							array(5,'HEN')
+				
+// 					);
+// 					$atributos['matrizItems'] = $matrizItems;
+				
+					if (isset ( $_REQUEST [$esteCampo] )) {
+						$atributos ['valor'] = $_REQUEST [$esteCampo];
+					} else {
+						$atributos ['valor'] = '';
+					}
+					$atributos ["titulo"] = $this->lenguaje->getCadena ( $esteCampo . 'Titulo' );
+					$tab ++;
+				
+					// Aplica atributos globales al control
+					$atributos = array_merge ( $atributos, $atributosGlobales );
+					echo $this->miFormulario->campoCuadroLista ( $atributos );
+					// --------------- FIN CONTROL : Select --------------------------------------------------
+				}
+				echo $this->miFormulario->division ( "fin" );
+				
+				unset($atributos);
+				
+				
 				}
 				echo $this->miFormulario->marcoAgrupacion ( "fin" );
 				
@@ -756,7 +807,6 @@ class Formulario {
 		
 		echo $this->miFormulario->marcoAgrupacion ( 'fin' );
 		// ------------------- SECCION: Paso de variables ------------------------------------------------
-
 		/**
 		 * En algunas ocasiones es útil pasar variables entre las diferentes páginas.
 		 * SARA permite realizar esto a través de tres
@@ -767,11 +817,8 @@ class Formulario {
 		 * formsara, cuyo valor será una cadena codificada que contiene las variables.
 		 * (c) a través de campos ocultos en los formularios. (deprecated)
 		 */
-
 		// En este formulario se utiliza el mecanismo (b) para pasar las siguientes variables:
-
 		// Paso 1: crear el listado de variables
-
 		//$valorCodificado = "actionBloque=" . $esteBloque ["nombre"]; //Ir pagina Funcionalidad
 		//$valorCodificado = "actionBloque=" . $esteBloque ["nombre"];
 		$valorCodificado = "&pagina=" . $this->miConfigurador->getVariableConfiguracion ( 'pagina' );//Frontera mostrar formulario
@@ -786,7 +833,6 @@ class Formulario {
 		$valorCodificado .= "&campoSeguro=" . $_REQUEST['tiempo'];
 		// Paso 2: codificar la cadena resultante
 		$valorCodificado = $this->miConfigurador->fabricaConexiones->crypto->codificar ( $valorCodificado );
-
 		$atributos ["id"] = "formSaraData"; // No cambiar este nombre
 		$atributos ["tipo"] = "hidden";
 		$atributos ['estilo'] = '';
@@ -796,33 +842,22 @@ class Formulario {
 		$atributos ["valor"] = $valorCodificado;
 		echo $this->miFormulario->campoCuadroTexto ( $atributos );
 		unset ( $atributos );
-
 		// ----------------FIN SECCION: Paso de variables -------------------------------------------------
-
 		// ---------------- FIN SECCION: Controles del Formulario -------------------------------------------
-
 		// ----------------FINALIZAR EL FORMULARIO ----------------------------------------------------------
 		// Se debe declarar el mismo atributo de marco con que se inició el formulario.
 		$atributos ['marco'] = true;
 		$atributos ['tipoEtiqueta'] = 'fin';
 		echo $this->miFormulario->formulario ( $atributos );
-
 		return true;
-
 	}
-
 	function mensaje() {
-
 		// Si existe algun tipo de error en el login aparece el siguiente mensaje
 		$mensaje = $this->miConfigurador->getVariableConfiguracion ( 'mostrarMensaje' );
 		$this->miConfigurador->setVariableConfiguracion ( 'mostrarMensaje', null );
-
 		if ($mensaje) {
-
 			$tipoMensaje = $this->miConfigurador->getVariableConfiguracion ( 'tipoMensaje' );
-
 			if ($tipoMensaje == 'json') {
-
 				$atributos ['mensaje'] = $mensaje;
 				$atributos ['json'] = true;
 			} else {
@@ -837,20 +872,12 @@ class Formulario {
 			$atributos ["columnas"] = ''; // El control ocupa 47% del tamaño del formulario
 			echo $this->miFormulario->campoMensaje ( $atributos );
 			unset ( $atributos );
-
 			 
 		}
-
 		return true;
-
 	}
-
 }
-
 $miFormulario = new Formulario ( $this->lenguaje, $this->miFormulario, $this->sql );
-
-
 $miFormulario->formulario ();
 $miFormulario->mensaje ();
-
 ?>

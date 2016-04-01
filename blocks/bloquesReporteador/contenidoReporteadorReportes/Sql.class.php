@@ -164,7 +164,7 @@ class Sql extends \Sql {
                 $cadenaSql = 'SELECT ';
                 $cadenaSql .= 'pn.documento, ';
                 $cadenaSql .= 'pn.primer_apellido||\' \'||pn.segundo_apellido||\' \'||pn.primer_nombre||\' \'||pn.segundo_nombre as nombre, ';
-                $cadenaSql .= '\'Sede:\'||vpn.sede||\'(\'|| vpn.dependencia||\')\' as Ubicacion, ';
+                $cadenaSql .= 'vpn.ubicacion_sede_dependencia as Ubicacion, ';
                 $cadenaSql .= 'ptv.nombre AS vinculacion ';
                 $cadenaSql .= 'FROM ';
                 $cadenaSql .= 'parametro.tipo_vinculacion ptv, ';
@@ -243,8 +243,6 @@ class Sql extends \Sql {
                 $cadenaSql .= 'pn.segundo_apellido, ';
                 $cadenaSql .= 'pn.primer_nombre, ';
                 $cadenaSql .= 'pn.segundo_nombre, ';
-                $cadenaSql .= 'vpn.sede, ';
-                $cadenaSql .= 'vpn.dependencia, ';
                 $cadenaSql .= 'ptv.nombre, ';
                 $cadenaSql .= 'vpn.fecha_inicio, ';
                 $cadenaSql .= 'vpn.fecha_final, ';
@@ -275,8 +273,8 @@ class Sql extends \Sql {
                 $cadenaSql .= 'pn.documento = vpn.documento and ';
                 $cadenaSql .= 'vpn.id_tipo_vinculacion = ptv.id and ';
                 $cadenaSql .= 'pn.tipo_documento = td.tipo_documento and ';
-                $cadenaSql .= 'ldntv.id_tipo_vinculacion=ptv.id and ';
-                $cadenaSql .= 'ldn.id_ldn=ldntv.id_ley and ';
+                $cadenaSql .= 'ldntv.id=ptv.id and ';
+                $cadenaSql .= 'ldn.id_ldn=ldntv.id_ldn and ';
                 $cadenaSql .= 'pn.documento='.$variable.';'; 
                 break;
             case 'obtenerPreliquidaciones' :

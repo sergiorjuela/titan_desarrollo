@@ -27,32 +27,30 @@ class FormProcessor {
 				'ciudad' => $_REQUEST ['personaNaturalCiudad'] 
 		);
 		
-	
-		
 		$cadenaSql = $this->miSql->getCadenaSql ( "insertarUbicacion", $datosUbicacion );
 		$id_ubicacion = $primerRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda", $datosUbicacion, "insertarUbicacion" );
 		
-		if (isset ( $_REQUEST ['personaNaturalRegimen'] )) {
-			switch ($_REQUEST ['personaNaturalRegimen']) {
+		if (isset ( $_REQUEST ['personaNaturalRegimen1'] )) {
+			switch ($_REQUEST ['personaNaturalRegimen1']) {
 				case 1 :
-					$_REQUEST ['personaNaturalRegimen'] = 'comun';
+					$_REQUEST ['personaNaturalRegimen1'] = 'Comun';
 					break;
 				case 2 :
-					$_REQUEST ['personaNaturalRegimen'] = 'simplificado';
+					$_REQUEST ['personaNaturalRegimen1'] = 'Simplifica';
 					break;
 				case 3 :
-					$_REQUEST ['personaNaturalRegimen'] = 'noAplica';
+					$_REQUEST ['personaNaturalRegimen1'] = 'NoAplica';
 					break;
 			}
 		}
 		
-		if (isset ( $_REQUEST ['personaNaturalAutorretenedor'] )) {
-			switch ($_REQUEST ['personaNaturalAutorretenedor']) {
+		if (isset ( $_REQUEST ['personaNaturalAutorretenedor1'] )) {
+			switch ($_REQUEST ['personaNaturalAutorretenedor1']) {
 				case 1 :
-					$_REQUEST ['personaNaturalAutorretenedor'] = 'si';
+					$_REQUEST ['personaNaturalAutorretenedor1'] = "Si";
 					break;
 				case 2 :
-					$_REQUEST ['personaNaturalAutorretenedor'] = 'no';
+					$_REQUEST ['personaNaturalAutorretenedor1'] = 'No';
 					break;
 			}
 		}
@@ -77,13 +75,14 @@ class FormProcessor {
 				'primerApellido' => $_REQUEST ['personaNaturalPrimerApellido'],
 				'segundoApellido' => $_REQUEST ['personaNaturalSegundoApellido'],
 				'contribuyente' => $_REQUEST ['personaNaturalContribuyente'],
-				'autorretenedor' => $_REQUEST ['personaNaturalAutorretenedor'],
-				'regimen' => $_REQUEST ['personaNaturalRegimen']
-// 				'soporteDocumento' => $_REQUEST ['personaNaturalSoporteIden'] 
-		);
+				'autorretenedor' => $_REQUEST ['personaNaturalAutorretenedor1'],
+				'regimen' => $_REQUEST ['personaNaturalRegimen1'] 
+		)
+		// 'soporteDocumento' => $_REQUEST ['personaNaturalSoporteIden']
+		;
 		
 		$atributos ['cadena_sql'] = $this->miSql->getCadenaSql ( "insertarRegistroBasico", $datos );
-		$primerRecursoDB->ejecutarAcceso ( $atributos ['cadena_sql'], "acceso" );
+		$resultado = $primerRecursoDB->ejecutarAcceso ( $atributos ['cadena_sql'], "acceso" );
 		
 		if (isset ( $_REQUEST ['personaNaturalBanco'] )) {
 			switch ($_REQUEST ['personaNaturalBanco']) {
@@ -141,33 +140,30 @@ class FormProcessor {
 			}
 			
 			$datosCom = array (
-					'consecutivo' => $_REQUEST ['personaNaturalConsecutivo'],
+					
 					'banco' => $_REQUEST ['personaNaturalBanco'],
 					'tipoCuenta' => $_REQUEST ['personaNaturalTipoCuenta'],
 					'numeroCuenta' => $_REQUEST ['personaNaturalNumeroCuenta'],
 					'tipoPago' => $_REQUEST ['personaNaturalTipoPago'],
 					'estado' => $_REQUEST ['personaNaturalEconomicoEstado'],
 					'fecha' => $_REQUEST ['fechaCreacionConsulta1'],
-					'creador' => $_REQUEST ['personaNaturalCreo']
-// 					'soporteRUT' => $_REQUEST ['personaNaturalSoporteRUT'] 
-			);
+					'creador' => $_REQUEST ['personaNaturalCreo'] 
+			)
+			// 'soporteRUT' => $_REQUEST ['personaNaturalSoporteRUT']
+			;
 			
-            $atributos ['cadena_sql'] = $this->miSql->getCadenaSql ( "insertarRegistroComercial", $datosCom );
-			$id_comercial = $primerRecursoDB->ejecutarAcceso (  $atributos ['cadena_sql'], "busqueda", $datosCom, "insertarRegistroComercial" );
-			
+			$atributos ['cadena_sql'] = $this->miSql->getCadenaSql ( "insertarRegistroComercial", $datosCom );
+			$id_comercial = $primerRecursoDB->ejecutarAcceso ( $atributos ['cadena_sql'], "busqueda", $datosCom, "insertarRegistroComercial" );
 			
 			$datosPersonaComercial = array (
 					'documento' => $_REQUEST ['personaNaturalDocumento'],
-					'consecutivo' => $id_comercial [0][0]
+					'consecutivo' => $id_comercial [0] [0] 
 			);
 			
 			$atributos ['cadena_sql'] = $this->miSql->getCadenaSql ( "insertarPersonaComercial", $datosPersonaComercial );
-			$primerRecursoDB->ejecutarAcceso ( $atributos ['cadena_sql'], "acceso" );
-			
+			$resultado2 = $primerRecursoDB->ejecutarAcceso ( $atributos ['cadena_sql'], "acceso" );
 			
 			// Al final se ejecuta la redirección la cual pasará el control a otra página
-			
-			
 			
 			if (isset ( $_REQUEST ['personaNaturalContactoTipo'] )) {
 				switch ($_REQUEST ['personaNaturalContactoTipo']) {
@@ -215,33 +211,65 @@ class FormProcessor {
 						'observacion' => $_REQUEST ['personaNaturalContactosObserv'],
 						'fecha' => $_REQUEST ['fechaCreacionConsulta'],
 						'creador' => $_REQUEST ['personaNaturalContactosUsuarioCreo'],
-						'ubicacion'=>$id_ubicacion_contacto[0][0]
+						'ubicacion' => $id_ubicacion_contacto [0] [0] 
 				);
 				
 				$atributos ['cadena_sql'] = $this->miSql->getCadenaSql ( "insertarRegistroContacto", $datosContacto );
-				$id_contacto = $primerRecursoDB->ejecutarAcceso (  $atributos ['cadena_sql'], "busqueda", $datosContacto, "insertarRegistroContacto" );
+				$id_contacto = $primerRecursoDB->ejecutarAcceso ( $atributos ['cadena_sql'], "busqueda", $datosContacto, "insertarRegistroContacto" );
 				
 				$datosPersonaContacto = array (
 						'documento' => $_REQUEST ['personaNaturalDocumento'],
-						'consecutivo' => $id_contacto [0][0] 
+						'consecutivo' => $id_contacto [0] [0] 
 				);
 				
 				$atributos ['cadena_sql'] = $this->miSql->getCadenaSql ( "insertarPersonaContacto", $datosPersonaContacto );
-				$primerRecursoDB->ejecutarAcceso ( $atributos ['cadena_sql'], "acceso" );
+				$resultado1 = $primerRecursoDB->ejecutarAcceso ( $atributos ['cadena_sql'], "acceso" );
 				
-		if ($datos[0][1] == $datosPersonaContacto[0][0]) {
-        	
-        	$this->miConfigurador->setVariableConfiguracion("cache", true);
-        	Redireccionador::redireccionar('inserto', $datos);
-        	exit();
-        } else {
-        	
-        	//$this->miConfigurador->setVariableConfiguracion("cache", true);
-        	Redireccionador::redireccionar('noInserto', $datos);
-        	//var_dump("TEXTO NO INS");exit;
-        	exit();
-        }
-        
+				if (isset ( $_REQUEST ['personaNaturalEconomicoEstado1'] )) {
+					switch ($_REQUEST ['personaNaturalEconomicoEstado1']) {
+						case 1 :
+							$_REQUEST ['personaNaturalEconomicoEstado1'] = 'Activo';
+							break;
+						case 2 :
+							$_REQUEST ['personaNaturalEconomicoEstado1'] = 'Inactivo';
+							break;
+					}
+				}
+				
+				$datosActividadesE = array (
+						'codigo' => $_REQUEST ['personaNaturalEconomicoCodigo'],
+						'descripcion' => $_REQUEST ['personaNaturalEconomicoDescrip'],
+						'fechaI' => $_REQUEST ['fechaEconomicoInicio'],
+						'fechaF' => $_REQUEST ['fechaEconomicoFin'],
+						'estado' => $_REQUEST ['personaNaturalEconomicoEstado1'],
+						'fechaCrea' => $_REQUEST ['fechaEconomicoCreacion'],
+						'usuario' => $_REQUEST ['personaNaturalEconomicoUsuarioCreo']
+				);
+				
+				$atributos ['cadena_sql'] = $this->miSql->getCadenaSql ( "insertarActividadE", $datosActividadesE );
+				$consec_acteco = $primerRecursoDB->ejecutarAcceso ( $atributos ['cadena_sql'], "busqueda",$datosActividadesE, "insertarActividadE");
+				
+				$datosActxPer = array (
+						'documento' => $_REQUEST ['personaNaturalDocumento'],
+						'consecutivo'=> $consec_acteco[0][0]
+				);
+				
+				$atributosU ['cadena_sql'] = $this->miSql->getCadenaSql ( "ActxPer", $datosActxPer );
+				$final = $primerRecursoDB->ejecutarAcceso ( $atributosU ['cadena_sql'], "acceso" );
+				
+				
+				if (! empty ( $resultado ) && ! empty ( $resultado1 ) && ! empty ( $id_contacto ) && ! empty ( $id_ubicacion_contacto ) && ! empty ( $resultado2 ) && ! empty ( $id_comercial )&& ! empty ( $final )) {
+					
+					$this->miConfigurador->setVariableConfiguracion ( "cache", true );
+					Redireccionador::redireccionar ( 'inserto', $datos );
+					exit ();
+				} else {
+					
+					// $this->miConfigurador->setVariableConfiguracion("cache", true);
+					Redireccionador::redireccionar ( 'noInserto', $datos );
+					// var_dump("TEXTO NO INS");exit;
+					exit ();
+				}
 			}
 			function resetForm() {
 				foreach ( $_REQUEST as $clave => $valor ) {

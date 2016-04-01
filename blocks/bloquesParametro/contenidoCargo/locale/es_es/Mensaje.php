@@ -13,7 +13,7 @@ $this->idioma["cancelarInactivar"]="Cancelar";
 $this->idioma["botonAceptarRegistro"]="Aceptar";
 $this->idioma["botonRegresarConsulta"]="Regresar";
 
-
+$this->idioma["cancelar"]="Cancelar";
 
 
 
@@ -30,14 +30,14 @@ $this->idioma["codigoRegistro"]="Codigo  :";
 $this->idioma["codigoRegistroTitulo"]="Código";
 $this->idioma["nivelRegistro"]="Nivel  :";
 $this->idioma["nivelRegistroTitulo"]="Nivel";
-$this->idioma["codAlternativoRegistro"]="Código alternativo:";
-$this->idioma["codAlternativoRegistroTitulo"]="Código alternativo";
+$this->idioma["tipoCargo"]="tipo de Cargo:";
+$this->idioma["tipoCargoTitulo"]="tipo de cargo";
 $this->idioma["gradoRegistro"]="Grado  :";
 $this->idioma["gradoRegistroTitulo"]="Grado";
-$this->idioma["nombreRegistro"]="Nombre cargo :";
+$this->idioma["funciones"]="Funciones :";
 $this->idioma["nombreRegistroTitulo"]="Nombre cargo";
-$this->idioma["codTipoCargoRegistro"]="Código tipo cargo:";
-$this->idioma["codTipoCargoRegistroTitulo"]="Código tipo cargo";
+$this->idioma["ley"]="Ley:";
+$this->idioma["leyTitulo"]="Ley";
 $this->idioma["sueldoRegistro"]="Sueldo  :";
 $this->idioma["sueldoRegistroTitulo"]="Sueldo";
 $this->idioma["tipoSueldoRegistro"]="Tipo sueldo  :";

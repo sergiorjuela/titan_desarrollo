@@ -71,7 +71,24 @@ class registrarForm {
 		{
 			// ---------------- SECCION: Controles del Formulario -----------------------------------------------
 			
-			
+		  if ($_REQUEST ['mensaje'] == 'nitRep') {
+
+                    $mensaje = "No se realizó el registro, Por favor revisar que el nit no se encuentre registrado anteriormente <br> Nit: <h4>" . $_REQUEST ['nitRegistro'] . "</h4>";
+
+                    // ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
+                    $esteCampo = 'mensajeRegistro';
+                    $atributos ['id'] = $esteCampo;
+                    $atributos ['tipo'] = 'error';
+                    $atributos ['estilo'] = 'textoCentrar';
+                    $atributos ['mensaje'] = $mensaje;
+
+                    $tab ++;
+
+                    // Aplica atributos globales al control
+                    $atributos = array_merge($atributos, $atributosGlobales);
+                    echo $this->miFormulario->cuadroMensaje($atributos);
+                    // --------------- FIN CONTROL : Cuadro de Texto --------------------------------------------------
+                }	
 			$miPaginaActual = $this->miConfigurador->getVariableConfiguracion ( 'pagina' );
 				
 			$directorio = $this->miConfigurador->getVariableConfiguracion ( "host" );
@@ -167,7 +184,7 @@ class registrarForm {
 					// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
 					$esteCampo = 'mensajeRegistro';
 					$atributos ['id'] = $esteCampo;
-					$atributos ['tipo'] = 'success';
+					$atributos ['tipo'] = 'error';
 					$atributos ['estilo'] = 'textoCentrar';
 					$atributos ['mensaje'] = $mensaje;
 					

@@ -33,7 +33,7 @@ $(function() {
 		event.preventDefault();
 	});
 });
-
+$("#tablaReporte").dataTable().fnDestroy();
 $(document).ready(function() {
     // Setup - add a text input to each footer cell
 //    $('#tablaReporte tfoot th').each( function () {
@@ -107,3 +107,11 @@ $(document).ready(function() {
     
 } );
 
+if($('#<?php echo $this->campoSeguro('estadoPagina')?>').val() == 'verDetalle' || $('#<?php echo $this->campoSeguro('estadoPagina')?>').val() == 'modificar'){
+	var values = $('#<?php echo $this->campoSeguro('cargaSelectMultiple')?>').val();
+	$.each(values.split(","), function(i,e){
+	    $("#<?php echo $this->campoSeguro('leyes') ?>" + " option[value='" + e + "']").prop("selected", true);
+	    $("#<?php echo $this->campoSeguro('leyes')?>").width(250);
+	    $("#<?php echo $this->campoSeguro('leyes')?>").select2(); 
+	});
+}

@@ -57,9 +57,9 @@ class Sql extends \Sql {
 				$cadenaSql .= '\'' . $variable ['segundoNombre'] . '\'' . ', ';
 				$cadenaSql .= '\'' . $variable ['primerApellido'] . '\'' . ', ';
 				$cadenaSql .= '\'' . $variable ['segundoApellido'] . '\'' . ', ';
-				$cadenaSql .= '\'<' . $variable ['contribuyente'] . '>\'' . ', ';
+				$cadenaSql .= '\'' . $variable ['contribuyente'] . '\'' . ', ';
 				$cadenaSql .= '\'' . $variable ['autorretenedor'] . '\'' . ', ';
-				$cadenaSql .= '\'<' . $variable ['regimen'] . '>\'' . ', ';
+				$cadenaSql .= '\'' . $variable ['regimen'] . '\'' . ', ';
 				$cadenaSql .= '\'' . 'Modificable' . '\' ' . ',';
 				$cadenaSql .= '\'' . 'soporte documento ' . '\'';
 				$cadenaSql .= ') ';
@@ -83,7 +83,7 @@ class Sql extends \Sql {
 				$cadenaSql .= '( ';
 				// $cadenaSql .= $variable ['consecutivo']. ', ';
 				$cadenaSql .= '\'' . $variable ['banco'] . '\'' . ', ';
-				$cadenaSql .= '\'<' . $variable ['tipoCuenta'] . '>\'' . ', ';
+				$cadenaSql .= '\'' . $variable ['tipoCuenta'] . '\'' . ', ';
 				$cadenaSql .= $variable ['numeroCuenta'] . ', ';
 				$cadenaSql .= '\'' . $variable ['tipoPago'] . '\'' . ', ';
 				$cadenaSql .= '\'' . $variable ['estado'] . '\'' . ', ';
@@ -117,6 +117,33 @@ class Sql extends \Sql {
 				$cadenaSql .= '\'' . $variable ['fecha'] . '\'' . ', ';
 				$cadenaSql .= '\'' . $variable ['creador'] . '\'' . ', ';
 				$cadenaSql .= $variable ['ubicacion'];
+				$cadenaSql .= ')';
+				$cadenaSql .= "RETURNING  consecutivo; ";
+				break;
+			
+			case 'insertarActividadE' :
+				$cadenaSql = 'INSERT INTO ';
+				$cadenaSql .= 'persona.actividades_economicas ';
+				$cadenaSql .= '( ';
+				// $cadenaSql .= 'consecutivo,';
+				$cadenaSql .= 'codigo,';
+				$cadenaSql .= 'descripcion,';
+				$cadenaSql .= 'fecha_inicio,';
+				$cadenaSql .= 'fecha_fin,';
+				$cadenaSql .= 'estado,';
+				$cadenaSql .= 'fecha_creacion,';
+				$cadenaSql .= 'usuario_creo';
+				$cadenaSql .= ') ';
+				$cadenaSql .= 'VALUES ';
+				$cadenaSql .= '( ';
+				// $cadenaSql .= $variable ['consecutivo']. ', ';
+				$cadenaSql .= '\'' . $variable ['codigo'] . '\'' . ', ';
+				$cadenaSql .= '\'' . $variable ['descripcion'] . '\'' . ', ';
+				$cadenaSql .= '\'' . $variable ['fechaI'] . '\'' . ', ';
+				$cadenaSql .= '\'' . $variable ['fechaF'] . '\'' . ', ';
+				$cadenaSql .= '\'' . $variable ['estado'] . '\'' . ', ';
+				$cadenaSql .= '\'' . $variable ['fechaCrea'] . '\'' . ', ';
+				$cadenaSql .= '\'' . $variable ['usuario'] . '\'' . ' ';
 				$cadenaSql .= ')';
 				$cadenaSql .= "RETURNING  consecutivo; ";
 				break;
@@ -165,7 +192,21 @@ class Sql extends \Sql {
 				$cadenaSql .= 'VALUES ';
 				$cadenaSql .= '( ';
 				$cadenaSql .= $variable ['documento'] . ', ';
-				$cadenaSql .= $variable ['consecutivo'] . ' ';
+				$cadenaSql .= $variable ['consecutivo'];
+				$cadenaSql .= ') ';
+				break;
+			
+			case 'ActxPer' :
+				$cadenaSql = 'INSERT INTO ';
+				$cadenaSql .= 'persona.pernaturalxace ';
+				$cadenaSql .= '( ';
+				$cadenaSql .= 'documento,';
+				$cadenaSql .= 'consecutivo';
+				$cadenaSql .= ') ';
+				$cadenaSql .= 'VALUES ';
+				$cadenaSql .= '( ';
+				$cadenaSql .= $variable ['documento'] . ', ';
+				$cadenaSql .= $variable ['consecutivo'];
 				$cadenaSql .= ') ';
 				break;
 			
@@ -179,7 +220,7 @@ class Sql extends \Sql {
 				$cadenaSql .= 'VALUES ';
 				$cadenaSql .= '( ';
 				$cadenaSql .= $variable ['documento'] . ', ';
-				$cadenaSql .= $variable ['consecutivo'] . ' ';
+				$cadenaSql .= $variable ['consecutivo'];
 				$cadenaSql .= ') ';
 				break;
 			
@@ -236,6 +277,24 @@ class Sql extends \Sql {
 				$cadenaSql .= '\'' . $variable ['consecutivo'] . '\'';
 				break;
 			
+			case 'infoEcoxCon' :
+				
+				$cadenaSql = 'SELECT ';
+				$cadenaSql .= 'consecutivo as CONSECUTIVO, ';
+				$cadenaSql .= 'codigo as CODIGO, ';
+				$cadenaSql .= 'descripcion as DESCRIPCION, ';
+				$cadenaSql .= 'fecha_inicio as FECHAI, ';
+				$cadenaSql .= 'fecha_fin as FECHAF, ';
+				$cadenaSql .= 'estado as ESTADO, ';
+				$cadenaSql .= 'fecha_creacion as FECHAC, ';
+				$cadenaSql .= 'usuario_creo as USUARIO_CREO ';
+				$cadenaSql .= 'FROM ';
+				$cadenaSql .= 'persona.actividades_economicas ';
+				$cadenaSql .= 'WHERE ';
+				$cadenaSql .= 'consecutivo = ';
+				$cadenaSql .= '\'' . $variable ['consecutivo'] . '\'';
+				break;
+			
 			case 'buscardetalleECOxCargo' :
 				
 				$cadenaSql = 'SELECT ';
@@ -255,15 +314,32 @@ class Sql extends \Sql {
 				
 				break;
 			
+			case 'buscarCodigo' :
+				$cadenaSql = 'SELECT ';
+				$cadenaSql .= 'codigo as CODIGO, ';
+				$cadenaSql .= 'nombre as NOMBRE ';
+				$cadenaSql .= 'FROM ';
+				$cadenaSql .= 'parametro.actividad_economica ';
+				break;
+			
 			case 'buscarConsecutivoCom' :
-				
 				$cadenaSql = 'SELECT ';
 				$cadenaSql .= 'consecutivo as CONSECUTIVO ';
 				$cadenaSql .= 'FROM ';
 				$cadenaSql .= 'persona.personaxcomercial ';
 				$cadenaSql .= 'WHERE ';
 				$cadenaSql .= 'documento = ';
-				$cadenaSql .= '\'' . $variable ['documento'] . '\'';
+				$cadenaSql .= $variable ['documento'];
+				break;
+			
+			case 'buscarConsecutivoEcono' :
+				$cadenaSql = 'SELECT ';
+				$cadenaSql .= 'consecutivo as CONSECUTIVO ';
+				$cadenaSql .= 'FROM ';
+				$cadenaSql .= 'persona.pernaturalxace ';
+				$cadenaSql .= 'WHERE ';
+				$cadenaSql .= 'documento = ';
+				$cadenaSql .= $variable ['documento'];
 				break;
 			
 			case 'buscarConsecutivoCon' :
@@ -274,7 +350,7 @@ class Sql extends \Sql {
 				$cadenaSql .= 'persona.contactoxpernatural ';
 				$cadenaSql .= 'WHERE ';
 				$cadenaSql .= 'documento = ';
-				$cadenaSql .= '\'' . $variable ['documento'] . '\'';
+				$cadenaSql .= $variable ['documento'];
 				break;
 			
 			case 'buscarModificarxPersona' :

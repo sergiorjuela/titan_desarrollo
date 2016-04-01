@@ -50,6 +50,11 @@ class FormProcessor {
               $ubicacion=$primerRecursoDB->ejecutarAcceso($atributos['cadena_sql'], "busqueda");
           }   
           
+          
+          $atributos ['cadena_sql'] = $this->miSql->getCadenaSql("buscarNit", $_REQUEST ['nit']);
+        $nit = $primerRecursoDB->ejecutarAcceso($atributos['cadena_sql'], "busqueda");
+        $var = 0;
+        if (empty($nit)) {
        $datos = array(
             'nitRegistro' => $_REQUEST ['nit'],
             'nombreRegistro' => $_REQUEST ['nombre'],
@@ -68,13 +73,22 @@ class FormProcessor {
    
     $resultado=  $primerRecursoDB->ejecutarAcceso($atributos['cadena_sql'], "acceso");
         
- 
+        }
+        else {
+            $resultado = false;
+            $var = 1;
+            
+            
+        }
    if (!empty($resultado)) {
             Redireccionador::redireccionar('inserto');
             exit();
         } else {
-           Redireccionador::redireccionar('noInserto');
-            exit();
+            if ($var == 1) {
+                Redireccionador::redireccionar('nitRep', $_REQUEST ['nit']);
+            } else {
+                Redireccionador::redireccionar('noInserto');
+            }
         }
         
         //Al final se ejecuta la redirección la cual pasará el control a otra página

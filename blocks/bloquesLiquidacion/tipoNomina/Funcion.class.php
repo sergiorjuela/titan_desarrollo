@@ -51,7 +51,7 @@ class Funcion {
         // en la carpeta funcion
         
         // Importante: Es adecuado que sea una variable llamada opcion o action la que guie el procesamiento:
-        
+      
         
         if (isset ( $_REQUEST ['procesarAjax'] )) {
             $this->procesarAjax ();
@@ -64,9 +64,7 @@ class Funcion {
         	
         	switch ($_REQUEST['opcion']){
         		case "mostrar":
-                            var_dump($_REQUEST);
-                            exit;
-                            include_once ($this->ruta."funcion/registrar.php");
+                           include_once ($this->ruta."funcion/registrar.php");
         		 break;
                          case "opcion":
         		      include_once ($this->ruta."funcion/opcion.php");

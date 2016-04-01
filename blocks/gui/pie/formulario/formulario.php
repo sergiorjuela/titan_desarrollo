@@ -52,7 +52,7 @@ class pie {
         $atributos ['metodo'] = 'POST';
         // Si no se coloca, entonces toma el valor predeterminado 'index.php' (Recomendado)
         $atributos ['action'] = 'index.php';
-        // $atributos ['titulo'] = $this->lenguaje->getCadena ( $esteCampo );
+        $atributos ['titulo'] = $this->lenguaje->getCadena ( $esteCampo );
         // Si no se coloca, entonces toma el valor predeterminado.
         $atributos ['estilo'] = '';
         $atributos ['marco'] = false;
@@ -88,15 +88,14 @@ class pie {
                     $atributos ['tabIndex'] = $tab;
                     $atributos ['estilo'] = 'escudo';
                     $atributos ['enlaceImagen'] = $this->miConfigurador->getVariableConfiguracion('rutaUrlBloque') . 'imagen/escudo.png';
-                    $atributos ['ancho'] = '60px';
-                    $atributos ['alto'] = '80px';
+                    $atributos ['ancho'] = '100px';
+                    $atributos ['alto'] = '100px';
                     $tab++;
                     echo $this->miFormulario->enlace($atributos);
                     unset($atributos);
                 }
 
                 echo $this->miFormulario->division("fin");
-
                 $atributos ["id"] = "colm2";
                 echo $this->miFormulario->division("inicio", $atributos);
                 unset($atributos);

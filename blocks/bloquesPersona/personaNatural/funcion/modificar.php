@@ -26,10 +26,10 @@ class FormProcessor {
 		if (isset ( $_REQUEST ['personaNaturalAutorretenedor'] )) {
 			switch ($_REQUEST ['personaNaturalAutorretenedor']) {
 				case 1 :
-					$_REQUEST ['personaNaturalAutorretenedor'] = 'SI';
+					$_REQUEST ['personaNaturalAutorretenedor'] = 'Si';
 					break;
 				case 2 :
-					$_REQUEST ['personaNaturalAutorretenedor'] = 'NO';
+					$_REQUEST ['personaNaturalAutorretenedor'] = 'No';
 					break;
 			}
 		}
@@ -37,10 +37,10 @@ class FormProcessor {
 		if (isset ( $_REQUEST ['personaNaturalContribuyente'] )) {
 			switch ($_REQUEST ['personaNaturalContribuyente']) {
 				case 1 :
-					$_REQUEST ['personaNaturalContribuyente'] = 'SI';
+					$_REQUEST ['personaNaturalContribuyente'] = 'Si';
 					break;
 				case 2 :
-					$_REQUEST ['personaNaturalContribuyente'] = 'NO';
+					$_REQUEST ['personaNaturalContribuyente'] = 'No';
 					break;
 			}
 		}
@@ -48,13 +48,13 @@ class FormProcessor {
 		if(isset($_REQUEST['personaNaturalRegimen'])){
 			switch($_REQUEST ['personaNaturalRegimen']){
 				case 1 :
-					$_REQUEST ['personaNaturalRegimen']='Común';
+					$_REQUEST ['personaNaturalRegimen']='Comun';
 					break;
 				case 2 :
-					$_REQUEST ['personaNaturalRegimen']='simplificado';
+					$_REQUEST ['personaNaturalRegimen']='Simplificado';
 					break;
 				case 3 :
-					$_REQUEST ['personaNaturalRegimen']='No Aplica';
+					$_REQUEST ['personaNaturalRegimen']='NoAplica';
 					break;
 			}
 		}

@@ -96,7 +96,7 @@ class Formulario {
 	$atributos ['id'] = $esteCampo;
 	$atributos ["estilo"] = "jqueryui";
 	$atributos ['tipoEtiqueta'] = 'inicio';
-	$atributos ["leyenda"] = "Modificar Cargo";
+	$atributos ["leyenda"] = "Estado Ley, Decreto o Norma";
 	echo $this->miFormulario->marcoAgrupacion ( 'inicio', $atributos );
         
        
@@ -115,10 +115,35 @@ class Formulario {
         }
         
        echo '<h3>Se realiza el cambio de estado del registro a: '.$opcion.'</h3>';
+     
        
-         // ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
+           // ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
         
        $esteCampo = 'id_ldn';
+        $atributos ['id'] = $esteCampo;
+        $atributos ['nombre'] = $esteCampo;
+        $atributos ['tipo'] = 'hidden';
+        $atributos ['estilo'] = 'jqueryui';
+        $atributos ['columnas'] = 1;
+        $atributos ['marco'] = true;
+        $atributos ['dobleLinea'] = false;
+        $atributos ['tabIndex'] = $tab;
+        $atributos ['etiqueta'] = '';
+        $atributos ['valor'] = $matrizItems[$_REQUEST['variable']][0];       
+        $atributos ['titulo'] = $this->lenguaje->getCadena ( $esteCampo . 'Titulo' );
+        $atributos ['deshabilitado'] = true;
+        $atributos ['tamanno'] = 20;
+        $atributos ['maximoTamanno'] = '';
+        
+        $tab ++;
+        
+        // Aplica atributos globales al control
+        $atributos = array_merge ( $atributos, $atributosGlobales );
+        echo $this->miFormulario->campoCuadroTexto ( $atributos );
+        unset($atributos);
+         // ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
+        
+       $esteCampo = 'nombre_ldn';
         $atributos ['id'] = $esteCampo;
         $atributos ['nombre'] = $esteCampo;
         $atributos ['tipo'] = 'text';
@@ -128,7 +153,7 @@ class Formulario {
         $atributos ['dobleLinea'] = false;
         $atributos ['tabIndex'] = $tab;
         $atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
-        $atributos ['valor'] = $matrizItems[$_REQUEST['variable']][0];       
+        $atributos ['valor'] = $matrizItems[$_REQUEST['variable']][1];       
         $atributos ['titulo'] = $this->lenguaje->getCadena ( $esteCampo . 'Titulo' );
         $atributos ['deshabilitado'] = true;
         $atributos ['tamanno'] = 20;
@@ -219,6 +244,8 @@ class Formulario {
         // ------------------Fin Division para los botones-------------------------
         echo $this->miFormulario->division ( "fin" );
         echo $this->miFormulario->marcoAgrupacion ( 'fin' );
+        
+        
         // ------------------- SECCION: Paso de variables ------------------------------------------------
 
         /**

@@ -34,6 +34,7 @@ $funcion [$indice ++] = "scriptLocal/campoFecha.js";
 
 
 
+
 $rutaBloque=$this->miConfigurador->getVariableConfiguracion("host");
 $rutaBloque.=$this->miConfigurador->getVariableConfiguracion("site");
 

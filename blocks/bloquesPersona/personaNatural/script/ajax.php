@@ -79,11 +79,11 @@ $urlFinal19 = $url . $cadena19;
 
 $url = $this->miConfigurador->getVariableConfiguracion ( "host" );
 $url .= $this->miConfigurador->getVariableConfiguracion ( "site" );
-$url .= "/index.php?data=pMu1CNlOV6DaV7xDJjbWcyaChUSyI1OiPDhh-jirt3hX73Ao65cjosCeekMd3z_j3ntmWHBRqIp6v4uEQnRftJTE3R3lGpCZySCiFJ0rRo6teiGqXrg5RKFVspaqA5drPTmy8ucyJfuPwdIwSRVbtubUuKjOSEr6hHcdzux_HGk";
+$url .= "/index.php?";
 // Variables
 $cadenaACodificar20 = "pagina=" . $this->miConfigurador->getVariableConfiguracion ( "pagina" );
 $cadenaACodificar20 .= "&procesarAjax=true";
-$cadenaACodificar20 .= "&action=index.php?data=pMu1CNlOV6DaV7xDJjbWcyaChUSyI1OiPDhh-jirt3hX73Ao65cjosCeekMd3z_j3ntmWHBRqIp6v4uEQnRftJTE3R3lGpCZySCiFJ0rRo6teiGqXrg5RKFVspaqA5drPTmy8ucyJfuPwdIwSRVbtubUuKjOSEr6hHcdzux_HGk";
+$cadenaACodificar20 .= "&action=index.php";
 $cadenaACodificar20 .= "&bloqueNombre=" . $esteBloque ["nombre"];
 $cadenaACodificar20 .= "&bloqueGrupo=" . $esteBloque ["grupo"];
 $cadenaACodificar20 .= $cadenaACodificar20 . "&funcion=consultarDepartamentoAjax";
@@ -98,11 +98,11 @@ $urlFinal20 = $url . $cadena20;
 // URL base
 $url = $this->miConfigurador->getVariableConfiguracion ( "host" );
 $url .= $this->miConfigurador->getVariableConfiguracion ( "site" );
-$url .= "/index.php?data=pMu1CNlOV6DaV7xDJjbWcyaChUSyI1OiPDhh-jirt3hX73Ao65cjosCeekMd3z_j3ntmWHBRqIp6v4uEQnRftJTE3R3lGpCZySCiFJ0rRo6teiGqXrg5RKFVspaqA5drPTmy8ucyJfuPwdIwSRVbtubUuKjOSEr6hHcdzux_HGk";
+$url .= "/index.php?";
 // Variables
 $cadenaACodificar21 = "pagina=" . $this->miConfigurador->getVariableConfiguracion ( "pagina" );
 $cadenaACodificar21 .= "&procesarAjax=true";
-$cadenaACodificar21 .= "&action=index.php?data=pMu1CNlOV6DaV7xDJjbWcyaChUSyI1OiPDhh-jirt3hX73Ao65cjosCeekMd3z_j3ntmWHBRqIp6v4uEQnRftJTE3R3lGpCZySCiFJ0rRo6teiGqXrg5RKFVspaqA5drPTmy8ucyJfuPwdIwSRVbtubUuKjOSEr6hHcdzux_HGk";
+$cadenaACodificar21 .= "&action=index.php";
 $cadenaACodificar21 .= "&bloqueNombre=" . $esteBloque ["nombre"];
 $cadenaACodificar21 .= "&bloqueGrupo=" . $esteBloque ["grupo"];
 $cadenaACodificar21 .= $cadenaACodificar21 . "&funcion=consultarCiudadAjax";

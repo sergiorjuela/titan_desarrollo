@@ -12,7 +12,7 @@ $this->idioma["enviarInactivar"]="Aceptar";
 $this->idioma["cancelarInactivar"]="Cancelar";
 $this->idioma["botonAceptarRegistro"]="Aceptar";
 $this->idioma["botonRegresarConsulta"]="Regresar";
-
+$this->idioma["regresarRegistro"]="Regresar";
 
 
 

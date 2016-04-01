@@ -71,7 +71,7 @@ $(document).ready(function() {
 	}
     }
     });
-    
+        
 //    $('#tablaReporte tbody')
 //        .on( 'mouseenter', 'td', function () {
 //            var colIdx = table.cell(this).index().column;
@@ -92,3 +92,12 @@ $(document).ready(function() {
 //        } );
 //    } );
 } );
+
+if($('#<?php echo $this->campoSeguro('estadoPagina')?>').val() == 'verDetalle' || $('#<?php echo $this->campoSeguro('estadoPagina')?>').val() == 'modificar'){
+	var values = $('#<?php echo $this->campoSeguro('cargaSelectMultiple')?>').val();
+	$.each(values.split(","), function(i,e){
+	    $("#<?php echo $this->campoSeguro('ley') ?>" + " option[value='" + e + "']").prop("selected", true);
+	    $("#<?php echo $this->campoSeguro('ley')?>").width(250);
+	    $("#<?php echo $this->campoSeguro('ley')?>").select2(); 
+	});
+}

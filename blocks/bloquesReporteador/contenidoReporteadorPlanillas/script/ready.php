@@ -13,8 +13,6 @@ $('#datepicker').datepicker({
 
 
 
-
-
  $('#<?php echo $this->campoSeguro('selecNovedades')?>').width(300); 
  $("#<?php echo $this->campoSeguro('selecNovedades')?>").select2();
  

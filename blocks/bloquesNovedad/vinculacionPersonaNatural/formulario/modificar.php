@@ -176,7 +176,7 @@ class Formulario {
 	        $atributos ['etiquetaObligatorio'] = false;
 	        $atributos ['validar'] = '';
 	        
-	        $atributos ['cadena_sql'] = $this->miSql->getCadenaSql ( "buscarTipoVinculacion" );
+	        $atributos ['cadena_sql'] = $this->miSql->getCadenaSql ( "buscarTipoVinculacion1" );
 	        $matrizItems1 = $primerRecursoDB->ejecutarAcceso ( $atributos ['cadena_sql'], "busqueda" );
 	        
 	        $atributos['matrizItems'] = $matrizItems1;
@@ -191,7 +191,7 @@ class Formulario {
 	        // Aplica atributos globales al control
 	        $atributos = array_merge ( $atributos, $atributosGlobales );
 	        echo $this->miFormulario->campoCuadroLista ( $atributos );  
-                echo $matrizItems[$_REQUEST['variable']][5];
+                
         
         // ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
         $esteCampo = 'fechaInicio';

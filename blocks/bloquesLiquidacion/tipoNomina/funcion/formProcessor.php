@@ -1,6 +1,6 @@
 <?php
 
-namespace bloquesModelo\bloqueContenido\funcion;
+namespace bloquesLiquidacion\tipoNomina\funcion;
 
 
 include_once('Redireccionador.php');

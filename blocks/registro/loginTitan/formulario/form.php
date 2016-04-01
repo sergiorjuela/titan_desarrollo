@@ -87,6 +87,7 @@ class Formulario {
         // ---------------- SECCION: Controles del Formulario -----------------------------------------------
 
         // ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
+        echo "estoy aqui";
         $esteCampo = 'nombreCampo';
         $atributos ['id'] = $esteCampo;
         $atributos ['nombre'] = $esteCampo;

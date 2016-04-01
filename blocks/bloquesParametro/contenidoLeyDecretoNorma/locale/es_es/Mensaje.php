@@ -21,8 +21,8 @@ $this->idioma["cancelarInactivar"]="Cancelar";
 
 
 //REGISTRO
+$this->idioma["nombre_ldn"]="Nombre :";
 $this->idioma["id_ldn"]="Id :";
-$this->idioma["id_ldnTitulo"]="Id";
 $this->idioma["nitRegistro"]="Nit  :";
 $this->idioma["nitRegistroTitulo"]="Nit";
 $this->idioma["fechaExp"]="Fecha Expedición";

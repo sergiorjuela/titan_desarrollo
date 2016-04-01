@@ -29,14 +29,7 @@ class Redireccionador {
                               
 				break;
 			
-			case "opcion1" :
-				
-				$variable = "pagina=" . $miPaginaActual;
-				$variable   = "&opcion=mensaje";
-                                $variable   = "&mensaje=error";
-                              
-				
-				break;
+			
 			case "verdetalle" :
 				$variable = 'pagina='.$miPaginaActual;                                
 				$variable .= "&opcion=verdetalle";
@@ -65,6 +58,27 @@ class Redireccionador {
                                 
 				$variable = 'pagina='.$miPaginaActual;                                
 				$variable .= "&opcion=vincular";
+                                $variable .= '&variable=' . $valor;
+                               
+                            break; 
+                         case "opcion1" :
+                                
+				$variable = 'pagina='.$miPaginaActual;                                
+				$variable .= "&opcion=opcion1";
+                                $variable .= '&variable=' . $valor;
+                               
+                            break; 
+                        case "opcion2" :
+                                
+				$variable = 'pagina='.$miPaginaActual;                                
+				$variable .= "&opcion=opcion2";
+                                $variable .= '&variable=' . $valor;
+                               
+                            break; 
+                        case "opcion3" :
+                                
+				$variable = 'pagina='.$miPaginaActual;                                
+				$variable .= "&opcion=opcion3";
                                 $variable .= '&variable=' . $valor;
                                
                             break; 

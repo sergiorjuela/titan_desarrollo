@@ -108,7 +108,7 @@ class Formulario {
 
 
         unset($atributos);
-
+		
         // --------------- CONTROL :Select Tipo Plantilla --------------------------------------------------
         $esteCampo = 'seltipoPlantilla';
         $atributos ['id'] = $esteCampo;
@@ -152,7 +152,7 @@ class Formulario {
         $atributos ['tab'] = $tab;
         $atributos ['seleccion'] = -1;
         $atributos['evento'] = ' ';
-        $atributos['deshabilitado'] = true;
+        $atributos['deshabilitado'] = false;
         $atributos['limitar'] = 20;
         $atributos['tamanno'] = 1;
         $atributos['columnas'] = 1;
@@ -298,7 +298,7 @@ class Formulario {
         $atributos ['tab'] = $tab;
         $atributos ['seleccion'] = -1;
         $atributos['evento'] = ' ';
-        $atributos['deshabilitado'] = true;
+        $atributos['deshabilitado'] = false;
         $atributos['limitar'] = 50;
         $atributos['tamanno'] = 1;
         $atributos['columnas'] = 1;

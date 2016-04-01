@@ -124,6 +124,13 @@ class HtmlBase {
     
     const ANCHOCAJA = 'anchoCaja';
     
+    const TEXTOFONDO = 'textoFondo';
+    
+    const POSICIONIMAGEN = 'posicionImagen';
+    
+    const ENLACEIMAGEN = 'enlaceImagen';
+    
+    const SALTOLINEA = 'saltoLinea';
     /**
      * Atributos HTML
      * Se definen como constantes para evitar errores al duplicar

@@ -177,7 +177,7 @@ class Formulario {
         if (isset($_REQUEST [$esteCampo])) {
             $atributos ['valor'] = $_REQUEST [$esteCampo];
         } else {
-            $atributos ['valor'] = "Documento: " . $resultado[0]['documento'] . " / Nombre" . $resultado[0][5];
+            $atributos ['valor'] = "Documento: " . $resultado[0]['documento'] . " / Nombre: " . $resultado[0][5];
         }
         $atributos ['deshabilitado'] = true;
         $atributos ['tamanno'] = 50;

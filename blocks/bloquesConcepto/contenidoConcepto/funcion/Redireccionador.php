@@ -46,6 +46,10 @@ class Redireccionador {
 				$variable .= "&mensaje=noInserto";
 				$variable .= "&nombreRegistro=" . $valor ['nombre'];
 				$variable .= "&simboloRegistro=" . $valor ['simbolo'];
+				if(isset($valor ['refError']) && isset($valor ['error'])){
+					$variable .= "&referenciaError=" . $valor ['refError'];
+					$variable .= "&mensajeError=" . $valor ['error'];
+				}
 				break;
 			case "modifico" :
 				$variable = 'pagina=' . $miPaginaActual;

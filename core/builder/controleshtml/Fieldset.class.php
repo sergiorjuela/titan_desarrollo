@@ -40,7 +40,7 @@ class Fieldset  extends HtmlBase{
                 }
             } else {
                 $this->cadenaHTML .= "</fieldset>\n";
-                $this->cadenaHTML .= "</div>\n";
+                $this->cadenaHTML .= "\n";
             }
         }
         return $this->cadenaHTML;

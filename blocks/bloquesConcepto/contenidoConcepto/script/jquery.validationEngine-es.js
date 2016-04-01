@@ -103,6 +103,10 @@
                     "regex": /^[a-zA-Z\ \']+$/,
                     "alertText": "* Sólo letras"
                 },
+			    "onlyLetterBack": {
+                    "regex": /^[_A-Z\ \']+$/,
+                    "alertText": "* Sólo letras Mayusculas y (_)"
+                },
                 "onlyLetterNumber": {
                     "regex": /^[0-9a-zA-Z]+$/,
                     "alertText": "* No se permiten caracteres especiales"

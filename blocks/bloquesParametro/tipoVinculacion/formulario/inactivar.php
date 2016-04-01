@@ -95,7 +95,7 @@ class Formulario {
        
          // ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
         
-        $esteCampo = 'id';
+        $esteCampo = 'nombre';
         $atributos ['id'] = $esteCampo;
         $atributos ['nombre'] = $esteCampo;
         $atributos ['tipo'] = 'text';
@@ -105,7 +105,7 @@ class Formulario {
         $atributos ['dobleLinea'] = false;
         $atributos ['tabIndex'] = $tab;
         $atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
-        $atributos ['valor'] = $matrizItems[$_REQUEST['variable']][0];       
+        $atributos ['valor'] = $matrizItems[$_REQUEST['variable']][1];       
         $atributos ['titulo'] = $this->lenguaje->getCadena ( $esteCampo . 'Titulo' );
         $atributos ['deshabilitado'] = true;
         $atributos ['tamanno'] = 20;

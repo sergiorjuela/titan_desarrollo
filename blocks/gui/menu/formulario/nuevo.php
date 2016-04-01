@@ -201,7 +201,7 @@ $enlaceFinSesion ['nombre'] = "Cerrar Sesión";
 
                 </div>
                 <!-- /cbp-hrsub-inner -->
-            </div> <!-- /cbp-hrsub --></li>
+            <!-- /cbp-hrsub --></li>
 
     </ul>
 </nav>

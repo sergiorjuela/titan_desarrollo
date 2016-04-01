@@ -99,10 +99,11 @@
                     "regex": /^[0-9\ ]+$/,
                     "alertText": "* Sólo números"
                 },
-			    "onlyLetterSp": {
-                    "regex": /^[a-zA-Z\ \']+$/,
-                    "alertText": "* Sólo letras"
+                "onlyLetterSp": {
+                    "regex": /^[a-zA-Zñáéíóú\ \']+$/,
+                    "alertText": "* Sólo se permiten letras"
                 },
+		
                 "onlyLetterNumber": {
                     "regex": /^[0-9a-zA-Z]+$/,
                     "alertText": "* No se permiten caracteres especiales"

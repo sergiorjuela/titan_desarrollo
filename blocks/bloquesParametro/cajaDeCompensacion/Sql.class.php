@@ -49,6 +49,15 @@ class Sql extends \Sql {
                 $cadenaSql .= 'FROM ';
                 $cadenaSql .= 'parametro.caja_compensacion';
                 break;
+             case 'buscarNit' :
+
+                $cadenaSql = 'SELECT ';
+                $cadenaSql .= 'nombre as NOMBRE ';
+                $cadenaSql .= 'FROM ';
+                $cadenaSql .= 'parametro.caja_compensacion ';
+                $cadenaSql .= 'WHERE ';
+                $cadenaSql .= 'nit ='. $variable . ';';
+                break;
             case 'modificarRegistro' :
                 $cadenaSql = 'UPDATE ';
                 $cadenaSql .= 'parametro.caja_compensacion ';
@@ -178,7 +187,7 @@ class Sql extends \Sql {
                 $cadenaSql .= $variable ['id_ubicacion'] . ', ';
                 if($variable ['nomRepreRegistro']!='')
                 {
-                  $cadenaSql .= $variable ['nomRepreRegistro'] . ', ';
+                  $cadenaSql .= '\'' . $variable ['nomRepreRegistro']  . '\', ';
                 }
              
                 $cadenaSql .= '\'' . $variable ['emailRegistro'] . '\', ';

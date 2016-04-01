@@ -31,17 +31,13 @@ class FormProcessor {
             'fdpCiudad' => $_REQUEST ['ciudad']
      );
        
-      if(isset ( $_REQUEST ['regresar'] ) && $_REQUEST ['regresar'] == "true"){
-                    
-                     Redireccionador::redireccionar('form'); 
-                     exit;
-                }
+
         $atributos ['cadena_sql'] = $this->miSql->getCadenaSql("buscarIdUbicacion",$datosubicacion);
-   
+  
               
         $ubicacion=$primerRecursoDB->ejecutarAcceso($atributos['cadena_sql'], "busqueda");
     
-          if(!empty($ubicacion)){
+          if(empty($ubicacion)){
               $atributos ['cadena_sql'] = $this->miSql->getCadenaSql("insertarUbicacion",$datosubicacion);
               $primerRecursoDB->ejecutarAcceso($atributos['cadena_sql'], "insertar");
            
@@ -63,8 +59,10 @@ class FormProcessor {
         );
           }   
           
-       }else 
+       }
+       if(!empty($ubicacion))
        {
+          
         $datos = array(
             'nit' => $_REQUEST ['nit'],
             'nombre' => $_REQUEST ['nombre'],
@@ -73,7 +71,7 @@ class FormProcessor {
             'extencionTelefono' => $_REQUEST ['extencionTelefono'],
             'fax' => $_REQUEST ['fax'],
             'extencionFax' => $_REQUEST ['extencionFax'],
-           'lugar' => "",
+           'lugar' => $ubicacion[0][0],
             'nombreRepresentante' => $_REQUEST ['nombreRepresentante'],
             'email' => $_REQUEST ['email']
             
@@ -85,7 +83,7 @@ class FormProcessor {
         $atributos ['cadena_sql'] = $this->miSql->getCadenaSql("modificarRegistro",$datos);
        
                 
-    
+     
         
         
         

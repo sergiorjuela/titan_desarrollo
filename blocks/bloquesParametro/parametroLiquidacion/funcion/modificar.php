@@ -1,93 +1,127 @@
 <?php
 
 namespace bloquesParametro\parametroLiquidacion\funcion;
-
+    
 include_once('Redireccionador.php');
-
 class FormProcessor {
-
+    
     var $miConfigurador;
     var $lenguaje;
     var $miFormulario;
     var $miSql;
     var $conexion;
-
+    
     function __construct($lenguaje, $sql) {
-
-        $this->miConfigurador = \Configurador::singleton();
-        $this->miConfigurador->fabricaConexiones->setRecursoDB('principal');
+        
+        $this->miConfigurador = \Configurador::singleton ();
+        $this->miConfigurador->fabricaConexiones->setRecursoDB ( 'principal' );
         $this->lenguaje = $lenguaje;
         $this->miSql = $sql;
+    
     }
-
-    function procesarFormulario() {
+    
+    function procesarFormulario() {    
         //Aquí va la lógica de procesamiento
-
-
-        $conexion = 'estructura';
+        
+        
+       $conexion = 'estructura';
         $primerRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexion);
-
+        
+         
+          if($_REQUEST['simbolo']==$_REQUEST['simboloParametro'])   {
+              
+              $datos = array(
+            'id' => $_REQUEST ['id'],
+            'nombre' => $_REQUEST ['nombre'],
+            
+            'descripcion' => $_REQUEST ['descripcion'],
+            'categoria' => $_REQUEST ['categoria'],
+            'valor' => $_REQUEST ['valor'],
+                                        
+            
+        );
+          $cadenaSql = $this->miSql->getCadenaSql("modificarRegistro1",$datos);
+      
+        	$resultado = $primerRecursoDB->ejecutarAcceso($cadenaSql, "acceso");
+        	
+              
+              
+          }    else {
         $datos = array(
-            'id' => $_REQUEST['id'],
+            'id' => $_REQUEST ['id'],
             'nombre' => $_REQUEST ['nombre'],
             'simbolo' => $_REQUEST ['simbolo'],
             'descripcion' => $_REQUEST ['descripcion'],
-            'categoriaParametro' => $_REQUEST ['categoriaParametro'],
-            'valor' => $_REQUEST ['valor']
+            'categoria' => $_REQUEST ['categoria'],
+            'valor' => $_REQUEST ['valor'],
+            
         );
-        //primero se eliminan las leyes actuales para evitar duplicidad
-        $cadenaEliminarLeyes = $this->miSql->getCadenaSql("eliminarLeyesModificar", $datos['id']);
-        $resultadoEliminarLeyes = $primerRecursoDB->ejecutarAcceso($cadenaEliminarLeyes, "acceso");
-        echo $cadenaEliminarLeyes . "<br>";
-        var_dump($resultadoEliminarLeyes);
-        echo "<br>";
-        //Modificacion de datos de parametro
-        $atributos ['cadena_sql'] = $this->miSql->getCadenaSql("modificarParametro", $datos);
-        $resultadoModificar = $primerRecursoDB->ejecutarAcceso($atributos['cadena_sql'], "acceso");
+        
+         $cadenaSql = $this->miSql->getCadenaSql("modificarRegistro",$datos);
+      
+        	$resultado = $primerRecursoDB->ejecutarAcceso($cadenaSql, "acceso");
+        
+          }
+          
+//       
+       	
+        
+  
+             
+      $datosLeyesConcepto = array(
+        			'id_parametro' => $_REQUEST['id']
+        	);
+        	
+        	$cadenaSql = $this->miSql->getCadenaSql("eliminarLeyesModificar",$datosLeyesConcepto);
+        	
+                 $primerRecursoDB->ejecutarAcceso($cadenaSql, "acceso");//********************************
+        	 
+        	$arrayLeyes = explode(",", $_REQUEST['leyRegistros']);
+        $count = 0;
+        
+        while($count < count($arrayLeyes)){
+        	
+        	$datosLeyesConcepto = array(
+        			'id_ley' => $arrayLeyes[$count],
+        			'concepto' => $_REQUEST ['id']
+        	);
+        	
+        	$atributos ['cadena_sql'] = $this->miSql->getCadenaSql("insertarLeyesParametro",$datosLeyesConcepto);
+        	
+                $resultado1=$primerRecursoDB->ejecutarAcceso($atributos ['cadena_sql'], "acceso");//********************************
+        	
+ 
+        	$count++;
+        
+        }
+        	
+        	
+      
+   if (!empty($resultado)&&!empty($resultado1)) {
+      
 
-        echo $atributos ['cadena_sql'] . "<br>";
-        var_dump($resultadoModificar);
-        echo "<br>";
-        //Ingreso de nuevas leyes
-        if (!empty($resultadoEliminarLeyes) && !empty($resultadoModificar)) {
-
-            $leyes = $_REQUEST ['leyesParametroHidden'];
-            $leyes = explode(",", $leyes);
-            for ($i = 0; $i < count($leyes); $i++) {
-                $datosLey = array(
-                    'id' => $datos['id'],
-                    'idLey' => $leyes[$i]
-                );
-                $cadenaLey = $this->miSql->getCadenaSql("ActualizarLeyesParametroLiquidacion", $datosLey);
-                $resultadoLey = $primerRecursoDB->ejecutarAcceso($cadenaLey, "acceso");
-                echo $cadenaLey . "<br>";
-                var_dump( $resultadoLey);
-                echo "<br>";
-
-                if (!$resultadoLey) {
-                    exit();
-                    Redireccionador::redireccionar('noInserto');
-                    exit();
-                }
-            }
-            Redireccionador::redireccionar('modifico', $datos);
+            Redireccionador::redireccionar('modifico');
+            
             exit();
         } else {
-            Redireccionador::redireccionar('nomodifico');
+       
+        
+           Redireccionador::redireccionar('nomodifico');
             exit();
         }
+        
+    	        
     }
-
-    function resetForm() {
-        foreach ($_REQUEST as $clave => $valor) {
-
-            if ($clave != 'pagina' && $clave != 'development' && $clave != 'jquery' && $clave != 'tiempo') {
+    
+    function resetForm(){
+        foreach($_REQUEST as $clave=>$valor){
+             
+            if($clave !='pagina' && $clave!='development' && $clave !='jquery' &&$clave !='tiempo'){
                 unset($_REQUEST[$clave]);
             }
         }
     }
-
+    
 }
-
-$miProcesador = new FormProcessor($this->lenguaje, $this->sql);
-$resultado = $miProcesador->procesarFormulario();
+$miProcesador = new FormProcessor ( $this->lenguaje, $this->sql );
+$resultado= $miProcesador->procesarFormulario ();

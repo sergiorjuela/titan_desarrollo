@@ -15,20 +15,12 @@ $( document ).ready(function() {
 	campoFecha[IFechaA++] = "#<?php echo $this->campoSeguro('fecha')?>";
 	campoFechaInput[IFechaB++] = "input#<?php echo $this->campoSeguro('fecha')?>";
 	
-        campoFechaFin[IFechaFinA++] = "#<?php echo $this->campoSeguro('fechaVen')?>";
-	campoFechaInputFin[IFechaFinB++] = "input#<?php echo $this->campoSeguro('fechaVen')?>";
-        
-	campoFecha[IFechaA++] = "#<?php echo $this->campoSeguro('fechaCreacionConsulta')?>";
-	campoFechaInput[IFechaB++] = "input#<?php echo $this->campoSeguro('fechaCreacionConsulta')?>";
+//        campoFechaFin[IFechaFinA++] = "#<?php echo $this->campoSeguro('fechaVen')?>";
+//	campoFechaInputFin[IFechaFinB++] = "input#<?php echo $this->campoSeguro('fechaVen')?>";
+//        
+//	campoFecha[IFechaA++] = "#<?php echo $this->campoSeguro('fechaExp')?>";
+//	campoFechaInput[IFechaB++] = "input#<?php echo $this->campoSeguro('fechaExp')?>";
 	
-	campoFecha[IFechaA++] = "#<?php echo $this->campoSeguro('fechaExp')?>";
-	campoFechaInput[IFechaB++] = "input#<?php echo $this->campoSeguro('fechaExp')?>";
-	
-	campoFecha[IFechaA++] = "#<?php echo $this->campoSeguro('fechaEconomicoInicio')?>";
-	campoFechaInput[IFechaB++] = "input#<?php echo $this->campoSeguro('fechaEconomicoInicio')?>";
-	
-	campoFecha[IFechaA++] = "#<?php echo $this->campoSeguro('fechaEconomicoFin')?>";
-	campoFechaInput[IFechaB++] = "input#<?php echo $this->campoSeguro('fechaEconomicoFin')?>";
 	
 	$(campoFecha).each(function(){
 		$(this.valueOf()).datepicker({
@@ -49,22 +41,5 @@ $( document ).ready(function() {
 				}
 		})
 	});
-         $(campoFechaFin).each(function(){
-		$(this.valueOf()).datepicker({
-			dateFormat: 'yy-mm-dd',
-			yearRange: '-50:+0',
-			changeYear: true,
-			changeMonth: true,
-			monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio',
-			'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
-			monthNamesShort: ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'],
-			dayNames: ['Domingo','Lunes','Martes','Miercoles','Jueves','Viernes','Sabado'],
-			dayNamesShort: ['Dom','Lun','Mar','Mie','Jue','Vie','Sab'],
-			dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sa'],
-			onSelect: function(dateText, inst) {
-				var lockDate = new Date($(this.valueOf()).datepicker('getDate'));
-			}, onClose: function() { 
-				}
-		})
-	});
+
 });

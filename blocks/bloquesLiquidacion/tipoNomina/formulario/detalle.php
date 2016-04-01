@@ -1,5 +1,5 @@
 <?php 
-namespace bloquesParametro\contenidoCargo\formulario;
+namespace bloquesLiquidacion\tipoNomina\formulario;;
 
 
 

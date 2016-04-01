@@ -16,6 +16,9 @@
     $('#<?php echo $this->campoSeguro('leyes')?>').width(250);
     $("#<?php echo $this->campoSeguro('leyes')?>").select2();
     
+    $( '#<?php echo $this->campoSeguro('leyes')?>' ).change(function() {
+		$("#<?php echo $this->campoSeguro('leyRegistros') ?>").val($("#<?php echo $this->campoSeguro('leyes') ?>").val());
+    });
           $(function () {
 	        
 	        $("#<?php echo $this->campoSeguro('tipoNomina')?>").change(function(){

@@ -97,11 +97,11 @@
                 },
                 "onlyNumberSp": {
                     "regex": /^[0-9\ ]+$/,
-                    "alertText": "* Sólo números"
+                    "alertText": "* Sólo se permiten números"
                 },
 			    "onlyLetterSp": {
                     "regex": /^[a-zA-Z\ \']+$/,
-                    "alertText": "* Sólo letras"
+                    "alertText": "* Sólo se permiten letras"
                 },
                 "onlyLetterNumber": {
                     "regex": /^[0-9a-zA-Z]+$/,

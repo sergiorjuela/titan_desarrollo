@@ -1,5 +1,5 @@
 <?php 
-namespace bloquesLiquidacion\tipoNomina\formulario;
+namespace bloquesLiquidacion\tipoNomina\formulario;;
 
 
 

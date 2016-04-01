@@ -692,7 +692,8 @@ class Sql extends \Sql {
 				$cadenaSql .= 'id_pais as ID_PAIS, ';
 				$cadenaSql .= 'nombre_pais as NOMBRE ';
 				$cadenaSql .= 'FROM ';
-				$cadenaSql .= 'otro.pais';
+				$cadenaSql .= 'otro.pais ';
+				$cadenaSql .= 'ORDER BY NOMBRE; ';
 				break;
 			
 			case 'buscarDepartamento' ://Provisionalmente solo Departamentos de Colombia
@@ -714,7 +715,8 @@ class Sql extends \Sql {
 				$cadenaSql .= 'FROM ';
 				$cadenaSql .= 'otro.departamento ';
 				$cadenaSql .= 'WHERE ';
-				$cadenaSql .= 'id_pais = ' . $variable . ';';
+				$cadenaSql .= 'id_pais = ' . $variable . ' ';
+				$cadenaSql .= 'ORDER BY NOMBRE; ';
 				break;
                		
 			case 'buscarCiudad' : //Provisionalmente Solo Ciudades de Colombia sin Agrupar
@@ -736,7 +738,8 @@ class Sql extends \Sql {
 				$cadenaSql .= 'FROM ';
 				$cadenaSql .= 'otro.ciudad ';
 				$cadenaSql .= 'WHERE ';
-				$cadenaSql .= 'id_departamento = ' . $variable . ';';
+				$cadenaSql .= 'id_departamento = ' . $variable . ' ';
+				$cadenaSql .= 'ORDER BY NOMBRECIUDAD; ';
 				break;
              
              case 'buscarRegistroPersonaNatural' :

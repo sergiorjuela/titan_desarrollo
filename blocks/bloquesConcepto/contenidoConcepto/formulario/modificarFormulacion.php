@@ -156,7 +156,7 @@ class Formulario {
 					echo $this->miFormulario->division ( "fin" );
 					
 					$atributos ["id"] = "botonesPanel2";
-					$atributos ["estilo"] = "col-md-8 btn-group btn-group-lg";
+					$atributos ["estilo"] = "col-md-10 btn-group btn-group-lg";
 					echo $this->miFormulario->division ( "inicio", $atributos );
 					{
 						echo "<input type=\"button\" id=\"btOper1\" value=\"(\" class=\"btn btn-primary\"/>";
@@ -217,7 +217,7 @@ class Formulario {
 					$atributos ['etiquetaObligatorio'] = false;
 					$atributos ['validar'] = '';
 					
-					$atributos ['cadena_sql'] = $this->miSql->getCadenaSql("buscarRegistroxParametro");
+					$atributos ['cadena_sql'] = $this->miSql->getCadenaSql("buscarCategoriaParametro");
 					$matrizParametros=$primerRecursoDB->ejecutarAcceso($atributos['cadena_sql'], "busqueda");
 					
 					$atributos['matrizItems'] = $matrizParametros;
@@ -257,7 +257,7 @@ class Formulario {
 					$esteCampo = 'seccionParametros';
 					$atributos['nombre'] = $esteCampo;
 					$atributos['id'] = $esteCampo;
-					$atributos['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
+					$atributos['etiqueta'] = '';
 					$atributos ['anchoEtiqueta'] = 180;
 					$atributos['tab'] = $tab;
 					$atributos['seleccion'] = -1;
@@ -366,8 +366,13 @@ class Formulario {
 						$atributos ['obligatorio'] = false;
 						$atributos ['etiquetaObligatorio'] = false;
 						$atributos ['validar'] = '';
+						
+						$atributos ['cadena_sql'] = $this->miSql->getCadenaSql("buscarCategoriaConcepto");
+						$matrizParametros=$primerRecursoDB->ejecutarAcceso($atributos['cadena_sql'], "busqueda");
 							
-						$matrizItems=array(
+						$atributos['matrizItems'] = $matrizParametros;
+							
+						/*$matrizItems=array(
 								array(1,'CP0001'),
 								array(2,'CP0002'),
 								array(3,'CP0003'),
@@ -375,7 +380,7 @@ class Formulario {
 								array(5,'CP0005')
 									
 						);
-						$atributos['matrizItems'] = $matrizItems;
+						$atributos['matrizItems'] = $matrizItems;*/
 							
 						if (isset ( $_REQUEST [$esteCampo] )) {
 							$atributos ['valor'] = $_REQUEST [$esteCampo];
@@ -403,7 +408,7 @@ class Formulario {
 						$esteCampo = 'seccionConceptos';
 						$atributos['nombre'] = $esteCampo;
 						$atributos['id'] = $esteCampo;
-						$atributos['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
+						$atributos['etiqueta'] = '';
 						$atributos ['anchoEtiqueta'] = 180;
 						$atributos['tab'] = $tab;
 						$atributos['seleccion'] = -1;
@@ -500,7 +505,7 @@ class Formulario {
 					echo $this->miFormulario->division ( "inicio", $atributos );
 					{
 						$atributos ["id"] = "botonesPanel1B";
-						$atributos ["estilo"] = "col-md-2";
+						$atributos ["estilo"] = "col-md-12";
 						echo $this->miFormulario->division ( "inicio", $atributos );
 						{
 							echo("Operadores:");
@@ -509,9 +514,10 @@ class Formulario {
 						echo $this->miFormulario->division ( "fin" );
 							
 						$atributos ["id"] = "botonesPanel2B";
-						$atributos ["estilo"] = "col-md-10 btn-group btn-group-lg";
+						$atributos ["estilo"] = "col-md-12 btn-group btn-group-lg";
 						echo $this->miFormulario->division ( "inicio", $atributos );
 						{
+							echo "<center>";
 							echo "<input type=\"button\" id=\"btOper1B\" value=\"(\" class=\"btn btn-warning\"/>";
 							echo "<input type=\"button\" id=\"btOper2B\" value=\")\" class=\"btn btn-warning\" />";
 							echo "<input type=\"button\" id=\"btOper3B\" value=\"+\" class=\"btn btn-warning\"/>";
@@ -522,6 +528,7 @@ class Formulario {
 							echo "<input type=\"button\" id=\"btOper8B\" value=\"^\" class=\"btn btn-warning\" />";
 							echo "<input type=\"button\" id=\"btOper9B\" value=\"Borrar\" class=\"btn btn-danger\" />";
 							echo "<input type=\"button\" id=\"btOper10B\" value=\"Insertar\" class=\"btn btn-success\" />";
+							echo "</center>";
 						}
 						echo $this->miFormulario->division ( "fin" );
 					
@@ -532,6 +539,75 @@ class Formulario {
 				echo $this->miFormulario->marcoAgrupacion ( "fin" );
 				
 				
+				unset($atributos);
+                                
+                $esteCampo = "marcoDatosVariables";
+				$atributos ['id'] = $esteCampo;
+				$atributos ["estilo"] = "jqueryui";
+				$atributos ['tipoEtiqueta'] = 'inicio';
+				$atributos ["leyenda"] = "Panel Variables";
+				echo $this->miFormulario->marcoAgrupacion ( 'inicio', $atributos );
+				{
+				
+				$atributos ["id"] = "variables_lista";
+				$atributos ["estilo"] = "col-md-12";
+				echo $this->miFormulario->division ( "inicio", $atributos );
+				{
+					// ---------------- CONTROL: Select --------------------------------------------------------
+					$esteCampo = 'VariablesList';
+					$atributos['nombre'] = $esteCampo;
+					$atributos['id'] = $esteCampo;
+					$atributos['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
+					$atributos ['anchoEtiqueta'] = 230;
+					$atributos['tab'] = $tab;
+					$atributos['seleccion'] = -1;
+					$atributos['evento'] = ' ';
+					$atributos['deshabilitado'] = false;
+					$atributos['limitar']= 50;
+					$atributos['tamanno']= 1;
+					$atributos['columnas']= 1;
+				
+					$atributos ['obligatorio'] = false;
+					$atributos ['etiquetaObligatorio'] = false;
+					$atributos ['validar'] = '';
+					
+					$atributos ['cadena_sql'] = $this->miSql->getCadenaSql("buscarVariables");
+					$matrizParametros=$primerRecursoDB->ejecutarAcceso($atributos['cadena_sql'], "busqueda");
+					
+					$atributos['matrizItems'] = $matrizParametros;
+				
+// 					$matrizItems=array(
+// 							array(1,'SMLV'),
+// 							array(2,'IVA'),
+// 							array(3,'RTF'),
+// 							array(4,'HED'),
+// 							array(5,'HEN')
+				
+// 					);
+// 					$atributos['matrizItems'] = $matrizItems;
+				
+					if (isset ( $_REQUEST [$esteCampo] )) {
+						$atributos ['valor'] = $_REQUEST [$esteCampo];
+					} else {
+						$atributos ['valor'] = '';
+					}
+					$atributos ["titulo"] = $this->lenguaje->getCadena ( $esteCampo . 'Titulo' );
+					$tab ++;
+				
+					// Aplica atributos globales al control
+					$atributos = array_merge ( $atributos, $atributosGlobales );
+					echo $this->miFormulario->campoCuadroLista ( $atributos );
+					// --------------- FIN CONTROL : Select --------------------------------------------------
+				}
+				echo $this->miFormulario->division ( "fin" );
+				
+				unset($atributos);
+				
+				
+				}
+				echo $this->miFormulario->marcoAgrupacion ( "fin" );
+				
+
 				//***********************************************************************************************
 				//***********************************************************************************************
 				

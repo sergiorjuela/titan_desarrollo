@@ -110,8 +110,8 @@ class registrarForm {
 					//$cadenaSql = $this->miSql->getCadenaSql ( 'actualizar_entrada', $arreglo );
 					//$inserto = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso" );
 					
-					$mensaje = "Registro Cargo Satisfactorio <br> Nombre: <h4>" . $_REQUEST ['nombreRegistro'] . "</h4>".
-					"<br>Estado: <h4>" . $_REQUEST ['estadoRegistro'] . "</h4>".
+					$mensaje = "Registro Cargo Satisfactorio <br> Nivel: <h4>" . $_REQUEST ['nombreRegistro'] . "</h4>".
+					"<br>Grado: <h4>" . $_REQUEST ['estadoRegistro'] . "</h4>".
 					"<br>Fecha Registro: " . date ( 'Y-m-d' );
 					$mensaje .= "<br> Nuevo Cargo Registrado!";
 					// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
@@ -133,8 +133,8 @@ class registrarForm {
 					//$cadenaSql = $this->miSql->getCadenaSql ( 'actualizar_entrada', $arreglo );
 					//$inserto = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso" );
 					
-					$mensaje = "Modificacion Cargo Satisfactorio <br> Nombre: <h4>" . $_REQUEST ['nombreRegistro'] . "</h4>".
-					"<br>Codigo Registro: <h4>" . $_REQUEST ['codigoRegistro'] . "</h4>".
+					$mensaje = "Modificacion Cargo Satisfactorio <br> Nivel: <h4>" . $_REQUEST ['nombreRegistro'] . "</h4>".
+					"<br>Grado: <h4>" . $_REQUEST ['codigoRegistro'] . "</h4>".
 					"<br>Fecha Registro: " . date ( 'Y-m-d' );
 					$mensaje .= "<br> Modificado Cargo!";
 					// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
@@ -153,7 +153,7 @@ class registrarForm {
 				} 
 				if ($_REQUEST ['mensaje'] == 'noInserto') {
 					
-					$mensaje = "No Se Pudo Hacer Registro Cargo, Por favor revisar que todos lo campos esten correctos y vuelva a intentarlo <br>Fecha Registro:" . date ( 'Y-m-d' );
+					$mensaje = "No Se Pudo Hacer Registro Categoría, Por favor revisar que todos lo campos esten correctos y vuelva a intentarlo <br>Fecha Registro:" . date ( 'Y-m-d' );
 					
 					// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
 					$esteCampo = 'mensajeRegistro';

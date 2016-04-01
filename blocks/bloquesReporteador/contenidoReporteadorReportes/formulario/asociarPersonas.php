@@ -158,7 +158,7 @@ class Formulario {
         $longitud = count($matrizItems);
         $i = 0;
         echo '<table id="tablaReporte" class="display" cellspacing="0" width="100%"> '
-        . '<thead style="display: table-row-group"><tr><th>' . "SELECCIONAR TODOS <input type=\"checkbox\" id=\"checkboxPadre\" name=\"checkboxPadre\" value=\"Elegir\"> " . '</th><th>' . "CEDULA" . '</th> <th>' . "NOMBRE" . '</th><th>' . "TIPO DE VINCULACIÓN" . '</th><th>' . "DEPENDENCIA" . '</th></tr></thead>
+        . '<thead style="display: table-row-group"><tr><th>' . "SELECCIONAR TODOS <input type=\"checkbox\" id=\"checkboxPadre\" name=\"checkboxPadre\" value=\"Elegir\"> " . '</th><th>' . "CEDULA" . '</th> <th>' . "NOMBRE" . '</th><th>' . "TIPO DE VINCULACIÓN" . '</th><th>' . "UBICACIÓN" . '</th></tr></thead>
         .  <tbody>';
 
         if (!empty($matrizItems)) {

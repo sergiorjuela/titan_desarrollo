@@ -29,7 +29,7 @@ $funcion[$indice++]="bootstrap.min.js";
 $funcion[$indice++]="npm.js";
 
 $embebido [$indice] = true;
-$funcion [$indice ++] = "scriptLocal/campoFecha.js";
+$funcion[$indice++] = "scriptLocal/campoFecha.js";
 
 
 

@@ -154,7 +154,13 @@ class registrarForm {
 				} 
 				if ($_REQUEST ['mensaje'] == 'noInserto') {
 					
-					$mensaje = "No Se Pudo Hacer Registro Concepto, Por favor revisar que todos lo campos esten correctos y vuelva a intentarlo <br>Fecha Registro:" . date ( 'Y-m-d' );
+					if(isset($_REQUEST ['referenciaError']) && isset($_REQUEST ['mensajeError'])){
+						$mensaje = "No Se Pudo Hacer Registro Concepto, Por favor revisar que todos lo campos esten correctos y vuelva a intentarlo <br>Fecha Registro:" . date ( 'Y-m-d' ).
+						"<br>Motivo del ERROR: <h4>" . $_REQUEST ['referenciaError'] . $_REQUEST ['mensajeError'] ."</h4>";
+					}else{
+						$mensaje = "No Se Pudo Hacer Registro Concepto, Por favor revisar que todos lo campos esten correctos y vuelva a intentarlo <br>Fecha Registro:" . date ( 'Y-m-d' ).
+						"<br>Motivo del ERROR: <h4> No se digito correctamente los Campos de Información Básica </h4>";
+					}
 					
 					// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
 					$esteCampo = 'mensajeRegistro';

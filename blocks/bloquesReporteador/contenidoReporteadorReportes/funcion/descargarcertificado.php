@@ -33,8 +33,6 @@ if ($_REQUEST['tipoPlantilla'] == 'Certificado') {
     $cuerpo = str_replace("[FECHA_FINAL]", " " . $informacionPersona[0]['fecha_final'] . " ", $cuerpo);
     $cuerpo = str_replace("[NUMERO_CONTRATO]", " " . $informacionPersona[0]['numero_contrato'] . " ", $cuerpo);
     $cuerpo = str_replace("[ESTADO_VINCULACION]", " " . $informacionPersona[0]['estado_vinculacion'] . " ", $cuerpo);
-    $cuerpo = str_replace("[SEDE]", " " . $informacionPersona[0]['sede'] . " ", $cuerpo);
-    $cuerpo = str_replace("[DEPENDENCIA]", " " . $informacionPersona[0]['dependencia'] . " ", $cuerpo);
     $cuerpo = str_replace("[REGLAMENTACION]", " " . $reglamentacion . " ", $cuerpo);
     $contenidoPagina = "<page backtop='30mm' backbottom='10mm' backleft='20mm' backright='20mm'>";
     $contenidoPagina .= "<page_header>
@@ -204,28 +202,28 @@ $html2pdf->Output($nombre.".pdf", 'D');
         $contenidoReporte .= "<td text-align:left;>
                             <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
                             text-align:left;line-height:normal'><span style='font-size:10.0pt;
-                            mso-bidi-font-size:11.0pt'><strong>Est. Dependencia:</strong> " . $informacionPersona[0]['estado_vinculacion_dependencia'] . "</span></p>
+                            mso-bidi-font-size:11.0pt'>Dep. Estado: " . $informacionPersona[0]['estado_vinculacion_dependencia'] . "</span></p>
                          </td>";
     }
     if (isset($informacionPersona[0]['gran_contribuyente'])) {
         $contenidoReporte .= "<td text-align:left;>
                             <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
                             text-align:left;line-height:normal'><span style='font-size:10.0pt;
-                            mso-bidi-font-size:11.0pt'><strong>G.Contribuyente:</strong> " . $informacionPersona[0]['gran_contribuyente'] . "</span></p>
+                            mso-bidi-font-size:11.0pt'>G. Contribuyente: " . $informacionPersona[0]['gran_contribuyente'] . "</span></p>
                          </td>";
     }
     if (isset($informacionPersona[0]['autorretenedor'])) {
         $contenidoReporte .= "<td text-align:left;>
                             <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
                             text-align:left;line-height:normal'><span style='font-size:10.0pt;
-                            mso-bidi-font-size:11.0pt'><strong>Autorretenedor:</strong> " . $informacionPersona[0]['autorretenedor'] . "</span></p>
+                            mso-bidi-font-size:11.0pt'>Autorretenedor: " . substr($informacionPersona[0]['autorretenedor'],1,strlen($informacionPersona[0]['autorretenedor'])-2) . "</span></p>
                          </td>";
     }
     if (isset($informacionPersona[0]['regimen_tributario'])) {
-        $contenidoReporte .= "<td text-align:left;>
+       $contenidoReporte .= "<td text-align:left;>
                             <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
                             text-align:left;line-height:normal'><span style='font-size:10.0pt;
-                            mso-bidi-font-size:11.0pt'><strong>R. Tributario:</strong> " . $informacionPersona[0]['regimen_tributario'] . "</span></p>
+                            mso-bidi-font-size:11.0pt'>Regimen: " . substr($informacionPersona[0]['regimen_tributario'],1,strlen($informacionPersona[0]['regimen_tributario'])-2) . "</span></p>
                          </td>";
     }
     $contenidoReporte.="</tr>";
@@ -305,13 +303,13 @@ $html2pdf->Output($nombre.".pdf", 'D');
     $contenidoConceptosDevenga .= "<td text-align:left;>
                             <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
                             text-align:left;line-height:normal'><span style='font-size:10.0pt;
-                            mso-bidi-font-size:11.0pt'><strong>Total Devengando: </strong>" . $sumaDevengos . "</span></p>
+                            mso-bidi-font-size:11.0pt'><strong>Total: </strong>" . $sumaDevengos . "</span></p>
                          </td></tr>";
     $contenidoConceptosDeduce .= "<tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes'>";
     $contenidoConceptosDeduce .= "<td text-align:left;>
                             <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
                             text-align:left;line-height:normal'><span style='font-size:10.0pt;
-                            mso-bidi-font-size:11.0pt'><strong>Total Deducido: </strong>" .$sumaDeducciones . "</span></p>
+                            mso-bidi-font-size:11.0pt'><strong>Total: </strong>" .$sumaDeducciones . "</span></p>
                          </td></tr>";
     $contenidoConceptosDevenga .= "</table>";
     $contenidoConceptosDeduce .= "</table>";
@@ -379,8 +377,8 @@ $contenidoConceptosDeduce
 $contenidoPagina .= "</page>";
 
 $nombre=$_REQUEST['tipoReporte'].$_REQUEST['tipoPlantilla'];
-$html2pdf = new HTML2PDF('P', 'LETTER', 'es');
-$res = $html2pdf->WriteHTML($contenidoPagina);
+$html2pdf = new HTML2PDF('L', 'LETTER', 'es');
+$res = $html2pdf->WriteHTML($contenidoPagina,false);
 $html2pdf->Output($nombre.".pdf", 'D');
 }
 

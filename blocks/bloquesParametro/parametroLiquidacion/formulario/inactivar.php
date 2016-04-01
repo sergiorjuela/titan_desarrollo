@@ -79,11 +79,11 @@ class Formulario {
        
         
        
-        $atributos ['cadena_sql'] = $this->miSql->getCadenaSql("buscarParametroPorId",$_REQUEST['variable']);
-        $resultado = $primerRecursoDB->ejecutarAcceso($atributos ['cadena_sql'], "busqueda");
-     
+       $atributos ['cadena_sql'] = $this->miSql->getCadenaSql("buscarParametroLiquidacion");
+        $matrizItems=$primerRecursoDB->ejecutarAcceso($atributos['cadena_sql'], "busqueda");
        
-        if($resultado[0]['estado']=='Inactivo'){
+       
+        if($matrizItems[$_REQUEST['variable']][5]=='Inactivo'){
             $opcion='Activo';
         }
         else{
@@ -97,15 +97,15 @@ class Formulario {
         $esteCampo = 'id';
         $atributos ['id'] = $esteCampo;
         $atributos ['nombre'] = $esteCampo;
-        $atributos ['tipo'] = 'text';
+        $atributos ['tipo'] = 'hidden';
         $atributos ['estilo'] = 'jqueryui';
         $atributos ['columnas'] = 1;
         $atributos ['marco'] = true;
         $atributos ['dobleLinea'] = false;
         $atributos ['tabIndex'] = $tab;
-        $atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
-        $atributos ['valor'] = $_REQUEST['variable'];
-        $atributos ['titulo'] = $this->lenguaje->getCadena ( $esteCampo . 'Titulo' );
+       
+        $atributos ['valor'] = $matrizItems[$_REQUEST['variable']][6];       
+        
         $atributos ['deshabilitado'] = true;
         $atributos ['tamanno'] = 20;
         $atributos ['maximoTamanno'] = '';
@@ -117,7 +117,7 @@ class Formulario {
         echo $this->miFormulario->campoCuadroTexto ( $atributos );
         unset($atributos);
          // ---------------- CONTROL: Select --------------------------------------------------------
-        $esteCampo = 'nombre';
+           $esteCampo = 'nombre';
         $atributos ['id'] = $esteCampo;
         $atributos ['nombre'] = $esteCampo;
         $atributos ['tipo'] = 'text';
@@ -127,7 +127,7 @@ class Formulario {
         $atributos ['dobleLinea'] = false;
         $atributos ['tabIndex'] = $tab;
         $atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
-        $atributos ['valor'] = $resultado[0]['nombre'];       
+        $atributos ['valor'] = $matrizItems[$_REQUEST['variable']][0];       
         $atributos ['titulo'] = $this->lenguaje->getCadena ( $esteCampo . 'Titulo' );
         $atributos ['deshabilitado'] = true;
         $atributos ['tamanno'] = 20;
@@ -151,7 +151,7 @@ class Formulario {
         $atributos ['tabIndex'] = $tab;
         $atributos ['marco'] = true;
         $atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
-        $atributos ['valor'] = $resultado[0]['estado'];      
+        $atributos ['valor'] = $matrizItems[$_REQUEST['variable']][5];       
         $atributos ['titulo'] = $this->lenguaje->getCadena ( $esteCampo . 'Titulo' );
         $atributos ['deshabilitado'] = true;
         $atributos ['tamanno'] = 20;
@@ -236,7 +236,6 @@ class Formulario {
         $valorCodificado .= "&bloque=" . $esteBloque ['nombre'];
         $valorCodificado .= "&bloqueGrupo=" . $esteBloque ["grupo"];
         $valorCodificado .= "&opcion=inactivar";
-        $valorCodificado .= "&nuevoEstado=".$opcion;
         /**
          * SARA permite que los nombres de los campos sean dinámicos.
          * Para ello utiliza la hora en que es creado el formulario para

@@ -132,7 +132,7 @@ class Formulario {
                 $atributos = array_merge($atributos, $atributosGlobales);
                 echo $this->miFormulario->campoCuadroTexto($atributos);
                 unset($atributos);
-
+                
                 $esteCampo = 'clave';
                 $atributos ['id'] = $esteCampo;
                 $atributos ['nombre'] = $esteCampo;

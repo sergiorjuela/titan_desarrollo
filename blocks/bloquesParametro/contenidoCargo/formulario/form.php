@@ -156,7 +156,7 @@ class Formulario {
             
         
         echo '<table id="tablaReporte" class="display" cellspacing="0" width="100%"> '
-                 . '<thead style="display: table-row-group"><tr><th>'."COD CARGO".'</th><th>'."NIVEL".'</th> <th>'."COD ALTERNATIVO".'</th> <th>'."GRADO".'</th> <th>'."NOMBRE".'</th><th>'."COD TIPO".'</th><th>'."ESTADO".'</th><th>'."VER DETALLE".'</th><th>'."MODIFICAR".'</th><th>'."ACTIVAR".'</th></tr></thead>
+                 . '<thead style="display: table-row-group"><tr><th>'."COD CARGO".'</th><th>'."NIVEL".'</th> <th>'."GRADO".'</th> <th>'."COD TIPO".'</th><th>'."ESTADO".'</th><th>'."VER DETALLE".'</th><th>'."MODIFICAR".'</th><th>'."ACTIVAR".'</th></tr></thead>
  
                     <tbody>'; 
         if(!empty($matrizItems)){
@@ -166,13 +166,12 @@ class Formulario {
                     echo "<td>".$matrizItems[$i][2]."</td>";
                     echo "<td>".$matrizItems[$i][3]."</td>";
                     echo "<td>".$matrizItems[$i][4]."</td>";
-                    echo "<td>".$matrizItems[$i][5]."</td>";
-                    echo "<td>".$matrizItems[$i][6]."</td>";
+
                          $variableVD = "pagina=" . $this->miConfigurador->getVariableConfiguracion ( 'pagina' );; // pendiente la pagina para modificar parametro
                           $variableVD .= "&opcion=verdetalle";
                           $variableVD .= "&bloque=" . $esteBloque ['nombre'];
                           $variableVD .="&tamaño=".$longitud;
-                          $variableVD .= "&variable=" . $i;
+                          $variableVD .= "&variable=" . $matrizItems[$i][0];
                           $variableVD .= "&bloqueGrupo=" . $esteBloque ["grupo"];
                           $variableVD = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $variableVD, $directorio );
 
@@ -180,11 +179,11 @@ class Formulario {
                           <img src='" . $rutaBloque . "/css/images/verDetalle.png' width='25px'>
                           </a></center> </td>";
                        
-                       $variableMOD = "pagina=" . $this->miConfigurador->getVariableConfiguracion ( 'pagina' );; // pendiente la pagina para modificar parametro
+                          $variableMOD = "pagina=" . $this->miConfigurador->getVariableConfiguracion ( 'pagina' );; // pendiente la pagina para modificar parametro
                           $variableMOD .= "&opcion=modificar";
                           $variableMOD .= "&bloque=" . $esteBloque ['nombre'];
                           $variableMOD .="&tamaño=".$longitud;
-                          $variableMOD .= "&variable=" . $i;
+                          $variableMOD .= "&variable=" . $matrizItems[$i][0];
                           $variableMOD .= "&bloqueGrupo=" . $esteBloque ["grupo"];
                           $variableMOD = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $variableMOD, $directorio );
 
@@ -196,12 +195,12 @@ class Formulario {
                           $variableACT .= "&opcion=inactivar";
                           $variableACT .= "&bloque=" . $esteBloque ['nombre'];
                           $variableACT .="&tamaño=".$longitud;
-                          $variableACT .= "&variable=" . $i;
+                          $variableACT .= "&variable=" . $matrizItems[$i][0];
                           $variableACT .= "&bloqueGrupo=" . $esteBloque ["grupo"];
                           $variableACT = $this->miConfigurador->fabricaConexiones->crypto->codificar_url ( $variableACT, $directorio );
 
                          echo "<td><center><a href='" . $variableACT . "'>";
-                         if($matrizItems[$i][6]=='Activo'){
+                         if($matrizItems[$i][4]=='Activo'){
                             echo "<img src='" . $rutaBloque . "/css/images/desactivacion.png' width='25px'>";
                          }
                          else{

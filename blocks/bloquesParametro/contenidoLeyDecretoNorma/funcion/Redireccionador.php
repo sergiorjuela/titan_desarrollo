@@ -22,6 +22,7 @@ class RedireccionadorFP {
 			case "form" :
 				$variable = 'pagina='.$miPaginaActual;                                
 				$variable .= "&opcion=form";
+                                
 				break;
                         case "inserto" :
 				$variable = 'pagina='.$miPaginaActual;                                

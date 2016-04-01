@@ -38,8 +38,9 @@ class FormProcessor {
             $opcion='Inactivo';
         }
         
+        
             
-            $datos = array(
+        $datos = array(
             'nombre' => $_REQUEST ['nombre'],
             'simbolo' => $_REQUEST ['simbolo'],
             'estadoRegistro' => $opcion       
@@ -47,7 +48,7 @@ class FormProcessor {
 //       
         $atributos ['cadena_sql'] = $this->miSql->getCadenaSql("inactivarRegistro",$datos);
         $primerRecursoDB->ejecutarAcceso($atributos['cadena_sql'], "acceso");
-                
+
         
                   Redireccionador::redireccionar('form');      
 

@@ -38,8 +38,6 @@ if ($_REQUEST['tipoPlantilla'] == 'Certificado') {
         $cuerpo = str_replace("[FECHA_FINAL]", " " . $informacionPersona[0]['fecha_final'] . " ", $cuerpo);
         $cuerpo = str_replace("[NUMERO_CONTRATO]", " " . $informacionPersona[0]['numero_contrato'] . " ", $cuerpo);
         $cuerpo = str_replace("[ESTADO_VINCULACION]", " " . $informacionPersona[0]['estado_vinculacion'] . " ", $cuerpo);
-        $cuerpo = str_replace("[SEDE]", " " . $informacionPersona[0]['sede'] . " ", $cuerpo);
-        $cuerpo = str_replace("[DEPENDENCIA]", " " . $informacionPersona[0]['dependencia'] . " ", $cuerpo);
         $cuerpo = str_replace("[REGLAMENTACION]", " " . $reglamentacion . " ", $cuerpo);
         $contenidoCuerpoMultiple[$l] = $cuerpo;
     }
@@ -233,14 +231,14 @@ if ($_REQUEST['tipoPlantilla'] == 'Certificado') {
             $contenidoReporte .= "<td text-align:left;>
                             <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
                             text-align:left;line-height:normal'><span style='font-size:10.0pt;
-                            mso-bidi-font-size:11.0pt'><strong>Autorretenedor:</strong> " . $informacionPersona[0]['autorretenedor'] . "</span></p>
+                            mso-bidi-font-size:11.0pt'><strong>Autorretenedor:</strong> " . substr($informacionPersona[0]['autorretenedor'],1,strlen($informacionPersona[0]['autorretenedor'])-2) . "</span></p>
                          </td>";
         }
         if (isset($informacionPersona[0]['regimen_tributario'])) {
             $contenidoReporte .= "<td text-align:left;>
                             <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
                             text-align:left;line-height:normal'><span style='font-size:10.0pt;
-                            mso-bidi-font-size:11.0pt'><strong>R. Tributario:</strong> " . $informacionPersona[0]['regimen_tributario'] . "</span></p>
+                            mso-bidi-font-size:11.0pt'><strong>R. Tributario:</strong> " . substr($informacionPersona[0]['regimen_tributario'],1,strlen($informacionPersona[0]['regimen_tributario'])-2) . "</span></p>
                          </td>";
         }
         $contenidoReporte.="</tr>";
@@ -397,8 +395,8 @@ $contenidoConceptosDeduce
 
     $contenidoPagina .= "</page>";
     $nombre = $_REQUEST['codigoReporte'] . $_REQUEST['tipoPlantilla'];
-    $html2pdf = new HTML2PDF('P', 'LETTER', 'es');
-    $res = $html2pdf->WriteHTML($contenidoPagina);
+    $html2pdf = new HTML2PDF('L', 'LETTER', 'es');
+    $res = $html2pdf->WriteHTML($contenidoPagina,false);
     $html2pdf->Output($nombre . ".pdf", 'D');
 }
 ?>

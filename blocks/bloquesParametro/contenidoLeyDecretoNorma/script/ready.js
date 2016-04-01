@@ -33,7 +33,7 @@ $(function() {
 		event.preventDefault();
 	});
 });
-
+$("#tablaReporte").dataTable().fnDestroy();
 $(document).ready(function() {
     // Setup - add a text input to each footer cell
 //    $('#tablaReporte tfoot th').each( function () {

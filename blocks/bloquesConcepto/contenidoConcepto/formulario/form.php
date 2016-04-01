@@ -152,7 +152,6 @@ class Formulario {
         $longitud = count($matrizItems);
         
         $i=0;
-            
         
         echo '<table id="tablaReporte" class="display" cellspacing="0" width="100%"> '
                  . '<thead style="display: table-row-group"><tr><th>'."NOMBRE".'</th><th>'."SIMBOLO".'</th> <th>'."DESCRIPCIÓN".'</th> <th>'."LEY".'</th> <th>'."NATURALEZA".'</th><th>'."ESTADO".'</th><th>'."VER DETALLE".'</th><th>'."MODIFICAR".'</th><th>'."ACTIVAR".'</th></tr></thead>
@@ -160,10 +159,26 @@ class Formulario {
                   .  <tbody>'; 
         if(!empty($matrizItems)){
         while($i<$longitud){
+        	
+        			$cadenaSqlDetalle = $this->miSql->getCadenaSql("consultarLeyesDeConceptos",$matrizItems[$i][6]);
+        			$matrizDatosLeyes = $primerRecursoDB->ejecutarAcceso($cadenaSqlDetalle, "busqueda", $matrizItems[$i][6], "consultarLeyesDeConceptos");
+        	
+        			
+        			$j = 0; $cadenaSelectMultiple = '';
+        	
+		        	while($j < count($matrizDatosLeyes)){
+		        		
+		        		$cadenaSqlDetalleNombre = $this->miSql->getCadenaSql("buscarLeyXConcepto",$matrizDatosLeyes[$j]['id']);
+		        		$matrizDatosNombreLeyes = $primerRecursoDB->ejecutarAcceso($cadenaSqlDetalleNombre, "busqueda", $matrizDatosLeyes[$j]['id'], "buscarLeyXConcepto");
+		        		
+		        		$cadenaSelectMultiple = $cadenaSelectMultiple . $matrizDatosNombreLeyes[0]['nombre'] . '<br>';
+		        		$j++;
+		        	}
+        	
                     echo "<tr><td>".$matrizItems[$i][0]."</td>";
                     echo "<td>".$matrizItems[$i][1]."</td>";
                     echo "<td>".$matrizItems[$i][2]."</td>";
-                    echo "<td>".$matrizItems[$i][3]."</td>";
+                    echo "<td>".$cadenaSelectMultiple."</td>";
                     echo "<td>".$matrizItems[$i][4]."</td>";
                     echo "<td>".$matrizItems[$i][5]."</td>";
                          $variableVD = "pagina=" . $this->miConfigurador->getVariableConfiguracion ( 'pagina' );; // pendiente la pagina para modificar parametro

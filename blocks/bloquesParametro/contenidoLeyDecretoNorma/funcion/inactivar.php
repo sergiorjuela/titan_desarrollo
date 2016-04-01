@@ -55,7 +55,8 @@ class FormProcessor {
                 
       if($_REQUEST['cancelarInactivar'] =='true'){
                     
-                     RedireccionadorFP::redireccionar('form',$datos); 
+                     RedireccionadorFP::redireccionar('form'); 
+                     
                 }
         
        
