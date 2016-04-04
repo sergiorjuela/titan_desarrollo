@@ -77,7 +77,7 @@ class Formulario {
 
         // Si no se coloca, entonces toma el valor predeterminado.
         $atributos ['estilo'] = '';
-        $atributos ['marco'] = true;
+        $atributos ['marco'] = false;
         $tab = 1;
         // ---------------- FIN SECCION: de Parámetros Generales del Formulario ----------------------------
 
@@ -96,7 +96,7 @@ class Formulario {
 	$atributos ['id'] = $esteCampo;
 	$atributos ["estilo"] = "jqueryui";
 	$atributos ['tipoEtiqueta'] = 'inicio';
-	$atributos ["leyenda"] = "Modificar Liquidación";
+	$atributos ["leyenda"] = "Modificar estado de Pago de Liquidación";
 	echo $this->miFormulario->marcoAgrupacion ( 'inicio', $atributos );
         
        
@@ -107,7 +107,7 @@ class Formulario {
         $atributos2 ['cadena_sql'] = $this->miSql->getCadenaSql("buscarRegistrosxID",$datos);
         $matrizItems2=$primerRecursoDB->ejecutarAcceso($atributos2['cadena_sql'], "busqueda");
         
-      
+       
          // ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
         
         $esteCampo = 'codigo';
@@ -147,11 +147,11 @@ class Formulario {
         $atributos ['valor'] = $matrizItems2[0][1];
         $atributos ['obligatorio'] = false;
         $atributos ['etiquetaObligatorio'] = false;
-        $atributos ['validar'] = 'required, minSize[2], maxSize[2],custom[onlyNumberSp]';
+        $atributos ['validar'] = '';
         
    
         $atributos ['titulo'] = $this->lenguaje->getCadena ( $esteCampo . 'Titulo' );
-        $atributos ['deshabilitado'] = false;
+        $atributos ['deshabilitado'] = true;
         $atributos ['tamanno'] = 20;
         $atributos ['maximoTamanno'] = '';
         $tab ++;
@@ -182,7 +182,7 @@ class Formulario {
         
     
         $atributos ['titulo'] = $this->lenguaje->getCadena ( $esteCampo . 'Titulo' );
-        $atributos ['deshabilitado'] = false;
+        $atributos ['deshabilitado'] = true;
         $atributos ['tamanno'] = 200;
         $atributos ['maximoTamanno'] = '';
         $tab ++;
@@ -193,41 +193,38 @@ class Formulario {
         // --------------- FIN CONTROL : Cuadro de Texto --------------------------------------------------
         
         // ---------------- CONTROL: Select --------------------------------------------------------
-        $esteCampo = 'estado';
-        $atributos['nombre'] = $esteCampo;
-        $atributos['id'] = $esteCampo;
-        $atributos['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
-        $atributos['tab'] = $tab;
-        $atributos['seleccion'] = -1;
-        $atributos['evento'] = ' ';
-        $atributos['deshabilitado'] = false;
-        $atributos['limitar']= 50;
-        $atributos['tamanno']= 1;
-        $atributos['columnas']= 1;
-        
-        $atributos ['ajax_function'] = "";
-        $atributos ['ajax_control'] = $esteCampo;
-        
-        $atributos ['obligatorio'] = true;
-        $atributos ['etiquetaObligatorio'] = true;
-        $atributos ['validar'] = 'required';
-        
-        $matrizItems=array(
-        		array(1,'Pagada')
-        		
-        );
-        $atributos['matrizItems'] = $matrizItems;
-        
-        if (isset ( $_REQUEST [$esteCampo] )) {
-        	$atributos ['valor'] = $_REQUEST [$esteCampo];
-        } else {
-        	$atributos ['valor'] = '';
+        if($matrizItems2[0]['estado']=="Pagada"){
+            $valorEstado = "Pendiente";
         }
+        else{
+            $valorEstado = "Pagada";
+        }           
+        
+        $esteCampo = 'estado';
+        $atributos ['id'] = $esteCampo;
+        $atributos ['nombre'] = $esteCampo;
+        $atributos ['tipo'] = 'text';
+        $atributos ['estilo'] = 'jqueryui';
+        $atributos ['marco'] = true;
+        $atributos ['columnas'] = 1;
+        $atributos ['dobleLinea'] = false;
+        $atributos ['tabIndex'] = $tab;
+        $atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
+        $atributos ['valor'] = $valorEstado;
+        $atributos ['obligatorio'] = false;
+        $atributos ['etiquetaObligatorio'] = false;
+        $atributos ['validar'] = '';
+        
+   
+        $atributos ['titulo'] = $this->lenguaje->getCadena ( $esteCampo . 'Titulo' );
+        $atributos ['deshabilitado'] = true;
+        $atributos ['tamanno'] = 15;
+        $atributos ['maximoTamanno'] = '';
         $tab ++;
         
         // Aplica atributos globales al control
         $atributos = array_merge ( $atributos, $atributosGlobales );
-        echo $this->miFormulario->campoCuadroLista ( $atributos );
+        echo $this->miFormulario->campoCuadroTexto ( $atributos );
         // --------------- FIN CONTROL : Select --------------------------------------------------
        
         

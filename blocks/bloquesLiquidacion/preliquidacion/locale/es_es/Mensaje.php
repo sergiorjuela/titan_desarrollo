@@ -34,12 +34,17 @@ $this->idioma["nombreConcepto"]="Nombre de Concepto";
 
 $this->idioma["estado"]="Estado: ";
 $this->idioma["nombre"]="Nombre: ";
+$this->idioma["nombretitulo"]="Registre el Nombre de la Preliquidación";
 $this->idioma["tipo_vinculacion"]="Tipo de Vinculación: ";
+$this->idioma["tipo_vinculaciontitulo"]="Seleccione el Tipo de Vinculación al cual se le preliquidara";
 $this->idioma["usuario"]="Usuario: ";
 $this->idioma["descripcion"]="Descripción: ";
+$this->idioma["descripciontitulo"]="Descripción de la Preliquidación ";
 $this->idioma["tipo_nomina"]="Nómina: ";
 $this->idioma["fecha_inicio"]="Fecha Inicio: ";
 $this->idioma["fecha_fin"]="Fecha Fin: ";
+$this->idioma["fecha_iniciotitulo"]="Fecha de inicio del periodo de preliquidación";
+$this->idioma["fecha_fintitulo"]="Fecha fin del periodo de preliquidación: ";
 $this->idioma["seccionConceptos"]="Conceptos:";
 
 $this->idioma["categoriaParametrosList"]="Categorias Parámetros:";

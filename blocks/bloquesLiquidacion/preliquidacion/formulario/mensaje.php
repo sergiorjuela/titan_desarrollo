@@ -151,7 +151,7 @@ class registrarForm {
 				} 
 				if ($_REQUEST ['mensaje'] == 'noInserto') {
 					
-					$mensaje = "No Se Pudo Hacer Registro Preliquidacion, Por favor revisar que todos lo campos esten correctos y vuelva a intentarlo <br>Fecha Registro:" . date ( 'Y-m-d' )."<br>".$_REQUEST['cadena'];
+					$mensaje = "No Se Pudo Hacer Registro Preliquidacion, Por favor revisar que todos lo campos esten correctos y vuelva a intentarlo <br>Fecha Registro:" . date ( 'Y-m-d' )."<br>";
 					
 					// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
 					$esteCampo = 'mensajeRegistro';

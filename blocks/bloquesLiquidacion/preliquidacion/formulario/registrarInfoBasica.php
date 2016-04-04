@@ -111,6 +111,7 @@ class Formulario {
         $atributos ['dobleLinea'] = false;
         $atributos ['tabIndex'] = $tab;
         $atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
+        $atributos ['titulo'] = $this->lenguaje->getCadena ( $esteCampo."titulo" );
         $atributos ['obligatorio'] = true;
         $atributos ['etiquetaObligatorio'] = true;
         $atributos ['validar'] = 'required,maxSize[100]';
@@ -145,7 +146,7 @@ class Formulario {
         $atributos ['dobleLinea'] = false;
         $atributos ['tabIndex'] = $tab;
         $atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
-        
+        $atributos ['titulo'] = $this->lenguaje->getCadena ( $esteCampo."titulo" );
         $atributos ['obligatorio'] = true;
         $atributos ['etiquetaObligatorio'] = true;
         $atributos ['validar'] = 'required';
@@ -155,7 +156,7 @@ class Formulario {
         } else {
         	$atributos ['valor'] = '';
         }
-        $atributos ['titulo'] = $this->lenguaje->getCadena ( $esteCampo . 'Titulo' );
+        $atributos ['titulo'] = $this->lenguaje->getCadena ( $esteCampo . 'titulo' );
         $atributos ['deshabilitado'] = false;
         $atributos ['filas'] = 4;
         $atributos ['maximoTamanno'] = '';
@@ -262,7 +263,7 @@ class Formulario {
         } else {
         	$atributos ['valor'] = '';
         }
-        $atributos ['titulo'] = $this->lenguaje->getCadena ( $esteCampo . 'Titulo' );
+        $atributos ['titulo'] = $this->lenguaje->getCadena ( $esteCampo . 'titulo' );
         $atributos ['deshabilitado'] = false;
         $atributos ['tamanno'] = 10;
         $atributos ['maximoTamanno'] = '';
@@ -294,7 +295,7 @@ class Formulario {
         } else {
         	$atributos ['valor'] = '';
         }
-        $atributos ['titulo'] = $this->lenguaje->getCadena ( $esteCampo . 'Titulo' );
+        $atributos ['titulo'] = $this->lenguaje->getCadena ( $esteCampo . 'titulo' );
         $atributos ['deshabilitado'] = false;
         $atributos ['tamanno'] = 10;
         $atributos ['maximoTamanno'] = '';

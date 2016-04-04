@@ -125,7 +125,7 @@ class Formulario {
         $atributos ['obligatorio'] = false;
         $atributos ['etiquetaObligatorio'] = false;
         $atributos ['validar'] = '';
-        $atributos ['anchoEtiqueta'] = 230;
+        $atributos ['anchoEtiqueta'] = 90;
         $atributos ['valor'] = $matrizDatosConcepto[0]['nombre'];
         
         //$atributos ['titulo'] = $this->lenguaje->getCadena ( $esteCampo . 'Titulo' );
@@ -156,7 +156,7 @@ class Formulario {
         $atributos ['obligatorio'] = false;
         $atributos ['etiquetaObligatorio'] = false;
         $atributos ['validar'] = '';
-        
+        $atributos ['anchoEtiqueta'] = 100;
         $atributos ['valor'] = $matrizDatosConcepto[0]['descripcion'];
         
         $atributos ['titulo'] = $this->lenguaje->getCadena ( $esteCampo . 'Titulo' );
@@ -184,7 +184,7 @@ class Formulario {
         $atributos['limitar']= 50;
         $atributos['tamanno']= 1;
         $atributos['columnas']= 1;
-        	
+        $atributos ['anchoEtiqueta'] = 150;	
         $atributos ['obligatorio'] = false;
         $atributos ['etiquetaObligatorio'] = false;
         $atributos ['validar'] = '';
@@ -234,7 +234,7 @@ unset($atributos);
         $atributos ['obligatorio'] = false;
         $atributos ['etiquetaObligatorio'] = false;
         $atributos ['validar'] = '';
-        
+        $atributos ['anchoEtiqueta'] = 80;     
         $atributos ['valor'] = $matrizDatosConcepto[0]['estado'];
         
         $atributos ['titulo'] = $this->lenguaje->getCadena ( $esteCampo . 'Titulo' );
@@ -263,7 +263,7 @@ unset($atributos);
         $atributos ['obligatorio'] = false;
         $atributos ['etiquetaObligatorio'] = false;
         $atributos ['validar'] = '';
-        
+        $atributos ['anchoEtiqueta'] = 80;  
         $atributos ['valor'] = $matrizDatosConcepto[0]['usuario'];
         
         $atributos ['titulo'] = $this->lenguaje->getCadena ( $esteCampo . 'Titulo' );
@@ -285,7 +285,7 @@ unset($atributos);
         $i=0;
             
         
-        echo '<table id="tablaReporte" class="display" cellspacing="0" width="100%"> '
+        echo '<table id="tablaPreliquidacion" class="display" cellspacing="0" width="100%"> '
                  . '<thead style="display: table-row-group"><tr><th>'."Cedula".'</th><th>'.
                 "Nombre".'</th> <th>'."Dependencia".'</th> <th>'.
                 "Vinculación".'</th> <th>'."Conceptos".
