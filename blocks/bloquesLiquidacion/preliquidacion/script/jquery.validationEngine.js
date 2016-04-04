@@ -1792,8 +1792,8 @@
 			var positionType=field.data("promptPosition") || options.promptPosition;
 			var shift1="";
 			var shift2="";
-			var shiftX=0;
-			var shiftY=0;
+			var shiftX=-250;
+			var shiftY=-40;
 			if (typeof(positionType)=='string') {
 				//do we have any position adjustments ?
 				if (positionType.indexOf(":")!=-1) {

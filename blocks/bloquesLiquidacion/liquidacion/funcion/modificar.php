@@ -21,18 +21,6 @@ class FormProcessor {
 		$conexion = 'estructura';
 		$primerRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB ( $conexion );
 		
-		if (isset ( $_REQUEST ['estado'] )) {
-			switch ($_REQUEST ['estado']) {
-				case 1 :
-					$_REQUEST ['estado'] = 'Pagada';
-					break;
-		
-				case 2 :
-					$_REQUEST ['estado'] = 'Algo salio mal';
-					break;
-			}
-		}
-		
 		
 		$datos = array (
 				'codigo' => $_REQUEST ['codigo'],
