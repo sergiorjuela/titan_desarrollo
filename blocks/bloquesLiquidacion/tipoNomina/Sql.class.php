@@ -83,8 +83,8 @@ class Sql extends \Sql {
                 $cadenaSql .= 'FROM ';
                 $cadenaSql .= 'liquidacion.nomina ';
                 $cadenaSql .= 'WHERE ';
-                $cadenaSql .= 'id = ';
-                $cadenaSql .= $variable ['vinculacion'] . '';
+                $cadenaSql .= 'codigo_nomina = ';
+                $cadenaSql .= $variable;
            break;
        case 'buscarNominaxregistroMod':
                 $cadenaSql = 'SELECT ';

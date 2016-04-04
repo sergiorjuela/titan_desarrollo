@@ -123,7 +123,7 @@ class FormProcessor {
         $resultado=$primerRecursoDB->ejecutarAcceso($atributos['cadena_sql'], "acceso");
         //Al final se ejecuta la redirección la cual pasará el control a otra página
 
-//        exit;
+        
         if (!empty($resultado)) {
             $atributos['cadena_sql'] = $this->miSql->getCadenaSql("buscarNominaAlterno",$datos);
             $nomina=$primerRecursoDB->ejecutarAcceso($atributos['cadena_sql'], "busqueda");

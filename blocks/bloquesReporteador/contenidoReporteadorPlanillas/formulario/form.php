@@ -132,7 +132,7 @@ class Formulario {
 
         echo $this->miFormulario->division("fin");
 
-
+      
 
         // ---------------- CONTROL: Tabla Plantillas sin Sara -----------------------------------------------                
 

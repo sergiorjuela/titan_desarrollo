@@ -1,6 +1,6 @@
 
 
-$("#contenidoCargo").validationEngine({
+$("#liquidacion").validationEngine({
 	promptPosition : "centerRight",
 	scroll: false,
 	autoHidePrompt: true,
