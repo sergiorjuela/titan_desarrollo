@@ -218,7 +218,7 @@ class Formulario {
         $atributos = array_merge ( $atributos, $atributosGlobales );
         echo $this->miFormulario->campoCuadroLista ( $atributos );
         // --------------- FIN CONTROL : Select --------------------------------------------------
-unset($atributos);
+        unset($atributos);
         		// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
         $esteCampo = 'estado';
         $atributos ['id'] = $esteCampo;
@@ -247,7 +247,7 @@ unset($atributos);
         $atributos = array_merge ( $atributos, $atributosGlobales );
         echo $this->miFormulario->campoCuadroTexto ( $atributos );
         // --------------- FIN CONTROL : Cuadro de Texto --------------------------------------------------
-unset($atributos);
+        unset($atributos);
                 		// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
         $esteCampo = 'usuario';
         $atributos ['id'] = $esteCampo;
@@ -335,27 +335,27 @@ unset($atributos);
         
         unset($atributos);
         // ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
-        $esteCampo = 'estadoPagina';
-        $atributos ['id'] = $esteCampo;
-        $atributos ['nombre'] = $esteCampo;
-        $atributos ['tipo'] = 'hidden';
-        $atributos ['estilo'] = 'jqueryui';
-        $atributos ['marco'] = true;
-        $atributos ['columnas'] = 1;
-        $atributos ['dobleLinea'] = false;
-        $atributos ['tabIndex'] = $tab;
-         
-        $atributos ['valor'] = 'verDetalle';
-        $atributos ['deshabilitado'] = false;
-        $atributos ['maximoTamanno'] = '';
-        $tab ++;
+//        $esteCampo = 'estadoPagina';
+//        $atributos ['id'] = $esteCampo;
+//        $atributos ['nombre'] = $esteCampo;
+//        $atributos ['tipo'] = 'hidden';
+//        $atributos ['estilo'] = 'jqueryui';
+//        $atributos ['marco'] = true;
+//        $atributos ['columnas'] = 1;
+//        $atributos ['dobleLinea'] = false;
+//        $atributos ['tabIndex'] = $tab;
+//         
+//        $atributos ['valor'] = 'verDetalle';
+//        $atributos ['deshabilitado'] = false;
+//        $atributos ['maximoTamanno'] = '';
+//        $tab ++;
          
         // Aplica atributos globales al control
-        $atributos = array_merge ( $atributos, $atributosGlobales );
-        echo $this->miFormulario->campoCuadroTexto ( $atributos );
-        // --------------- FIN CONTROL : Cuadro de Texto --------------------------------------------------
+//        $atributos = array_merge ( $atributos, $atributosGlobales );
+//        echo $this->miFormulario->campoCuadroTexto ( $atributos );
+//        // --------------- FIN CONTROL : Cuadro de Texto --------------------------------------------------
         
-        unset($atributos);
+//        unset($atributos);
         
         
                 
@@ -441,7 +441,7 @@ unset($atributos);
 
         // ----------------FINALIZAR EL FORMULARIO ----------------------------------------------------------
         // Se debe declarar el mismo atributo de marco con que se inició el formulario.
-        $atributos ['marco'] = true;
+        $atributos ['marco'] = false;
         $atributos ['tipoEtiqueta'] = 'fin';
         echo $this->miFormulario->formulario ( $atributos );
 

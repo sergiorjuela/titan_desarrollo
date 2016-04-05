@@ -8,7 +8,7 @@ $esteRecursoDB = $this->miConfigurador->fabricaConexiones->getRecursoDB($conexio
 
 if ($_REQUEST ['funcion'] == 'consultarNominaAjax') {
 
-	$cadenaSql = $this->sql->getCadenaSql ( 'buscarNomina', $_REQUEST['valor'] );
+	$cadenaSql = $this->sql->getCadenaSql ( 'buscarNominaAjax', $_REQUEST['valor'] );
 	$resultado = $esteRecursoDB->ejecutarAcceso ( $cadenaSql, "busqueda" );
 
         

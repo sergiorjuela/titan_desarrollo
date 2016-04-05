@@ -476,7 +476,7 @@ class Formulario {
 
         // ----------------FINALIZAR EL FORMULARIO ----------------------------------------------------------
         // Se debe declarar el mismo atributo de marco con que se inició el formulario.
-        $atributos ['marco'] = true;
+        $atributos ['marco'] = false;
         $atributos ['tipoEtiqueta'] = 'fin';
         echo $this->miFormulario->formulario ( $atributos );
 

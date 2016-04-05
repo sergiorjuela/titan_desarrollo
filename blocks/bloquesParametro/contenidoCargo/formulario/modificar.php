@@ -72,7 +72,7 @@ class Formulario {
 		                               
 		// Si no se coloca, entonces toma el valor predeterminado.
 		$atributos ['estilo'] = '';
-		$atributos ['marco'] = true;
+		$atributos ['marco'] = false;
 		$tab = 1;
 		// ---------------- FIN SECCION: de Parámetros Generales del Formulario ----------------------------
 		
@@ -81,10 +81,10 @@ class Formulario {
 		echo $this->miFormulario->formulario ( $atributos );
 		
 		// ---------------- SECCION: Controles del Formulario -----------------------------------------------
-		$_identificadorConcepto = $_REQUEST ['variable']; // Codigo Unico que identifica el Concepto
-		$cadenaSqlDetalle = $this->miSql->getCadenaSql ( "consultarRegistrosDeConceptos", $_identificadorConcepto );
-		$matrizDatosConcepto = $primerRecursoDB->ejecutarAcceso ( $cadenaSqlDetalle, "busqueda", $_identificadorConcepto, "consultarRegistrosDeConceptos" );
-		
+		$_identificadorCargo = $_REQUEST ['variable']; // Codigo Unico que identifica el Concepto
+//		$cadenaSqlDetalle = $this->miSql->getCadenaSql ( "consultarRegistrosDeConceptos", $_identificadorConcepto );
+//		$matrizDatosConcepto = $primerRecursoDB->ejecutarAcceso ( $cadenaSqlDetalle, "busqueda", $_identificadorConcepto, "consultarRegistrosDeConceptos" );
+//		
 		// --------------------------------------------------------------------------------------------------
 		
 		$esteCampo = "marcoDatosBasicos";
@@ -157,33 +157,86 @@ class Formulario {
 		// Aplica atributos globales al control
 		$atributos = array_merge ( $atributos, $atributosGlobales );
 		echo $this->miFormulario->campoCuadroLista ( $atributos );
+                unset($atributos);
 		// --------------- FIN CONTROL : Cuadro de Texto --------------------------------------------------
 		// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
-		$esteCampo = 'gradoRegistro';
-		$atributos ['id'] = $esteCampo;
+		
+                $esteCampo = 'gradoRegistro';
 		$atributos ['nombre'] = $esteCampo;
-		$atributos ['tipo'] = 'text';
-		$atributos ['estilo'] = 'jqueryui';
-		$atributos ['marco'] = true;
-		$atributos ['columnas'] = 1;
-		$atributos ['dobleLinea'] = false;
-		$atributos ['tabIndex'] = $tab;
+		$atributos ['id'] = $esteCampo;
 		$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
-		$atributos ['valor'] = $matrizItems2 [0] [2];
+		$atributos ['tab'] = $tab;
+		$atributos ['seleccion'] = - 1;
+		$atributos ['evento'] = ' ';
+		$atributos ['deshabilitado'] = false;
+		$atributos ['limitar'] = 50;
+		$atributos ['tamanno'] = 1;
+		$atributos ['columnas'] = 1;
+		
 		$atributos ['obligatorio'] = true;
 		$atributos ['etiquetaObligatorio'] = true;
-		$atributos ['validar'] = 'required, minSize[1], maxSize[2],custom[onlyNumberSp]';
+		$atributos ['validar'] = 'required';
 		
-		$atributos ['titulo'] = $this->lenguaje->getCadena ( $esteCampo . 'Titulo' );
-		$atributos ['deshabilitado'] = false;
-		$atributos ['tamanno'] = 20;
-		$atributos ['maximoTamanno'] = '';
+		$matrizItemsGrado = array (
+				array (
+						1,
+						'1' 
+				),
+				array (
+						2,
+						'2' 
+				),
+				array (
+						3,
+						'3' 
+				),
+				array (
+						4,
+						'4' 
+				),
+				array (
+						5,
+						'5' 
+				),
+				array (
+						6,
+						'6' 
+				),
+				array (
+						7,
+						'7' 
+				),
+				array (
+						8,
+						'8' 
+				),
+				array (
+						9,
+						'9' 
+				),
+				array (
+						10,
+						'10' 
+				),
+				array (
+						11,
+						'11' 
+				) 
+		);
+		$atributos ['matrizItems'] = $matrizItemsGrado;
+		
+		if (isset ( $_REQUEST [$esteCampo] )) {
+			$atributos ['seleccion'] = $matrizItems2 [0] ['grado'];
+		} else {
+			$atributos ['seleccion'] = '';
+		}
 		$tab ++;
 		
 		// Aplica atributos globales al control
 		$atributos = array_merge ( $atributos, $atributosGlobales );
-		echo $this->miFormulario->campoCuadroTexto ( $atributos );
-		// --------------- FIN CONTROL : Cuadro de Texto --------------------------------------------------
+		echo $this->miFormulario->campoCuadroLista ( $atributos );
+                unset($atributos);
+                // --------------- FIN CONTROL : Cuadro de Texto --------------------------------------------------
 		
 		// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
 		$esteCampo = 'tipoCargo';
@@ -310,8 +363,10 @@ class Formulario {
 		$atributos = array_merge ( $atributos, $atributosGlobales );
 		echo $this->miFormulario->campoTextArea ( $atributos );
 		// --------------- FIN CONTROL : Cuadro de Texto --------------------------------------------------
-		$cadenaSqlDetalle = $this->miSql->getCadenaSql ( "consultarLeyesDeCategoria", $_identificadorConcepto );
-		$matrizDatosLeyes = $primerRecursoDB->ejecutarAcceso ( $cadenaSqlDetalle, "busqueda", $_identificadorConcepto, "consultarLeyesDeCategoria" );
+		$cadenaSqlDetalle = $this->miSql->getCadenaSql ( "consultarLeyesDeCategoria", $_identificadorCargo );
+                //echo $cadenaSqlDetalle."<br>";
+		$matrizDatosLeyes = $primerRecursoDB->ejecutarAcceso ( $cadenaSqlDetalle, "busqueda", $_identificadorCargo, "consultarLeyesDeCategoria" );
+                
 		$i = 0;
 		$cadenaSelectMultiple = '';
 		
@@ -326,7 +381,7 @@ class Formulario {
 		$atributos ['id'] = $esteCampo;
 		$atributos ['etiqueta'] = $this->lenguaje->getCadena ( $esteCampo );
 		$atributos ['tab'] = $tab;
-		$atributos ['seleccion'] = - 1;
+		$atributos ['seleccion'] = -1;
 		$atributos ['evento'] = ' ';
 		$atributos ['deshabilitado'] = false;
 		$atributos ['limitar'] = 50;
@@ -342,7 +397,7 @@ class Formulario {
 		$matrizItems = $primerRecursoDB->ejecutarAcceso ( $atributos ['cadena_sql'], "busqueda" );
 		
 		$atributos ['matrizItems'] = $matrizItems;
-		
+	
 		if ($matrizItems) {
 		$atributos ['matrizItems'] = $matrizItems;
 		} else {
@@ -557,7 +612,7 @@ class Formulario {
 		
 		// ----------------FINALIZAR EL FORMULARIO ----------------------------------------------------------
 		// Se debe declarar el mismo atributo de marco con que se inició el formulario.
-		$atributos ['marco'] = true;
+		$atributos ['marco'] = false;
 		$atributos ['tipoEtiqueta'] = 'fin';
 		echo $this->miFormulario->formulario ( $atributos );
 		

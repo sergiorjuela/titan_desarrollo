@@ -139,8 +139,9 @@ class Sql extends \Sql {
                 $cadenaSql .= 'liquidacion.nomina n, ';
                 $cadenaSql .= 'parametro.tipo_vinculacion v ';
                 $cadenaSql .= 'WHERE ';
-                $cadenaSql .= 'v.id = n.id AND ';
-                $cadenaSql .= 'v.id = '."'$variable'";
+                $cadenaSql .= 'v.id = n.id ';
+                $cadenaSql .= 'AND n.codigo_nomina IN (SELECT tipo_nomina FROM concepto.asociacion_concepto) ';
+                $cadenaSql .= 'AND v.id = '."'$variable'";
                 break;
             
             case 'buscarSimbolo' :

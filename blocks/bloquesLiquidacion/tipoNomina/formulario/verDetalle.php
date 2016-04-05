@@ -430,7 +430,7 @@ class Formulario {
         $atributos ["tipo"] = "hidden";
         $atributos ['estilo'] = '';
         $atributos ["obligatorio"] = false;
-        $atributos ['marco'] = true;
+        $atributos ['marco'] = false;
         $atributos ["etiqueta"] = "";
         $atributos ["valor"] = $valorCodificado;
         echo $this->miFormulario->campoCuadroTexto ( $atributos );
@@ -439,7 +439,7 @@ class Formulario {
         // ---------------- FIN SECCION: Controles del Formulario -------------------------------------------
         // ----------------FINALIZAR EL FORMULARIO ----------------------------------------------------------
         // Se debe declarar el mismo atributo de marco con que se inició el formulario.
-        $atributos ['marco'] = true;
+        $atributos ['marco'] = false;
         $atributos ['tipoEtiqueta'] = 'fin';
         echo $this->miFormulario->formulario ( $atributos );
         return true;

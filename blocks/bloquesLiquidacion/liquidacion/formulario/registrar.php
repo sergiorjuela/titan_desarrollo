@@ -181,7 +181,7 @@ class Formulario {
         $atributos['limitar']= 50;
         $atributos['tamanno']= 1;
         $atributos['columnas']= 1;
-        
+        $atributos ['titulo'] = $this->lenguaje->getCadena ( $esteCampo . 'Titulo' );
         $atributos ['ajax_function'] = "";
         $atributos ['ajax_control'] = $esteCampo;
         
@@ -292,7 +292,7 @@ class Formulario {
 
         // ----------------FINALIZAR EL FORMULARIO ----------------------------------------------------------
         // Se debe declarar el mismo atributo de marco con que se inició el formulario.
-        $atributos ['marco'] = true;
+        $atributos ['marco'] = false;
         $atributos ['tipoEtiqueta'] = 'fin';
         echo $this->miFormulario->formulario ( $atributos );
 

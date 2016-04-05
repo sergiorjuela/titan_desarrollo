@@ -42,15 +42,18 @@ class FormProcessor {
         	
         
         $atributos ['cadena_sql'] = $this->miSql->getCadenaSql("insertarPreliquidacion",$datos);
-        //echo "SQL: ".$atributos ['cadena_sql'];
+        //echo "SQL: ".$atributos ['cadena_sql']."<br>";
         $resultado=$primerRecursoDB->ejecutarAcceso($atributos['cadena_sql'], "acceso");
+        //var_dump($resultado);
         //Al final se ejecuta la redirección la cual pasará el control a otra página
          if (!empty($resultado)) {
             $atributos ['cadena_sql'] = $this->miSql->getCadenaSql("generarFormulaNomina",$_REQUEST['tipo_nomina']);
             $result=$primerRecursoDB->ejecutarAcceso($atributos['cadena_sql'], "busqueda");
             echo "cadena ".$atributos ['cadena_sql']."<br>";
+            //var_dump($result);
             $nomina = $result[0]['formula'];
-            echo "nomina ".$nomina."<br>";
+            //echo "nomina ".$nomina."<br>";
+            //exit();
             $interprete = new Interprete($this->lenguaje, $this->miSql, $primerRecursoDB);
             $arbol = $interprete->generarArbol($nomina);
             if($arbol!= null){

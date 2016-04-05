@@ -25,7 +25,7 @@ $("#<?php echo $this->campoSeguro('tipo_vinculacion')?>").select2();
 $('#<?php echo $this->campoSeguro('tipo_nomina')?>').width(250);
 $("#<?php echo $this->campoSeguro('tipo_nomina')?>").select2();
 
-    function consultarCiudad(elem, request, response){
+    function consultarNomina(elem, request, response){
 		  $.ajax({
 		    url: "<?php echo $urlFinal17?>",
 		    dataType: "json",
@@ -58,7 +58,7 @@ $("#<?php echo $this->campoSeguro('tipo_nomina')?>").select2();
 	        
 	        $("#<?php echo $this->campoSeguro('tipo_vinculacion')?>").change(function(){
 	        	if($("#<?php echo $this->campoSeguro('tipo_vinculacion')?>").val()!=''){
-	            	consultarCiudad();
+	        		consultarNomina();
 	    		}else{
 	    			$("#<?php echo $this->campoSeguro('tipo_nomina')?>").attr('disabled','');
 	    			}

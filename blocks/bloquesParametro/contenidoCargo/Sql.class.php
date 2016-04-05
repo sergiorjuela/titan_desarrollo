@@ -138,16 +138,18 @@ class Sql extends \Sql {
 				
 				$cadenaSql = 'SELECT ';
 				$cadenaSql .= 'codigo_cargo as COD_CARGO, ';
-				$cadenaSql .= 'nivel as NIVEL, ';
+				$cadenaSql .= 'nc.nombre as NIVEL, ';
 				$cadenaSql .= 'grado as GRADO,';
 				$cadenaSql .= 'sueldo as SUELDO, ';
 				$cadenaSql .= 'tipo_sueldo as TIPO_SUELDO, ';
-				$cadenaSql .= 'estado as ESTADO, ';
+				$cadenaSql .= 'c.estado as ESTADO, ';
 				$cadenaSql .= 'tipo_cargo as TIPO, ';
 				$cadenaSql .= 'funciones as FUNCIONES ';
 				$cadenaSql .= 'FROM ';
-				$cadenaSql .= 'parametro.cargo ';
+				$cadenaSql .= 'parametro.cargo c, ';
+				$cadenaSql .= 'parametro.nivel_cargo nc ';
 				$cadenaSql .= 'WHERE ';
+				$cadenaSql .= 'nivel=nc.id and ';
 				$cadenaSql .= 'codigo_cargo = ';
 				$cadenaSql .= $variable ['codigoRegistro'] ;
 				break;
