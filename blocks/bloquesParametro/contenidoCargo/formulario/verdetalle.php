@@ -119,7 +119,7 @@ class Formulario {
         unset($atributos);
         // ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
         // ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
-        $esteCampo = 'nivelRegistro';
+        $esteCampo = 'nivelRegistroVerDetalle';
         $atributos ['id'] = $esteCampo;
         $atributos ['nombre'] = $esteCampo;
         $atributos ['tipo'] = 'text';
@@ -144,7 +144,7 @@ class Formulario {
         unset($atributos);
         // --------------- FIN CONTROL : Cuadro de Texto --------------------------------------------------
         // ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
-        $esteCampo = 'gradoRegistro';
+        $esteCampo = 'gradoRegistroVerDetalle';
         $atributos ['id'] = $esteCampo;
         $atributos ['nombre'] = $esteCampo;
         $atributos ['tipo'] = 'text';
@@ -217,7 +217,7 @@ class Formulario {
         unset($atributos);
         // --------------- FIN CONTROL : Cuadro de Texto --------------------------------------------------
         // ---------------- CONTROL: Select --------------------------------------------------------
-        $esteCampo = 'tipoSueldoRegistro';
+        $esteCampo = 'tipoSueldoRegistroVerDetalle';
         $atributos ['id'] = $esteCampo;
         $atributos ['nombre'] = $esteCampo;
         $atributos ['tipo'] = 'text';
@@ -291,7 +291,8 @@ class Formulario {
             $leyex = $leyex . $nombreLey [0] [0] . ',';
             $cont++;
         }
-
+        $leyex = substr($leyex, 0,-1);
+        
         // ---------------- CONTROL: Select --------------------------------------------------------
         // ---------------- CONTROL: Select --------------------------------------------------------
         $esteCampo = 'ley';
@@ -301,7 +302,7 @@ class Formulario {
         $atributos ['tab'] = $tab;
         $atributos ['seleccion'] = -1;
         $atributos ['evento'] = ' ';
-        $atributos ['deshabilitado'] = true;
+        
         $atributos ['limitar'] = 50;
         $atributos ['tamanno'] = 4;
         $atributos ['columnas'] = 1;
@@ -310,14 +311,23 @@ class Formulario {
         $atributos ['etiquetaObligatorio'] = true;
         $atributos ['validar'] = 'required';
         $atributos ['multiple'] = true;
-
+        
+        if($leyex!=""){
+          
         $atributos ['cadena_sql'] = $this->miSql->getCadenaSql("buscarley");
         $matrizItems = $primerRecursoDB->ejecutarAcceso($atributos ['cadena_sql'], "busqueda");
         for ($j = 0; $j < count($matrizItems); $j++) {
             $leyesSelect[$j]=array($matrizItems[$j]['nombre'],$matrizItems[$j]['nombre']);
+            $atributos ['matrizItems'] = $leyesSelect;
         }
-            
-        $atributos ['matrizItems'] = $leyesSelect;
+          
+        }
+        else{
+            $leyex="-1"; 
+            $leyesSelect=array(array(-1,"No existen leyes Asociadas") );
+            $atributos ['matrizItems'] = $leyesSelect;
+        }
+        $atributos ['deshabilitado'] = true;
         $tab ++;
 
         // Aplica atributos globales al control
@@ -378,7 +388,6 @@ class Formulario {
         $atributos ['columnas'] = 1;
         $atributos ['dobleLinea'] = false;
         $atributos ['tabIndex'] = $tab;
-
         $atributos ['valor'] = $leyex;
         $atributos ['deshabilitado'] = false;
         $atributos ['maximoTamanno'] = '';

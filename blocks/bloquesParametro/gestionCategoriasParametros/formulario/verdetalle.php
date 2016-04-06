@@ -76,7 +76,7 @@ class Formulario {
 		 
 		// Si no se coloca, entonces toma el valor predeterminado.
 		$atributos ['estilo'] = '';
-		$atributos ['marco'] = true;
+		$atributos ['marco'] = false;
 		$tab = 1;
 		// ---------------- FIN SECCION: de Parámetros Generales del Formulario ----------------------------
 
@@ -190,6 +190,7 @@ class Formulario {
 		}
 
 		echo '</tbody></table>';
+                echo $this->miFormulario->marcoAgrupacion ( 'fin' );
 
 		/**
 		 * // ---------------- CONTROL: Tabla Cargos -----------------------------------------------
@@ -199,7 +200,7 @@ class Formulario {
 		 * //
 		 * // echo $this->miFormulario->tablaReporte($matrizItems);
 		 * //
-		 * // echo $this->miFormulario->marcoAgrupacion ( 'fin' );
+		
 		 *
 		 * // ------------------- SECCION: Paso de variables ------------------------------------------------
 		 *
@@ -253,7 +254,7 @@ class Formulario {
 
 		// ----------------FINALIZAR EL FORMULARIO ----------------------------------------------------------
 		// Se debe declarar el mismo atributo de marco con que se inició el formulario.
-		$atributos ['marco'] = true;
+		$atributos ['marco'] = false;
 		$atributos ['tipoEtiqueta'] = 'fin';
 		echo $this->miFormulario->formulario ( $atributos );
 

@@ -14,6 +14,7 @@ $this->idioma["verdetalleRegistro"]="Aceptar";
 $this->idioma["modificarRegistro"]="Guardar Cambios";
 $this->idioma["enviarInactivar"]="Aceptar";
 $this->idioma["cancelarInactivar"]="Cancelar";
+$this->idioma["botonRegresar"]="Regresar";
 
 
 

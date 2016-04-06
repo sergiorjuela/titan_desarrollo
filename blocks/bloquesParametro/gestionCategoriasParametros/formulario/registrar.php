@@ -73,7 +73,7 @@ class Formulario {
 		                               
 		// Si no se coloca, entonces toma el valor predeterminado.
 		$atributos ['estilo'] = '';
-		$atributos ['marco'] = true;
+		$atributos ['marco'] = false;
 		$tab = 1;
 		// ---------------- FIN SECCION: de Parámetros Generales del Formulario ----------------------------
 		
@@ -256,14 +256,6 @@ class Formulario {
 		echo $this->miFormulario->enlace($atributos);
 		
 		// -----------------FIN CONTROL: Botón -----------------------------------------------------------
-		// ------------------Fin Division para los botones-------------------------
-		echo $this->miFormulario->division ( "fin" );
-		echo $this->miFormulario->marcoAgrupacion ( 'fin' );
-		// ------------------- SECCION: Paso de variables ------------------------------------------------
-		// ------------------Fin Division para los botones-------------------------
-		echo $this->miFormulario->division ( "fin" );
-		echo $this->miFormulario->marcoAgrupacion ( 'fin' );
-		// ------------------- SECCION: Paso de variables ------------------------------------------------
 		unset ( $atributos );
 		// ---------------- CONTROL: Cuadro de Texto --------------------------------------------------------
 		$esteCampo = 'leyRegistros';
@@ -285,6 +277,11 @@ class Formulario {
 		// Aplica atributos globales al control
 		$atributos = array_merge ( $atributos, $atributosGlobales );
 		echo $this->miFormulario->campoCuadroTexto ( $atributos );
+		// ------------------Fin Division para los botones-------------------------
+		echo $this->miFormulario->division ( "fin" );
+		echo $this->miFormulario->marcoAgrupacion ( 'fin' );
+		// ------------------- SECCION: Paso de variables ------------------------------------------------
+		
 		// --------------- FIN CONTROL : Cuadro de Texto --------------------------------------------------
 		/**
 		 * En algunas ocasiones es útil pasar variables entre las diferentes páginas.
@@ -331,7 +328,7 @@ class Formulario {
 		
 		// ----------------FINALIZAR EL FORMULARIO ----------------------------------------------------------
 		// Se debe declarar el mismo atributo de marco con que se inició el formulario.
-		$atributos ['marco'] = true;
+		$atributos ['marco'] = false;
 		$atributos ['tipoEtiqueta'] = 'fin';
 		echo $this->miFormulario->formulario ( $atributos );
 		

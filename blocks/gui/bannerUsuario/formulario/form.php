@@ -47,8 +47,8 @@ class Formulario {
             $atributos['imagen'] = $this->miConfigurador->getVariableConfiguracion('rutaUrlBloque') . 'css/images/bannerTitan2.jpg';
             $atributos['estilo'] = $esteCampo;
             $atributos['etiqueta'] = $this->lenguaje->getCadena($esteCampo . 'Titulo');
-            $atributos['ancho'] = '100%';
-            $atributos['alto'] = '5%';
+            $atributos['ancho'] = '1700px';
+            $atributos['alto'] = '180px';
             echo $this->miFormulario->campoImagen($atributos);
             unset($atributos);
 
