@@ -1,7 +1,7 @@
 
 
 $("#gestionCategoriasParametros").validationEngine({
-	promptPosition : "centerRight",
+	promptPosition : "bottomRight",
 	scroll: false,
 	autoHidePrompt: true,
 	autoHideDelay: 2000

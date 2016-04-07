@@ -189,6 +189,7 @@ class Pgsql extends ConectorDb {
         
         $cadena = $this->tratarCadena ( $cadena );
         
+        
         if ($tipo == "busqueda") {
             $esteRegistro = $this->ejecutar_busqueda ( $cadena, $numeroRegistros );
             if (isset ( $this->configuracion ["debugMode"] ) && $this->configuracion ["debugMode"] == 1 && ! $esteRegistro) {

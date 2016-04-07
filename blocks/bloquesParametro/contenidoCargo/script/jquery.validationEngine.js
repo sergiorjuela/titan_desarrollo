@@ -2050,7 +2050,7 @@
 		// Fade out duration while hiding the validations
 		fadeDuration: 0.3,
 	 // Use Prettify select library
-	 prettySelect: false,
+	 prettySelect: true,
 	 // Add css class on prompt
 	 addPromptClass : "",
 	 // Custom ID uses prefix
