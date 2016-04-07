@@ -29,7 +29,7 @@ class FormProcessor {
 		);
 		
 		$cadenaSql = $this->miSql->getCadenaSql ( "insertarNivel", $datos );
-		$resultado = $primerRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso");
+		$resultado = $primerRecursoDB->ejecutarAcceso ( $cadenaSql, "acceso",$datos,"insertarNivel");
 		
 		if (! empty ( $resultado )) {
 			Redireccionador::redireccionar ( 'inserto', $datos );
